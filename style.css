@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  input {
+    width: 100%;
+  }
+  button {
+    padding: 10px;
+    background-color: #00aaff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
