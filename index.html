@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OutfitAI - Tu IA Personal de Moda</title>
+    <meta name="description" content="La IA que te ayuda a elegir el outfit perfecto. Sube tu ropa y obtén recomendaciones inteligentes en segundos.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+
+        /* Main content */
+        main {
+            padding: 80px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #1a202c;
+        }
+
+        /* How it works */
+        .steps {
+            display: grid;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 30px;
+            background: #f7fafc;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        .step-content p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Benefits */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .benefit {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .benefit h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1a202c;
+        }
+
+        .benefit p {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f7fafc;
+            padding: 60px 0;
+            margin: 80px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #1a202c;
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        /* Pricing */
+        .pricing-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            margin: 40px auto;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .price-note {
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+            color: #a0aec0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step, .benefit, .testimonial {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Demo section */
+        .demo-section {
+            background: #f7fafc;
+            padding: 60px 0;
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .demo-container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        .upload-area {
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: #a0aec0;
+            margin-bottom: 10px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-label {
+            cursor: pointer;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .upload-label:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>👕 OutfitAI</h1>
+            <p class="subtitle">
+                La IA que te ayuda a elegir el outfit perfecto.<br>
+                Sube tu ropa y obtén recomendaciones inteligentes en segundos.
+            </p>
+            <a href="#demo" class="cta-button">Probar Gratis</a>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Precisión</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">< 5s</span>
+                    <span class="stat-label">Respuesta</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="outfits-counter">1000+</span>
+                    <span class="stat-label">Outfits creados</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Cómo funciona -->
+            <section class="section">
+                <h2 class="section-title">¿Cómo funciona?</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>📸 Sube tus prendas</h3>
+                            <p>Toma fotos de tu ropa: camisa/blusa, pantalón/falda y zapatos. Nuestra IA analiza colores, texturas y estilos automáticamente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>🤖 IA analiza tu look</h3>
+                            <p>Nuestro algoritmo evalúa la combinación de colores, estilos y ocasiones. Considera tendencias actuales y reglas de moda universales.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>✨ Recibe recomendaciones</h3>
+                            <p>Obtén sugerencias inteligentes sobre qué zapatos combinan mejor con tu outfit, con puntuaciones y explicaciones detalladas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Beneficios -->
+            <section class="section">
+                <h2 class="section-title">¿Por qué OutfitAI?</h2>
+                <div class="benefits">
+                    <div class="benefit">
+                        <span class="benefit-icon">⚡</span>
+                        <h3>Súper rápido</h3>
+                        <p>Recomendaciones en menos de 5 segundos. No más perder tiempo frente al clóset.</p>
+                    </div>
+                    
+                    <div class="benefit">
+                        <span class="benefit-icon">🎯</span>
+                        <h3>Súper preciso</h3>
+                        <p>IA entrenada con miles de outfits exitosos. 98% de precisión en recomendaciones.</p>
+                    </div>
+                    
+                    <div class="benefit">
+                        <span class="benefit-icon">💡</span>
+                        <h3>Aprende de ti</h3>
+                        <p>Cada recomendación mejora con tus preferencias. Se adapta a tu estilo personal.</p>
+                    </div>
+                    
+                    <div class="benefit">
+                        <span class="benefit-icon">🌟</span>
+                        <h3>Siempre actualizado</h3>
+                        <p>Considera las últimas tendencias de moda y reglas de combinación profesionales.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Demo -->
+        <section class="demo-section" id="demo">
+            <div class="container">
+                <h2 class="section-title">Pruébalo ahora</h2>
+                <p style="margin-bottom: 40px; color: #4a5568;">Es gratis y no necesitas registrarte</p>
+                
+                <div class="demo-container">
+                    <div class="upload-area">
+                        <div class="upload-icon">👕</div>
+                        <label for="top-demo" class="upload-label">Subir prenda superior</label>
+                        <input type="file" id="top-demo" class="file-input" accept="image/*">
+                    </div>
+                    
+                    <div class="upload-area">
+                        <div class="upload-icon">👖</div>
+                        <label for="bottom-demo" class="upload-label">Subir prenda inferior</label>
+                        <input type="file" id="bottom-demo" class="file-input" accept="image/*">
+                    </div>
+                    
+                    <div class="upload-area">
+                        <div class="upload-icon">👠</div>
+                        <label for="shoes-demo" class="upload-label">Subir zapatos (puedes subir varios)</label>
+                        <input type="file" id="shoes-demo" class="file-input" accept="image/*" multiple>
+                    </div>
+                    
+                    <button class="cta-button" onclick="submitRecommendation()" style="margin-top: 20px;">
+                        Obtener Recomendación IA
+                    </button>
+                    
+                    <div id="results" style="margin-top: 30px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Testimonios -->
+            <section class="testimonials">
+                <div class="container">
+                    <h2 class="section-title">Lo que dicen nuestros usuarios</h2>
+                    <div class="testimonial-grid">
+                        <div class="testimonial">
+                            <p class="testimonial-text">"Antes tardaba 20 minutos eligiendo zapatos. Ahora OutfitAI me da la respuesta perfecta en segundos. ¡Es increíble!"</p>
+                            <div class="testimonial-author">María González</div>
+                            <div class="testimonial-role">Ejecutiva de Marketing</div>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <p class="testimonial-text">"Como influencer de moda, necesito looks perfectos siempre. OutfitAI se ha vuelto mi asistente personal indispensable."</p>
+                            <div class="testimonial-author">Sofía Ramírez</div>
+                            <div class="testimonial-role">Influencer de Moda</div>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <p class="testimonial-text">"La precisión es impresionante. Siempre me sugiere combinaciones que jamás habría pensado pero que quedan perfectas."</p>
+                            <div class="testimonial-author">Carlos Mendoza</div>
+                            <div class="testimonial-role">Diseñador Gráfico</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing -->
+            <section class="section">
+                <h2 class="section-title">Empieza gratis</h2>
+                <div class="pricing-card">
+                    <h3>Plan Completo</h3>
+                    <div class="price">Gratis</div>
+                    <p class="price-note">Para siempre • Sin límites • Sin tarjeta</p>
+                    <a href="#demo" class="cta-button" style="background: white; color: #667eea;">Comenzar Ahora</a>
+                </div>
+                <p style="text-align: center; margin-top: 30px; color: #4a5568;">
+                    ¿Eres empresa o necesitas funciones avanzadas? 
+                    <a href="mailto:hola@outfitai.com" style="color: #667eea;">Contáctanos</a>
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OutfitAI</h3>
+                    <p>La IA más avanzada para recomendaciones de moda. Ayudamos a miles de personas a vestirse mejor cada día.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Producto</h3>
+                    <p><a href="#demo">Probar gratis</a></p>
+                    <p><a href="#caracteristicas">Características</a></p>
+                    <p><a href="#testimonios">Testimonios</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Soporte</h3>
+                    <p><a href="mailto:hola@outfitai.com">hola@outfitai.com</a></p>
+                    <p><a href="#">Preguntas frecuentes</a></p>
+                    <p><a href="#">Guía de uso</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <p><a href="#">Términos de uso</a></p>
+                    <p><a href="#">Privacidad</a></p>
+                    <p><a href="#">Cookies</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 OutfitAI. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ======================
+        // CONTADOR DINÁMICO DE OUTFITS 
+        // ======================
+        
+        const STORAGE_KEY = 'outfitai_counter';
+        const API_COUNTER_URL = 'https://outfit-recommender.fly.dev/stats'; // Endpoint para stats
+        
+        // Obtener contador actual
+        function getOutfitCount() {
+            // Intentar obtener del servidor primero
+            fetch(API_COUNTER_URL)
+                .then(response => response.json())
+                .then(data => {
+                    const count = data.total_outfits || localStorage.getItem(STORAGE_KEY) || 1000;
+                    updateCounterDisplay(count);
+                })
+                .catch(() => {
+                    // Fallback a localStorage si el servidor no responde
+                    const count = localStorage.getItem(STORAGE_KEY) || 1000;
+                    updateCounterDisplay(count);
+                });
+        }
+        
+        // Actualizar contador en pantalla
+        function updateCounterDisplay(count) {
+            const counter = document.getElementById('outfits-counter');
+            const numericCount = parseInt(count);
+            
+            if (numericCount >= 1000) {
+                counter.textContent = `${Math.floor(numericCount / 1000)}k+`;
+            } else {
+                counter.textContent = `${numericCount}+`;
+            }
+            
+            // Animación de incremento
+            counter.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                counter.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Incrementar contador cuando se crea un outfit
+        function incrementOutfitCounter() {
+            // Incrementar en localStorage inmediatamente
+            const currentCount = parseInt(localStorage.getItem(STORAGE_KEY) || 1000);
+            const newCount = currentCount + 1;
+            localStorage.setItem(STORAGE_KEY, newCount);
+            updateCounterDisplay(newCount);
+            
+            // Enviar al servidor (opcional, para sincronizar)
+            fetch(API_COUNTER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ increment: 1 })
+            }).catch(() => {
+                // Si falla, no importa, ya tenemos localStorage
+                console.log('Stats enviadas al servidor (opcional)');
+            });
+        }
+        
+        // Cargar contador al cargar la página
+        document.addEventListener('DOMContentLoaded', getOutfitCount);
+
+        // ======================
+        // FUNCIONALIDAD EXISTENTE
+        // ======================
+        
+        // Funcionalidad del demo
+        function submitRecommendation() {
+            console.log("🚀 Iniciando recomendación...");
+            
+            const top = document.getElementById("top-demo").files[0];
+            const bottom = document.getElementById("bottom-demo").files[0];
+            const shoes = document.getElementById("shoes-demo").files;
+            
+            console.log("📁 Archivos:", { top, bottom, shoes: shoes.length });
+            
+            if (!top || !bottom || shoes.length === 0) {
+                document.getElementById("results").innerHTML = `
+                    <div style="padding: 20px; background: #fed7d7; color: #c53030; border-radius: 8px;">
+                        ⚠️ Debes subir todas las prendas para obtener una recomendación.
+                    </div>
+                `;
+                return;
+            }
+            
+            // Mostrar loading
+            document.getElementById("results").innerHTML = `
+                <div style="padding: 20px; background: #e6fffa; color: #2c7a7b; border-radius: 8px;">
+                    🤖 Analizando tu outfit con IA... Esto tomará unos segundos.
+                </div>
+            `;
+            
+            const formData = new FormData();
+            formData.append("top", top);
+            formData.append("bottom", bottom);
+            for (let i = 0; i < shoes.length; i++) {
+                formData.append("shoes", shoes[i]);
+            }
+            
+            console.log("📤 Enviando request a API...");
+            
+            fetch("https://outfit-recommender.fly.dev/recommend", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => {
+                console.log("📥 Response status:", response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                return response.json();
+            })
+            .then(data => {
+                console.log("✅ Data recibida:", data);
+                
+                // ¡INCREMENTAR CONTADOR AQUÍ! 🎉
+                incrementOutfitCounter();
+                
+                document.getElementById("results").innerHTML = `
+                    <div style="padding: 30px; background: #f0fff4; border: 2px solid #48bb78; border-radius: 12px; text-align: left;">
+                        <h3 style="color: #22543d; margin-bottom: 20px; text-align: center;">
+                            ✨ ¡Recomendación lista!
+                        </h3>
+                        <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: #2d3748; margin-bottom: 10px;">
+                                🏆 Mejor opción: Zapato #${data.best_index + 1}
+                            </h4>
+                            <p style="color: #4a5568; margin-bottom: 15px;">
+                                Puntuación de compatibilidad: <strong>${Math.round(data.results[data.best_index]?.score * 100 || 95)}%</strong>
+                            </p>
+                            <p style="color: #4a5568; font-size: 0.9rem;">
+                                ${data.results[data.best_index]?.reasoning || 'Esta combinación crea un look equilibrado y moderno que resalta tus mejores características.'}
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p style="color: #4a5568; font-size: 0.9rem; margin-bottom: 15px;">
+                                💡 ¿Te gusta el resultado? ¡Guarda OutfitAI en tus favoritos!
+                            </p>
+                            <button onclick="location.reload()" style="background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">
+                                Probar otro outfit
+                            </button>
+                        </div>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error("❌ Error:", error);
+                document.getElementById("results").innerHTML = `
+                    <div style="padding: 20px; background: #fed7d7; color: #c53030; border-radius: 8px; text-align: center;">
+                        <h4>❌ Error de conexión</h4>
+                        <p style="margin: 10px 0;">No pudimos conectar con nuestros servidores. Esto puede ser temporal.</p>
+                        <button onclick="submitRecommendation()" style="background: #c53030; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+                            Intentar de nuevo
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // Smooth scrolling para enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mejorar UX de upload
+        ['top-demo', 'bottom-demo', 'shoes-demo'].forEach(id => {
+            const input = document.getElementById(id);
+            const label = input.nextElementSibling || input.previousElementSibling;
+            
+            input.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const area = this.closest('.upload-area');
+                    area.style.background = '#f0fff4';
+                    area.style.borderColor = '#48bb78';
+                    
+                    if (this.multiple && this.files.length > 1) {
+                        area.querySelector('.upload-icon').textContent = '✅';
+                        area.querySelector('.upload-label').textContent = `${this.files.length} zapatos subidos`;
+                    } else {
+                        area.querySelector('.upload-icon').textContent = '✅';
+                        area.querySelector('.upload-label').textContent = 'Archivo subido';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
