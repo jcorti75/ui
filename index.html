@@ -511,11 +511,16 @@
             flex-wrap: wrap;
         }
 
-        /* Features Section */
+        /* Features Section - Ajustes para dos secciones similares */
         .features {
             padding: 6rem 5% 4rem;
             position: relative;
             z-index: 2;
+        }
+
+        .features:nth-of-type(2) {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .features-container {
@@ -858,6 +863,10 @@
                 font-size: 2.5rem;
             }
 
+            .hero-description {
+                font-size: 1rem;
+            }
+
             .features h2,
             .pricing h2,
             .about h2 {
@@ -995,6 +1004,9 @@
                     <a href="#inicio" class="nav-pill active">
                         🏠 Inicio
                     </a>
+                    <a href="#que-hacemos" class="nav-pill">
+                        🎯 Qué Hacemos
+                    </a>
                     <a href="#nosotros" class="nav-pill">
                         👋 Nosotros
                     </a>
@@ -1029,8 +1041,8 @@
             <p class="hero-subtitle">¿Tardas mucho eligiendo qué ponerte cada mañana?</p>
             <p class="hero-description">Deja de perder tiempo. Aprovecha toda la ropa que ya tienes con nuestro algoritmo de IA que encuentra automáticamente las mejores combinaciones basándose en tus fotos. ¡Sin estrés, sin pérdida de tiempo, solo outfits perfectos!</p>
             
-            <a href="#upload" class="hero-button">
-                🎯 Acabar con el Sufrimiento Matutino
+            <a href="#que-hacemos" class="hero-button">
+                🎯 Ver Cómo Funciona
             </a>
             
             <div class="stats">
@@ -1050,10 +1062,73 @@
         </div>
     </section>
 
+    <section id="que-hacemos" class="features animate-on-scroll">
+        <div class="features-container">
+            <h2>🎯 Qué Hacemos</h2>
+            <p class="features-subtitle">Resolvemos el problema más común de las mañanas: "No tengo nada que ponerme"</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        📱
+                    </div>
+                    <h3>1. Fotografías Tu Ropa</h3>
+                    <p>Tomas fotos de las prendas que ya tienes en tu closet. Camisas, pantalones, zapatos... todo lo que quieras incluir.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        🤖
+                    </div>
+                    <h3>2. IA Analiza y Procesa</h3>
+                    <p>Nuestro algoritmo inteligente analiza colores, patrones, estilos y compatibilidad entre todas tus prendas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        ✨
+                    </div>
+                    <h3>3. Generas Combinaciones</h3>
+                    <p>En segundos obtienes múltiples opciones de outfits perfectamente coordinados, con puntuación de compatibilidad.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        🎉
+                    </div>
+                    <h3>4. Sales Perfecto de Casa</h3>
+                    <p>Eliminas el estrés matutino, ahorras tiempo y siempre luces increíble con la ropa que ya tienes.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        🔄
+                    </div>
+                    <h3>5. La IA Aprende de Ti</h3>
+                    <p>Mientras más uses OutfitAI, mejor conoce tu estilo y preferencias para sugerencias más personalizadas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        💡
+                    </div>
+                    <h3>6. Descubres Nuevas Opciones</h3>
+                    <p>Te sorprenderás con combinaciones que nunca habías pensado, maximizando el potencial de tu guardarropa.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#upload" class="hero-button">
+                    🚀 Empezar Ahora - Es Gratis
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section id="features" class="features animate-on-scroll">
         <div class="features-container">
-            <h2>🚀 Deja de Sufrir Cada Mañana</h2>
-            <p class="features-subtitle">Nuestro algoritmo de IA analiza toda tu ropa y encuentra las mejores combinaciones automáticamente</p>
+            <h2>💪 Beneficios Que Notarás Inmediatamente</h2>
+            <p class="features-subtitle">Estos son los cambios reales que verás en tu vida desde el primer día</p>
             
             <div class="features-grid">
                 <div class="feature-card">
@@ -1122,7 +1197,7 @@
                         <path fill="#FBBC04" d="M3.96363636 10.7109091c-.18-.54-.28363636-1.11818182-.28363636-1.7109091s.10363636-1.17090909.28363636-1.7109091V5.28181818L.68181818 5.28181818C.24727273 6.1418182 0 7.04727273 0 8s.24727273 1.8581818.68181818 2.7181818l3.28181818-1.27090909z"/>
                         <path fill="#EA4335" d="M9 3.57272727c1.32272727 0 2.50909091.45454545 3.44363636 1.34727273l2.58181818-2.58181818C13.46363636.89090909 11.42727273 0 9 0 5.48090909 0 2.24909091 2.40181818.68181818 5.28181818l3.28181818 1.27090909C4.67181818 5.15636364 6.65454545 3.57272727 9 3.57272727z"/>
                     </svg>
-                    Iniciar sesión con Google
+                    Acceder al Algoritmo de IA
                 </button>
             </div>
 
@@ -1277,7 +1352,7 @@
 
         // Update active nav pill
         function updateActiveNav() {
-            const sections = ['inicio', 'nosotros', 'precios'];
+            const sections = ['inicio', 'que-hacemos', 'nosotros', 'precios'];
             const navPills = document.querySelectorAll('.nav-pill');
             
             sections.forEach((section, index) => {
@@ -1911,6 +1986,3 @@
     </script>
 </body>
 </html>
-
-
-
