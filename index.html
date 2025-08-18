@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>👕 OutfitAI - Tu Asistente de Moda Inteligente</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         * {
             margin: 0;
@@ -1103,7 +1105,7 @@
                         <h4>Parte Superior</h4>
                         <p>Camisas, blusas, suéteres</p>
                         <label for="top-upload" class="file-label multiple">
-                            📤 Subir Fotos
+                            📤 Subir Superiores (máx 3)
                         </label>
                         <input type="file" id="top-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('top', this)">
                         <div id="top-preview" class="preview-area"></div>
@@ -1114,7 +1116,7 @@
                         <h4>Parte Inferior</h4>
                         <p>Pantalones, faldas, shorts</p>
                         <label for="bottom-upload" class="file-label multiple">
-                            📤 Subir Fotos
+                            📤 Subir Inferiores (máx 3)
                         </label>
                         <input type="file" id="bottom-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('bottom', this)">
                         <div id="bottom-preview" class="preview-area"></div>
@@ -1125,7 +1127,7 @@
                         <h4>Calzado</h4>
                         <p>Zapatos, sneakers, botas</p>
                         <label for="shoes-upload" class="file-label multiple">
-                            📤 Subir Fotos
+                            📤 Subir Zapatos (máx 5)
                         </label>
                         <input type="file" id="shoes-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('shoes', this)">
                         <div id="shoes-preview" class="preview-area"></div>
@@ -1210,6 +1212,19 @@
     </footer>
 
     <script>
+        // ========================================
+        // 🔧 CONFIGURACIÓN PARA DESARROLLADOR
+        // ========================================
+        // Esto lo configuras TÚ una sola vez:
+        // 1. Ve a: https://console.developers.google.com/
+        // 2. Crea proyecto → Habilita "Google Identity API" 
+        // 3. Crea OAuth 2.0 Client ID
+        // 4. Agrega tu dominio Netlify a "Authorized origins"
+        // 5. Reemplaza el CLIENT_ID abajo
+        // 
+        // Los USUARIOS solo hacen clic y se autentican automáticamente
+        // ========================================
+
         // Estado global de la aplicación
         let isLoggedIn = false;
         let currentUser = null;
@@ -1279,34 +1294,148 @@
             }
         });
 
-        // Google Login simulation (reemplazar con Google OAuth real)
-        async function loginWithGoogle() {
+        // Google OAuth Configuration
+        // ⚠️ CONFIGURAR UNA SOLA VEZ COMO DESARROLLADOR
+        // Este CLIENT_ID lo configuras TÚ, no cada usuario
+        const GOOGLE_CLIENT_ID = '326940877598-ko13n1qcqkkugkoo6gu2n1avs46al09p.apps.googleusercontent.com';
+
+        // Initialize Google OAuth when page loads
+        function initializeGoogleAuth() {
+            if (typeof google === 'undefined') {
+                console.warn('⚠️ Google Identity Services no cargado');
+                return;
+            }
+
+            google.accounts.id.initialize({
+                client_id: GOOGLE_CLIENT_ID,
+                callback: handleGoogleSignIn,
+                auto_select: false,
+                cancel_on_tap_outside: true
+            });
+
+            // Preparar el botón de login
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.onclick = () => triggerGoogleLogin();
+        }
+
+        // Handle Google Sign-In response
+        function handleGoogleSignIn(response) {
             try {
-                const button = document.getElementById('loginBtn');
-                const originalText = button.innerHTML;
+                // Decode JWT token to get user info
+                const token = response.credential;
+                const payload = JSON.parse(atob(token.split('.')[1]));
                 
-                button.innerHTML = '<span class="loading"></span> Conectando...';
-                button.disabled = true;
-                
-                // Simular autenticación con Google
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                // Simular datos del usuario (reemplazar con OAuth real)
                 currentUser = {
-                    name: 'Usuario Demo',
-                    email: 'usuario@gmail.com',
-                    picture: 'https://via.placeholder.com/35x35/00bcd4/ffffff?text=U'
+                    name: payload.name,
+                    email: payload.email,
+                    picture: payload.picture,
+                    given_name: payload.given_name,
+                    family_name: payload.family_name,
+                    token: token
                 };
                 
                 isLoggedIn = true;
                 updateAuthUI();
                 showUploadSection();
                 
-                showNotification('✅ ¡Conectado exitosamente!', 'success');
+                showNotification(`¡Hola ${currentUser.given_name || currentUser.name}! 🎉`, 'success');
                 
             } catch (error) {
-                showNotification('❌ Error al conectar con Google', 'error');
+                console.error('Error procesando login:', error);
+                showNotification('❌ Error al procesar el login', 'error');
+                // Fallback a modo demo
+                loginDemo();
             }
+        }
+
+        // Trigger Google Login (lo que ve el usuario)
+        function triggerGoogleLogin() {
+            if (typeof google === 'undefined') {
+                console.warn('Google Identity Services no disponible, usando modo demo');
+                loginDemo();
+                return;
+            }
+
+            try {
+                // Esto abre el popup de Google automáticamente
+                google.accounts.id.prompt((notification) => {
+                    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                        // Si no se muestra automáticamente, crear botón manual
+                        createGoogleButton();
+                    }
+                });
+            } catch (error) {
+                console.error('Error iniciando Google login:', error);
+                loginDemo();
+            }
+        }
+
+        // Crear botón de Google manual como fallback
+        function createGoogleButton() {
+            const loginBtn = document.getElementById('loginBtn');
+            const originalHTML = loginBtn.innerHTML;
+            
+            // Temporalmente reemplazar con botón de Google
+            const tempDiv = document.createElement('div');
+            loginBtn.parentNode.insertBefore(tempDiv, loginBtn);
+            loginBtn.style.display = 'none';
+            
+            google.accounts.id.renderButton(tempDiv, {
+                theme: 'filled_blue',
+                size: 'large',
+                text: 'signin_with',
+                shape: 'pill',
+                logo_alignment: 'left'
+            });
+            
+            // Restaurar después de 30 segundos si no se usa
+            setTimeout(() => {
+                if (!isLoggedIn) {
+                    tempDiv.remove();
+                    loginBtn.style.display = 'flex';
+                    loginBtn.innerHTML = originalHTML;
+                    loginBtn.onclick = () => loginDemo();
+                }
+            }, 30000);
+        }
+
+        // Demo login (fallback si Google no funciona)
+        function loginDemo() {
+            currentUser = {
+                name: 'Usuario Demo',
+                given_name: 'Usuario',
+                email: 'demo@aitrustyou.com',
+                picture: 'https://lh3.googleusercontent.com/a/default-user=s96-c'
+            };
+            
+            isLoggedIn = true;
+            updateAuthUI();
+            showUploadSection();
+            
+            showNotification('✅ Modo demo activado', 'success');
+        }
+
+        // Main login function (llamada desde el botón)
+        async function loginWithGoogle() {
+            const button = document.getElementById('loginBtn');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span class="loading"></span> Conectando...';
+            button.disabled = true;
+            
+            // Pequeña pausa para mostrar loading
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Activar Google login
+            triggerGoogleLogin();
+            
+            // Restaurar botón después de un momento
+            setTimeout(() => {
+                if (!isLoggedIn) {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }
+            }, 3000);
         }
 
         function logout() {
@@ -1346,27 +1475,53 @@
             document.querySelector('.upload-section').classList.remove('active');
         }
 
-        // Función para corregir rotación de imagen
-        function correctImageOrientation(file) {
+        // Función para detectar si una prenda/zapato necesita rotación inteligente
+        function needsRotationForClothing(img) {
+            const aspectRatio = img.width / img.height;
+            
+            // Si ya es vertical (height > width), no rotar
+            if (aspectRatio <= 1) {
+                return false;
+            }
+            
+            // Si es muy horizontal (panorámica), probablemente no es una prenda individual
+            if (aspectRatio > 3) {
+                return false;
+            }
+            
+            // Si es moderadamente horizontal (1.2 a 3), podría ser una prenda que se ve mejor vertical
+            if (aspectRatio > 1.2 && aspectRatio <= 3) {
+                return true;
+            }
+            
+            // Si es ligeramente horizontal (1 a 1.2), mantener como está
+            return false;
+        }
+
+        // Función para rotación inteligente de prendas
+        function intelligentClothingRotation(file) {
             return new Promise((resolve) => {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 const img = new Image();
                 
                 img.onload = function() {
-                    // Detectar si la imagen está en vertical y necesita rotación
-                    const needsRotation = img.height > img.width;
+                    const shouldRotate = needsRotationForClothing(img);
                     
-                    if (needsRotation) {
+                    if (shouldRotate) {
+                        // Rotar 90 grados para hacer vertical
                         canvas.width = img.height;
                         canvas.height = img.width;
                         ctx.translate(canvas.width / 2, canvas.height / 2);
                         ctx.rotate(Math.PI / 2);
                         ctx.drawImage(img, -img.width / 2, -img.height / 2);
+                        console.log(`🔄 Imagen rotada de ${img.width}x${img.height} a ${canvas.width}x${canvas.height}`);
                     } else {
+                        // Mantener orientación original
                         canvas.width = img.width;
                         canvas.height = img.height;
                         ctx.drawImage(img, 0, 0);
+                        console.log(`✅ Imagen mantenida en ${img.width}x${img.height}`);
                     }
                     
                     canvas.toBlob(resolve, 'image/jpeg', 0.9);
@@ -1376,15 +1531,45 @@
             });
         }
 
-        // File upload handling with multiple files and rotation correction
+        // Configuración de límites por categoría
+        const FILE_LIMITS = {
+            top: 3,
+            bottom: 3,
+            shoes: 5  // Hasta 5 pares de zapatos
+        };
+
+        // File upload handling with intelligent rotation and limits
         async function handleFileUpload(type, input) {
             const files = Array.from(input.files);
             const preview = document.getElementById(`${type}-preview`);
+            const currentCount = uploadedFiles[type].length;
+            const maxFiles = FILE_LIMITS[type];
+            
+            // Verificar límite de archivos
+            const availableSlots = maxFiles - currentCount;
+            if (files.length > availableSlots) {
+                showNotification(`⚠️ Solo puedes subir ${availableSlots} foto${availableSlots > 1 ? 's' : ''} más de ${type}. Máximo: ${maxFiles}`, 'error');
+                return;
+            }
+            
+            console.log(`📤 Procesando ${files.length} archivo(s) para ${type}`);
             
             for (let file of files) {
                 try {
-                    // Corregir orientación si es necesario
-                    const correctedFile = await correctImageOrientation(file);
+                    // Validar que es una imagen
+                    if (!file.type.startsWith('image/')) {
+                        showNotification('❌ Solo se permiten archivos de imagen', 'error');
+                        continue;
+                    }
+                    
+                    // Validar tamaño (máximo 10MB)
+                    if (file.size > 10 * 1024 * 1024) {
+                        showNotification('❌ La imagen es muy grande. Máximo 10MB', 'error');
+                        continue;
+                    }
+                    
+                    // Aplicar rotación inteligente
+                    const processedFile = await intelligentClothingRotation(file);
                     
                     // Crear preview
                     const reader = new FileReader();
@@ -1392,17 +1577,20 @@
                         const imageContainer = document.createElement('div');
                         imageContainer.style.position = 'relative';
                         imageContainer.style.display = 'inline-block';
+                        imageContainer.style.margin = '0.25rem';
                         
                         const img = document.createElement('img');
                         img.src = e.target.result;
                         img.className = 'preview-image';
+                        img.title = `${type} - ${file.name}`;
                         
                         const removeBtn = document.createElement('button');
                         removeBtn.className = 'remove-image';
                         removeBtn.innerHTML = '×';
+                        removeBtn.title = 'Eliminar imagen';
                         removeBtn.onclick = () => {
                             imageContainer.remove();
-                            const fileIndex = uploadedFiles[type].indexOf(correctedFile);
+                            const fileIndex = uploadedFiles[type].indexOf(processedFile);
                             if (fileIndex > -1) {
                                 uploadedFiles[type].splice(fileIndex, 1);
                             }
@@ -1413,14 +1601,14 @@
                         imageContainer.appendChild(removeBtn);
                         preview.appendChild(imageContainer);
                     };
-                    reader.readAsDataURL(correctedFile);
+                    reader.readAsDataURL(processedFile);
                     
-                    // Agregar archivo corregido al array
-                    uploadedFiles[type].push(correctedFile);
+                    // Agregar archivo procesado al array
+                    uploadedFiles[type].push(processedFile);
                     
                 } catch (error) {
                     console.error('Error procesando archivo:', error);
-                    showNotification('Error procesando la imagen', 'error');
+                    showNotification(`❌ Error procesando ${file.name}`, 'error');
                 }
             }
             
@@ -1432,31 +1620,44 @@
             setTimeout(() => {
                 uploadItem.style.transform = 'scale(1)';
             }, 300);
+            
+            // Limpiar el input para permitir resubir las mismas fotos
+            input.value = '';
         }
 
         function updateUploadLabel(type) {
             const label = document.querySelector(`label[for="${type}-upload"]`);
             const count = uploadedFiles[type].length;
+            const maxFiles = FILE_LIMITS[type];
             
             if (count > 0) {
-                label.innerHTML = `✅ ${count} foto${count > 1 ? 's' : ''} cargada${count > 1 ? 's' : ''}`;
+                const remaining = maxFiles - count;
+                label.innerHTML = `✅ ${count}/${maxFiles} foto${count > 1 ? 's' : ''} cargada${count > 1 ? 's' : ''}`;
                 label.style.background = 'linear-gradient(135deg, #00bcd4, #0097a7)';
+                
+                // Cambiar texto si llegó al límite
+                if (remaining === 0) {
+                    label.innerHTML = `🎯 ${count}/${maxFiles} - ¡Completo!`;
+                    label.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                }
             } else {
-                label.innerHTML = '📤 Subir Fotos';
+                const typeText = type === 'top' ? 'Superiores' : 
+                                type === 'bottom' ? 'Inferiores' : 'Zapatos';
+                label.innerHTML = `📤 Subir ${typeText} (máx ${maxFiles})`;
                 label.style.background = 'linear-gradient(135deg, #ff9800, #f57c00)';
             }
         }
 
-        // Get AI recommendation from your backend
+        // Get AI recommendation from your backend with intelligent file selection
         async function getRecommendation() {
             if (!isLoggedIn) {
                 showNotification('🔐 Necesitas iniciar sesión primero', 'error');
                 return;
             }
 
-            const totalFiles = uploadedFiles.top.length + uploadedFiles.bottom.length + uploadedFiles.shoes.length;
-            if (totalFiles < 3) {
-                showNotification('📸 Necesitas subir al menos 3 fotos (una de cada categoría)', 'error');
+            // Validar que hay al menos una imagen en cada categoría
+            if (uploadedFiles.top.length === 0 || uploadedFiles.bottom.length === 0 || uploadedFiles.shoes.length === 0) {
+                showNotification('📸 Necesitas subir al menos una foto de cada categoría', 'error');
                 return;
             }
 
@@ -1470,39 +1671,73 @@
                 // Limpiar resultados anteriores
                 clearResults();
                 
-                // Preparar FormData para tu backend
+                // Preparar FormData - enviar la primera imagen de cada categoría
                 const formData = new FormData();
                 
-                // Agregar archivos al FormData
-                uploadedFiles.top.forEach((file, index) => {
-                    formData.append('top', file, `top_${index}.jpg`);
-                });
-                uploadedFiles.bottom.forEach((file, index) => {
-                    formData.append('bottom', file, `bottom_${index}.jpg`);
-                });
-                uploadedFiles.shoes.forEach((file, index) => {
-                    formData.append('shoes', file, `shoes_${index}.jpg`);
-                });
+                // Mostrar al usuario qué imágenes se están enviando
+                console.log('📤 Enviando al backend:');
+                console.log(`- Top: imagen 1 de ${uploadedFiles.top.length}`);
+                console.log(`- Bottom: imagen 1 de ${uploadedFiles.bottom.length}`);
+                console.log(`- Shoes: imagen 1 de ${uploadedFiles.shoes.length}`);
+                
+                formData.append('top', uploadedFiles.top[0], 'top.jpg');
+                formData.append('bottom', uploadedFiles.bottom[0], 'bottom.jpg');
+                formData.append('shoes', uploadedFiles.shoes[0], 'shoes.jpg');
 
-                // Llamar a tu backend real
+                // Debug información
+                console.log('📊 Estadísticas de archivos:');
+                console.log(`Total archivos cargados: ${uploadedFiles.top.length + uploadedFiles.bottom.length + uploadedFiles.shoes.length}`);
+                
+                // Mostrar notificación sobre qué se está analizando
+                if (uploadedFiles.shoes.length > 1) {
+                    showNotification(`📊 Analizando con la primera imagen de cada categoría (tienes ${uploadedFiles.shoes.length} zapatos cargados)`, 'info');
+                }
+
+                // Llamar a tu backend real con timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000);
+
                 const response = await fetch('https://outfit-recommender.fly.dev/recommend', {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    signal: controller.signal,
+                    headers: {
+                        // No agregar Content-Type, el browser lo maneja automáticamente con FormData
+                    }
                 });
 
+                clearTimeout(timeoutId);
+
+                console.log('📡 Response status:', response.status);
+
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    const errorText = await response.text();
+                    console.error('❌ Error response:', errorText);
+                    throw new Error(`Error ${response.status}: ${errorText}`);
                 }
 
                 const data = await response.json();
+                console.log('✅ Backend response:', data);
+                
+                // Validar que la respuesta tiene el formato esperado
+                if (!data.results || !Array.isArray(data.results)) {
+                    throw new Error('Formato de respuesta inválido del backend');
+                }
                 
                 // Mostrar resultados ordenados
                 displayRecommendations(data);
                 showNotification('🎉 ¡Recomendaciones generadas!', 'success');
                 
             } catch (error) {
-                console.error('Error:', error);
-                showNotification('😔 Error al generar recomendaciones. Inténtalo de nuevo', 'error');
+                console.error('💥 Error completo:', error);
+                
+                if (error.name === 'AbortError') {
+                    showNotification('⏱️ Timeout: El servidor tardó demasiado en responder', 'error');
+                } else if (error.message.includes('Failed to fetch')) {
+                    showNotification('🌐 Error de conexión: Revisa tu internet o el servidor está caído', 'error');
+                } else {
+                    showNotification(`😔 Error: ${error.message}`, 'error');
+                }
             } finally {
                 button.innerHTML = originalText;
                 button.disabled = false;
@@ -1622,6 +1857,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateAuthUI();
             
+            // Initialize upload labels with limits
+            Object.keys(FILE_LIMITS).forEach(type => {
+                updateUploadLabel(type);
+            });
+            
+            // Initialize Google OAuth with delay to ensure script loads
+            setTimeout(() => {
+                initializeGoogleAuth();
+            }, 1000);
+            
             // Check if user clicks on upload section without being logged in
             document.querySelector('a[href="#upload"]').addEventListener('click', () => {
                 if (!isLoggedIn) {
@@ -1638,4 +1883,5 @@
     </script>
 </body>
 </html>
+
 
