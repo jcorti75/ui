@@ -42,17 +42,24 @@ def create_zip_from_directory(directory: str) -> str:
     """Crea un ZIP temporal con todos los archivos del directorio."""
     temp_zip = tempfile.NamedTemporaryFile(delete=False, suffix='.zip')
     
+    print(f"🔍 Explorando directorio: {directory}")
+    
     with zipfile.ZipFile(temp_zip.name, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, dirs, files in os.walk(directory):
             # Excluir archivos innecesarios
             dirs[:] = [d for d in dirs if not d.startswith('.') and d != '__pycache__']
             
+            print(f"📁 Procesando carpeta: {root}")
+            print(f"📄 Archivos encontrados: {files}")
+            
             for file in files:
                 if file.startswith('.') or file.endswith('.py') or file == '.env':
+                    print(f"❌ Excluyendo: {file}")
                     continue
                     
                 file_path = os.path.join(root, file)
                 arc_path = os.path.relpath(file_path, directory)
+                print(f"✅ Incluyendo: {file} -> {arc_path}")
                 zipf.write(file_path, arc_path)
                 
     print(f"📦 ZIP creado: {temp_zip.name}")
@@ -194,6 +201,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
