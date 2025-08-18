@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OutfitAI - Tu IA Personal de Moda</title>
-    <meta name="description" content="La IA que te ayuda a elegir el outfit perfecto. Sube tu ropa y obtén recomendaciones inteligentes en segundos.">
-    <script src="https://accounts.google.com/gsi/client" onload="initGoogleSignIn()"></script>
+    <title>👕 OutfitAI - Tu Asistente de Moda Inteligente</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,704 +13,239 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #2d3748;
-            background: #fff;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #ffffff;
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Header mejorado con navegación */
-        header {
-            padding: 20px 0 60px;
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            position: relative;
-        }
-
-        /* Navegación superior */
-        .top-nav {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-tab {
-            color: white;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .nav-tab:hover, .nav-tab.active {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Contenido de tabs */
-        .tab-content {
-            display: none;
-            padding: 40px 0;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Estilos para la sección de precios */
-        .pricing-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px auto;
-            max-width: 600px;
-            backdrop-filter: blur(10px);
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .pricing-card-header {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card-header.premium {
-            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
-        }
-
-        .pricing-card-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-        }
-
-        .plan-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .plan-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 15px 0;
-        }
-
-        .plan-price .currency {
-            font-size: 1.2rem;
-            vertical-align: top;
-        }
-
-        .plan-period {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .plan-trial {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 15px;
-            display: inline-block;
-        }
-
-        /* Sección del founder */
-        .founder-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px auto;
-            max-width: 600px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .founder-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-        }
-
-        .founder-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            display: block;
-            object-fit: cover;
-        }
-
-        .founder-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .founder-title {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-
-        .linkedin-btn {
-            background: #0077b5;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .linkedin-btn:hover {
-            background: #005885;
-            transform: translateY(-2px);
-        }
-
-        .linkedin-icon {
-            width: 20px;
-            height: 20px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>') no-repeat center;
-            background-size: contain;
-        }
-
-        /* Imagen de fondo en el header */
-        .hero-image {
-            position: absolute;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
-            width: 300px;
-            height: 400px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><rect width="300" height="400" fill="%23ffffff" opacity="0.1"/><circle cx="150" cy="120" r="40" fill="%23ffffff" opacity="0.2"/><rect x="100" y="160" width="100" height="120" rx="8" fill="%23ffffff" opacity="0.2"/><rect x="110" y="280" width="80" height="80" rx="8" fill="%23ffffff" opacity="0.2"/><text x="150" y="390" text-anchor="middle" fill="%23ffffff" font-size="12" opacity="0.7">Outfit Perfect</text></svg>') no-repeat center;
-            background-size: contain;
-            opacity: 0.3;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            position: relative;
-            z-index: 2;
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Auth Section */
-        .auth-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 16px;
-            margin-top: 40px;
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(10px);
-        }
-
-        .auth-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        /* Modal de autenticación */
-        .auth-modal {
-            display: none;
+        /* Floating Elements */
+        .floating-elements {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
         }
 
-        .auth-modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .auth-modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-close {
+        .floating-item {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
+            font-size: 2.5rem;
+            opacity: 0.2;
+            animation: float 25s infinite linear;
         }
 
-        .modal-close:hover {
-            color: #333;
+        .floating-item:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-item:nth-child(2) { left: 25%; animation-delay: 5s; }
+        .floating-item:nth-child(3) { left: 65%; animation-delay: 10s; }
+        .floating-item:nth-child(4) { left: 85%; animation-delay: 15s; }
+        .floating-item:nth-child(5) { left: 45%; animation-delay: 20s; }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
         }
 
-        .modal-title {
-            font-size: 1.8rem;
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: #1a202c;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .modal-subtitle {
-            color: #4a5568;
-            margin-bottom: 30px;
-            line-height: 1.5;
+        .nav-pills {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            gap: 0.5rem;
         }
 
-        .google-signin-btn {
-            background: white;
-            color: #1a73e8;
-            border: 2px solid #e2e8f0;
-            padding: 15px 25px;
-            border-radius: 12px;
+        .nav-pill {
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-pill:hover, .nav-pill.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .cta-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 50px;
+            color: white;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
             display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin: 20px auto;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-size: 1rem;
-        }
-
-        .google-signin-btn:hover {
-            background: #f8f9fa;
-            border-color: #1a73e8;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.2);
-        }
-
-        .google-icon {
-            width: 20px;
-            height: 20px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%234285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="%2334a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="%23fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="%23ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>') no-repeat center;
-            background-size: contain;
-        }
-
-        .skip-auth {
-            background: none;
-            border: none;
-            color: #667eea;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        .skip-auth:hover {
-            color: #5a67d8;
-        }
-
-        .modal-features {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        .modal-features h4 {
-            color: #2d3748;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
             text-align: center;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-            color: #4a5568;
-            font-size: 0.9rem;
-        }
-
-        .feature-icon {
-            font-size: 1.2rem;
-        }
-
-        .auth-note {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            color: white;
-        }
-
-        /* CTA Button */
-        .cta-button {
-            display: inline-block;
-            background: #48bb78;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
             position: relative;
             z-index: 2;
+            padding: 6rem 2rem 4rem;
         }
 
-        .cta-button:hover {
-            background: #38a169;
-            transform: translateY(-2px);
+        .hero-content {
+            max-width: 700px;
+            animation: fadeInUp 1s ease;
         }
 
-        /* Main content */
-        main {
-            padding: 80px 0;
-        }
-
-        .section {
-            margin-bottom: 80px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 40px;
-            text-align: center;
-            color: #1a202c;
-        }
-
-        /* How it works */
-        .steps {
-            display: grid;
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 30px;
-            background: #f7fafc;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-
-        .step-number {
-            background: #667eea;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .step-content h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1a202c;
-        }
-
-        .step-content p {
-            color: #4a5568;
-            line-height: 1.6;
-        }
-
-        /* Benefits */
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .benefit {
-            text-align: center;
-            padding: 30px 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .benefit:hover {
-            transform: translateY(-5px);
-        }
-
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        .hero-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
             display: block;
         }
 
-        .benefit h3 {
-            font-size: 1.2rem;
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
             font-weight: 600;
-            margin-bottom: 15px;
-            color: #1a202c;
         }
 
-        .benefit p {
-            color: #4a5568;
-            font-size: 0.95rem;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            background: #f7fafc;
-            padding: 60px 0;
-            margin: 80px 0;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .testimonial {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #4a5568;
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
             line-height: 1.6;
         }
 
-        .testimonial-author {
-            font-weight: 600;
-            color: #1a202c;
-        }
-
-        .testimonial-role {
-            font-size: 0.9rem;
-            color: #718096;
-        }
-
-        /* Pricing */
-        .pricing-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .hero-button {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 50px;
             color: white;
-            padding: 40px;
-            border-radius: 16px;
-            text-align: center;
-            max-width: 400px;
-            margin: 40px auto;
-        }
-
-        .price {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 20px 0;
-        }
-
-        .price-note {
-            opacity: 0.8;
-            margin-bottom: 30px;
-        }
-
-        /* Footer */
-        footer {
-            background: #1a202c;
-            color: white;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .footer-section p, .footer-section a {
-            color: #a0aec0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 4rem;
             text-decoration: none;
-            line-height: 1.8;
         }
 
-        .footer-section a:hover {
-            color: white;
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
         }
 
-        .footer-bottom {
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #2d3748;
-            color: #a0aec0;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .hero-stats {
-                gap: 20px;
-            }
-
-            .hero-image {
-                display: none;
-            }
-
-            .nav-tabs {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .nav-container {
-                justify-content: center;
-            }
-
-            .pricing-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .step {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .benefits {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        /* Animations */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -719,665 +253,954 @@
             }
         }
 
-        .step, .benefit, .testimonial {
-            animation: fadeInUp 0.6s ease-out;
+        /* Features Section */
+        .features {
+            padding: 6rem 5% 4rem;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Demo section */
-        .demo-section {
-            background: #f7fafc;
-            padding: 60px 0;
-            margin: 80px 0;
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .demo-container {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 40px auto;
+        .features h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .features-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-card p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            padding: 4rem 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .upload-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .upload-area {
-            border: 2px dashed #cbd5e0;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(20px);
             transition: all 0.3s ease;
         }
 
         .upload-area:hover {
-            border-color: #667eea;
-            background: #f7fafc;
+            border-color: #4CAF50;
+            background: rgba(255, 255, 255, 0.12);
         }
 
-        .upload-icon {
-            font-size: 2rem;
-            color: #a0aec0;
-            margin-bottom: 10px;
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .upload-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .upload-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .upload-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #4CAF50;
         }
 
         .file-input {
             display: none;
         }
 
-        .upload-label {
-            cursor: pointer;
-            color: #667eea;
+        .file-label {
+            display: block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 25px;
+            color: white;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
         }
 
-        .upload-label:hover {
-            text-decoration: underline;
+        .file-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
         }
 
-        /* Photo showcase */
-        .photo-showcase {
-            background: white;
-            padding: 60px 0;
+        /* About Section */
+        .about {
+            padding: 6rem 5% 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .showcase-image {
-            max-width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+        .about h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
         }
 
-        .showcase-caption {
-            font-size: 1.2rem;
-            color: #4a5568;
-            max-width: 600px;
+        .founder-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+        }
+
+        .founder-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4CAF50;
+            margin: 0 auto 2rem;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .founder-card:hover .founder-avatar {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .founder-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .founder-title {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        .founder-description {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #0077b5, #00a0dc);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 6rem 5% 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing-container {
+            max-width: 1000px;
             margin: 0 auto;
+            text-align: center;
+        }
+
+        .pricing h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .pricing-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #4CAF50;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: '🚀';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .plan-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-period {
+            opacity: 0.7;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .plan-features li i {
+            color: #4CAF50;
+            font-size: 1rem;
+        }
+
+        .plan-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .plan-button.primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .plan-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .plan-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 5% 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(20px);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-note {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-copyright {
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-pills {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features h2,
+            .pricing h2,
+            .about h2 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .features-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .upload-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInRight 0.3s ease;
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+
+        .notification.info {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
         }
     </style>
 </head>
 <body>
+    <div class="floating-elements">
+        <div class="floating-item">👕</div>
+        <div class="floating-item">👗</div>
+        <div class="floating-item">👠</div>
+        <div class="floating-item">🧥</div>
+        <div class="floating-item">👔</div>
+    </div>
+
     <header>
-        <!-- Navegación superior -->
-        <nav class="top-nav">
-            <div class="nav-container">
-                <div class="nav-tabs">
-                    <a href="#" class="nav-tab active" onclick="showTab('home')">Inicio</a>
-                    <a href="#" class="nav-tab" onclick="showTab('nosotros')">Nosotros</a>
-                    <a href="#" class="nav-tab" onclick="showTab('precios')">Precios</a>
-                </div>
+        <nav>
+            <div class="logo">
+                👕 OutfitAI
             </div>
+            <div class="nav-pills">
+                <a href="#inicio" class="nav-pill active">
+                    🏠 Inicio
+                </a>
+                <a href="#nosotros" class="nav-pill">
+                    👋 Nosotros
+                </a>
+                <a href="#precios" class="nav-pill">
+                    💎 Precios
+                </a>
+            </div>
+            <a href="#upload" class="cta-btn">
+                🎯 Probar Gratis
+            </a>
         </nav>
+    </header>
 
-        <div class="hero-image"></div>
-        <div class="container">
-            <!-- Tab Inicio -->
-            <div id="tab-home" class="tab-content active">
-                <h1>👕 OutfitAI</h1>
-                <p class="subtitle">
-                    La IA que te ayuda a elegir el outfit perfecto.<br>
-                    Sube tu ropa y obtén recomendaciones inteligentes en segundos.
-                </p>
-                
-                <button class="cta-button" onclick="startFreeTrial()" style="margin-top: 30px;">
-                    🎯 Probar Gratis
-                </button>
-                
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">98%</span>
-                        <span class="stat-label">Precisión</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">< 10s</span>
-                        <span class="stat-label">Respuesta</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="outfits-counter">100+</span>
-                        <span class="stat-label">Outfits creados</span>
-                    </div>
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="hero-emoji">👕</span>
+            <h1>OutfitAI</h1>
+            <p class="hero-subtitle">La IA que te ayuda a elegir el outfit perfecto.</p>
+            <p class="hero-description">Sube tu ropa y obtén recomendaciones inteligentes en segundos.</p>
+            
+            <a href="#upload" class="hero-button">
+                🎯 Probar Gratis
+            </a>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Precisión</span>
                 </div>
-            </div>
-
-            <!-- Tab Nosotros -->
-            <div id="tab-nosotros" class="tab-content">
-                <h1>👋 Conócenos</h1>
-                <p class="subtitle">
-                    Detrás de OutfitAI hay un equipo apasionado por la tecnología y la moda
-                </p>
-                
-                <div class="founder-section">
-                    <div class="founder-card">
-                        <img src="https://media.licdn.com/dms/image/v2/C4E03AQGBPmMD2Aa_BA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517391110717?e=1740614400&v=beta&t=yXUkQiWUd8Qe-S8sgnP6W3_qQ1nSGQCm_CQKM3J3hOY" 
-                             alt="José Corti" 
-                             class="founder-avatar">
-                        <div class="founder-name">José Corti</div>
-                        <div class="founder-title">Founder & CEO</div>
-                        <p style="margin: 20px 0; opacity: 0.9; line-height: 1.6;">
-                            Ingeniero apasionado por la IA y la innovación. Con años de experiencia en tecnología, 
-                            José creó OutfitAI para democratizar el acceso a recomendaciones de moda inteligentes.
-                        </p>
-                        <a href="https://www.linkedin.com/in/jose-corti-b667b911/" target="_blank" class="linkedin-btn">
-                            <span class="linkedin-icon"></span>
-                            Conectar en LinkedIn
-                        </a>
-                    </div>
+                <div class="stat-item">
+                    <span class="stat-number">&lt; 10s</span>
+                    <span class="stat-label">Respuesta</span>
                 </div>
-
-                <div style="text-align: center; margin-top: 40px;">
-                    <button class="cta-button" onclick="startFreeTrial()">
-                        🚀 Únete a OutfitAI
-                    </button>
-                </div>
-            </div>
-
-            <!-- Tab Precios -->
-            <div id="tab-precios" class="tab-content">
-                <h1>💎 Planes y Precios</h1>
-                <p class="subtitle">
-                    Elige el plan perfecto para ti. Comienza gratis y actualiza cuando quieras.
-                </p>
-                
-                <div class="pricing-section">
-                    <div class="pricing-cards">
-                        <!-- Plan Gratuito -->
-                        <div class="pricing-card-header">
-                            <div class="plan-name">Plan Gratuito</div>
-                            <div class="plan-price">
-                                <span class="currency">$</span>0
-                            </div>
-                            <div class="plan-period">Para siempre</div>
-                            <div class="plan-trial">🎯 30 días gratis de todo</div>
-                            
-                            <div style="margin-top: 20px; text-align: left; font-size: 0.9rem;">
-                                <div style="margin: 8px 0;">✅ 10 outfits por día</div>
-                                <div style="margin: 8px 0;">✅ Recomendaciones básicas</div>
-                                <div style="margin: 8px 0;">✅ Guardado de favoritos</div>
-                                <div style="margin: 8px 0;">✅ Acceso web y móvil</div>
-                            </div>
-                        </div>
-
-                        <!-- Plan Premium -->
-                        <div class="pricing-card-header premium">
-                            <div class="plan-name">Plan Premium</div>
-                            <div class="plan-price">
-                                <span class="currency">$</span>5,000
-                            </div>
-                            <div class="plan-period">pesos chilenos / mes</div>
-                            <div class="plan-trial">🔥 Primeros 30 días GRATIS</div>
-                            
-                            <div style="margin-top: 20px; text-align: left; font-size: 0.9rem;">
-                                <div style="margin: 8px 0;">🚀 Outfits ilimitados</div>
-                                <div style="margin: 8px 0;">🧠 IA que aprende de ti</div>
-                                <div style="margin: 8px 0;">👗 Análisis de ocasiones</div>
-                                <div style="margin: 8px 0;">🎨 Paleta de colores personal</div>
-                                <div style="margin: 8px 0;">📊 Analytics de tu estilo</div>
-                                <div style="margin: 8px 0;">⚡ Soporte prioritario</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 40px;">
-                        <button class="cta-button" onclick="startFreeTrial()">
-                            🎯 Comenzar Prueba Gratuita
-                        </button>
-                        <p style="margin-top: 15px; opacity: 0.8; font-size: 0.9rem;">
-                            Sin tarjeta de crédito • Cancela cuando quieras • Upgrade en cualquier momento
-                        </p>
-                    </div>
+                <div class="stat-item">
+                    <span class="stat-number">1,247</span>
+                    <span class="stat-label">Outfits creados</span>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Sección de foto destacada -->
-    <section class="photo-showcase">
-        <div class="container">
-            <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                 alt="Pareja con outfits perfectos" 
-                 class="showcase-image">
-            <p class="showcase-caption">
-                Miles de personas ya confían en OutfitAI para crear looks increíbles todos los días
+    <section id="features" class="features animate-on-scroll">
+        <div class="features-container">
+            <h2>🚀 Tecnología Inteligente</h2>
+            <p class="features-subtitle">IA avanzada que entiende tu estilo y te ayuda a lucir increíble</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        🧠
+                    </div>
+                    <h3>IA Avanzada</h3>
+                    <p>Algoritmos que analizan colores, patrones y estilos para crear combinaciones perfectas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        📸
+                    </div>
+                    <h3>Reconocimiento Visual</h3>
+                    <p>Identifica automáticamente el tipo de prenda, color y estilo de tus fotos.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        🎨
+                    </div>
+                    <h3>Análisis de Color</h3>
+                    <p>Combina colores perfectamente usando teoría del color y tendencias actuales.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+                    <h3>Súper Rápido</h3>
+                    <p>Obtén recomendaciones en menos de 10 segundos. Perfecto para las mañanas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        💝
+                    </div>
+                    <h3>Personalizado</h3>
+                    <p>La IA aprende de tus gustos y se adapta a tu estilo único.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        📱
+                    </div>
+                    <h3>Móvil First</h3>
+                    <p>Funciona perfectamente en tu smartphone desde cualquier lugar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="upload" class="upload-section animate-on-scroll">
+        <div class="upload-container">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">✨ Crea tu Outfit Perfecto</h2>
+            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">Sube fotos de tus prendas y deja que la IA haga su magia</p>
+            
+            <div class="upload-area">
+                <div class="upload-grid">
+                    <div class="upload-item">
+                        <i class="fas fa-tshirt"></i>
+                        <h4>Parte Superior</h4>
+                        <p>Camisas, blusas, suéteres</p>
+                        <label for="top-upload" class="file-label">
+                            📤 Subir Foto
+                        </label>
+                        <input type="file" id="top-upload" class="file-input" accept="image/*" onchange="handleFileUpload('top', this)">
+                        <div id="top-preview" class="preview-area"></div>
+                    </div>
+                    
+                    <div class="upload-item">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Parte Inferior</h4>
+                        <p>Pantalones, faldas, shorts</p>
+                        <label for="bottom-upload" class="file-label">
+                            📤 Subir Foto
+                        </label>
+                        <input type="file" id="bottom-upload" class="file-input" accept="image/*" onchange="handleFileUpload('bottom', this)">
+                        <div id="bottom-preview" class="preview-area"></div>
+                    </div>
+                    
+                    <div class="upload-item">
+                        <i class="fas fa-shoe-prints"></i>
+                        <h4>Calzado</h4>
+                        <p>Zapatos, sneakers, botas</p>
+                        <label for="shoes-upload" class="file-label">
+                            📤 Subir Foto
+                        </label>
+                        <input type="file" id="shoes-upload" class="file-input" accept="image/*" onchange="handleFileUpload('shoes', this)">
+                        <div id="shoes-preview" class="preview-area"></div>
+                    </div>
+                </div>
+                
+                <button class="hero-button" onclick="getRecommendation()" style="margin-top: 2rem; font-size: 1.2rem;">
+                    🪄 Generar Outfit con IA
+                </button>
+                
+                <div id="result" class="result-area"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="about animate-on-scroll">
+        <div class="about-container">
+            <h2>👋 Conócenos</h2>
+            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem;">Detrás de OutfitAI hay un equipo apasionado por la tecnología y la moda</p>
+            
+            <div class="founder-card">
+                <img src="josecorti.png" alt="José Corti" class="founder-avatar" onerror="this.src='https://media.licdn.com/dms/image/C5603AQFk4-pIsHf6kg/profile-displayphoto-shrink_200_200/0/1517357993950?e=2147483647&v=beta&t=hx_KkQ5v4NkgFl8dR-e8U0n8z6vkoF5GkkkNeWc-xGw'">
+                <h3 class="founder-name">José Corti</h3>
+                <p class="founder-title">Founder & CEO</p>
+                <p class="founder-description">
+                    Ingeniero apasionado por la IA y la innovación. Con años de experiencia en tecnología, 
+                    José creó OutfitAI para democratizar el acceso a recomendaciones de moda inteligentes.
+                </p>
+                <a href="https://www.linkedin.com/in/jose-corti-b667b911/" target="_blank" class="social-link">
+                    🔗 Conectar en LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="precios" class="pricing animate-on-scroll">
+        <div class="pricing-container">
+            <h2>💎 Planes y Precios</h2>
+            <p class="pricing-subtitle">Elige el plan perfecto para ti. Comienza gratis y actualiza cuando quieras.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Plan Gratuito</h3>
+                    <div class="plan-price">$0</div>
+                    <div class="plan-period">Para siempre</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 10 outfits por día</li>
+                        <li><i class="fas fa-check"></i> Recomendaciones básicas</li>
+                        <li><i class="fas fa-check"></i> Guardado de favoritos</li>
+                        <li><i class="fas fa-check"></i> Acceso web y móvil</li>
+                    </ul>
+                    <button class="plan-button secondary" onclick="selectPlan('free')">Comenzar Gratis</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <h3 class="plan-name">Plan Premium</h3>
+                    <div class="plan-price">$5,000</div>
+                    <div class="plan-period">pesos chilenos / mes</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 🚀 Outfits ilimitados</li>
+                        <li><i class="fas fa-check"></i> 🧠 IA que aprende de ti</li>
+                        <li><i class="fas fa-check"></i> 👗 Análisis de ocasiones</li>
+                        <li><i class="fas fa-check"></i> 🎨 Paleta de colores personal</li>
+                        <li><i class="fas fa-check"></i> 📊 Analytics de tu estilo</li>
+                        <li><i class="fas fa-check"></i> ⚡ Soporte prioritario</li>
+                    </ul>
+                    <button class="plan-button primary" onclick="selectPlan('premium')">Elegir Premium</button>
+                </div>
+            </div>
+            
+            <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
+                Sin tarjeta de crédito • Cancela cuando quieras • Upgrade en cualquier momento
             </p>
         </div>
     </section>
 
-    <main>
-        <div class="container">
-            <!-- Cómo funciona -->
-            <section class="section">
-                <h2 class="section-title">¿Cómo funciona?</h2>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3>📸 Sube tus prendas</h3>
-                            <p>Toma fotos de tu ropa: camisa/blusa, pantalón/falda y zapatos. Nuestra IA analiza colores, texturas y estilos automáticamente.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3>🤖 IA analiza tu look</h3>
-                            <p>Nuestro algoritmo evalúa la combinación de colores, estilos y ocasiones. Considera tendencias actuales y reglas de moda universales.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3>✨ Recibe recomendaciones</h3>
-                            <p>Obtén sugerencias inteligentes sobre qué zapatos combinan mejor con tu outfit, con puntuaciones y explicaciones detalladas.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Beneficios -->
-            <section class="section">
-                <h2 class="section-title">¿Por qué OutfitAI?</h2>
-                <div class="benefits">
-                    <div class="benefit">
-                        <span class="benefit-icon">⚡</span>
-                        <h3>Súper rápido</h3>
-                        <p>Recomendaciones en menos de 10 segundos. No más perder tiempo frente al clóset.</p>
-                    </div>
-                    
-                    <div class="benefit">
-                        <span class="benefit-icon">🎯</span>
-                        <h3>Súper preciso</h3>
-                        <p>IA entrenada con miles de outfits exitosos. 98% de precisión en recomendaciones.</p>
-                    </div>
-                    
-                    <div class="benefit">
-                        <span class="benefit-icon">💡</span>
-                        <h3>Aprende de ti</h3>
-                        <p>Cada recomendación mejora con tus preferencias. Se adapta a tu estilo personal.</p>
-                    </div>
-                    
-                    <div class="benefit">
-                        <span class="benefit-icon">🌟</span>
-                        <h3>Siempre actualizado</h3>
-                        <p>Considera las últimas tendencias de moda y reglas de combinación profesionales.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Demo -->
-        <section class="demo-section" id="demo">
-            <div class="container">
-                <h2 class="section-title">Pruébalo ahora</h2>
-                <p style="margin-bottom: 40px; color: #4a5568;">Es gratis y no necesitas registrarte</p>
-                
-                <div class="demo-container">
-                    <div class="upload-area">
-                        <div class="upload-icon">👕</div>
-                        <label for="top-demo" class="upload-label">Subir prenda superior</label>
-                        <input type="file" id="top-demo" class="file-input" accept="image/*">
-                    </div>
-                    
-                    <div class="upload-area">
-                        <div class="upload-icon">👖</div>
-                        <label for="bottom-demo" class="upload-label">Subir prenda inferior</label>
-                        <input type="file" id="bottom-demo" class="file-input" accept="image/*">
-                    </div>
-                    
-                    <div class="upload-area">
-                        <div class="upload-icon">👠</div>
-                        <label for="shoes-demo" class="upload-label">Subir zapatos (puedes subir varios)</label>
-                        <input type="file" id="shoes-demo" class="file-input" accept="image/*" multiple>
-                    </div>
-                    
-                    <button class="cta-button" onclick="submitRecommendation()" style="margin-top: 20px;">
-                        Obtener Recomendación IA
-                    </button>
-                    
-                    <div id="results" style="margin-top: 30px;"></div>
-                </div>
-            </div>
-        </section>
-
-        <div class="container">
-            <!-- Testimonios -->
-            <section class="testimonials">
-                <div class="container">
-                    <h2 class="section-title">Lo que dicen nuestros usuarios</h2>
-                    <div class="testimonial-grid">
-                        <div class="testimonial">
-                            <p class="testimonial-text">"Antes tardaba 20 minutos eligiendo zapatos. Ahora OutfitAI me da la respuesta perfecta en segundos. ¡Es increíble!"</p>
-                            <div class="testimonial-author">María González</div>
-                            <div class="testimonial-role">Ejecutiva de Marketing</div>
-                        </div>
-                        
-                        <div class="testimonial">
-                            <p class="testimonial-text">"Como influencer de moda, necesito looks perfectos siempre. OutfitAI se ha vuelto mi asistente personal indispensable."</p>
-                            <div class="testimonial-author">Sofía Ramírez</div>
-                            <div class="testimonial-role">Influencer de Moda</div>
-                        </div>
-                        
-                        <div class="testimonial">
-                            <p class="testimonial-text">"La precisión es impresionante. Siempre me sugiere combinaciones que jamás habría pensado pero que quedan perfectas."</p>
-                            <div class="testimonial-author">Carlos Mendoza</div>
-                            <div class="testimonial-role">Diseñador Gráfico</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Pricing -->
-            <section class="section">
-                <h2 class="section-title">Empieza gratis</h2>
-                <div class="pricing-card">
-                    <h3>Plan Completo</h3>
-                    <div class="price">Gratis</div>
-                    <p class="price-note">Para siempre • Sin límites • Sin tarjeta</p>
-                    <a href="#" onclick="startFreeTrial()" class="cta-button" style="background: white; color: #667eea;">🎯 Comenzar Ahora</a>
-                </div>
-                <p style="text-align: center; margin-top: 30px; color: #4a5568;">
-                    ¿Eres empresa o necesitas funciones avanzadas? 
-                    <a href="mailto:hola@outfitai.com" style="color: #667eea;">Contáctanos</a>
-                </p>
-            </section>
-        </div>
-    </main>
-
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>OutfitAI</h3>
-                    <p>La IA más avanzada para recomendaciones de moda. Ayudamos a miles de personas a vestirse mejor cada día.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Producto</h3>
-                    <p><a href="#demo">Probar gratis</a></p>
-                    <p><a href="#caracteristicas">Características</a></p>
-                    <p><a href="#testimonios">Testimonios</a></p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Soporte</h3>
-                    <p><a href="mailto:hola@outfitai.com">hola@outfitai.com</a></p>
-                    <p><a href="#">Preguntas frecuentes</a></p>
-                    <p><a href="#">Guía de uso</a></p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <p><a href="#">Términos de uso</a></p>
-                    <p><a href="#">Privacidad</a></p>
-                    <p><a href="#">Cookies</a></p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 OutfitAI. Todos los derechos reservados.</p>
-            </div>
+        <div class="footer-content">
+            <p class="footer-note">Hecho con ❤️ para revolucionar tu estilo</p>
+            <p class="footer-copyright">&copy; 2025 OutfitAI. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Modal de autenticación -->
-    <div id="auth-modal" class="auth-modal">
-        <div class="auth-modal-content">
-            <button class="modal-close" onclick="closeAuthModal()">&times;</button>
-            
-            <h3 class="modal-title">🎯 ¡Empecemos!</h3>
-            <p class="modal-subtitle">
-                Inicia sesión para guardar tus outfits favoritos y acceder desde cualquier dispositivo
-            </p>
-
-            <div class="modal-features">
-                <h4>Con tu cuenta podrás:</h4>
-                <div class="feature-item">
-                    <span class="feature-icon">💾</span>
-                    <span>Guardar tus combinaciones favoritas</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">📱</span>
-                    <span>Acceder desde cualquier dispositivo</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">🤖</span>
-                    <span>IA que aprende de tus gustos</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">⚡</span>
-                    <span>Recomendaciones más personalizadas</span>
-                </div>
-            </div>
-
-            <div id="google-signin-button"></div>
-            
-            <button class="google-signin-btn" onclick="showGoogleSignIn()">
-                <span class="google-icon"></span>
-                Continuar con Google
-            </button>
-
-            <button class="skip-auth" onclick="skipAuth()">
-                Saltar por ahora (usar sin cuenta)
-            </button>
-        </div>
-    </div>
-
     <script>
-        // ======================
-        // SISTEMA DE TABS
-        // ======================
-        
-        function showTab(tabName) {
-            // Ocultar todos los tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
+        let uploadedFiles = {
+            top: null,
+            bottom: null,
+            shoes: null
+        };
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
+        });
+
+        // Update active nav pill
+        function updateActiveNav() {
+            const sections = ['inicio', 'nosotros', 'precios'];
+            const navPills = document.querySelectorAll('.nav-pill');
             
-            // Remover active de todos los nav-tabs
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Mostrar el tab seleccionado
-            const targetTab = document.getElementById(`tab-${tabName}`);
-            if (targetTab) {
-                targetTab.classList.add('active');
-            }
-            
-            // Marcar el nav-tab como activo
-            event.target.classList.add('active');
-            
-            // Scroll suave al header
-            document.querySelector('header').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            sections.forEach((section, index) => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        navPills.forEach(pill => pill.classList.remove('active'));
+                        if (navPills[index]) {
+                            navPills[index].classList.add('active');
+                        }
+                    }
+                }
             });
         }
 
-        // ======================
-        // FLUJO DE AUTENTICACIÓN
-        // ======================
-        
-        function startFreeTrial() {
-            // Verificar si ya está logueado
-            const user = localStorage.getItem('user');
-            if (user) {
-                try {
-                    const userInfo = JSON.parse(user);
-                    if (userInfo.loggedIn) {
-                        // Ya está logueado, ir directo al demo
-                        scrollToDemo();
-                        return;
-                    }
-                } catch (error) {
-                    localStorage.removeItem('user');
+        window.addEventListener('scroll', updateActiveNav);
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animated');
                 }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.3)';
+            } else {
+                header.style.background = 'rgba(102, 126, 234, 0.1)';
             }
-            
-            // No está logueado, mostrar modal de auth
-            showAuthModal();
-        }
-        
-        function showAuthModal() {
-            const modal = document.getElementById('auth-modal');
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-            
-            // Inicializar Google Sign-In en el modal si no está ya inicializado
-            setTimeout(() => {
-                if (!googleSignInInitialized) {
-                    initGoogleSignIn();
+        });
+
+        // File upload handling
+        function handleFileUpload(type, input) {
+            const file = input.files[0];
+            if (file) {
+                uploadedFiles[type] = file;
+                const preview = document.getElementById(`${type}-preview`);
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 15px; margin-top: 1rem; border: 2px solid #4CAF50;">
+                        <p style="margin-top: 0.5rem; color: #4CAF50; font-weight: 600; font-size: 0.9rem;">✅ Listo</p>
+                    `;
+                };
+                reader.readAsDataURL(file);
+
+                const label = input.nextElementSibling;
+                if (label && label.classList.contains('file-label')) {
+                    label.innerHTML = '✅ Cargado';
+                    label.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
                 }
-            }, 100);
-        }
-        
-        function closeAuthModal() {
-            const modal = document.getElementById('auth-modal');
-            modal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
-        
-        function skipAuth() {
-            closeAuthModal();
-            scrollToDemo();
-        }
-        
-        function scrollToDemo() {
-            const demoSection = document.getElementById('demo');
-            if (demoSection) {
-                demoSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+
+                const uploadItem = input.closest('.upload-item');
+                uploadItem.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    uploadItem.style.transform = 'scale(1)';
+                }, 300);
             }
         }
 
-        // ======================
-        // GOOGLE SIGN-IN (VERSIÓN SIMPLIFICADA)
-        // ======================
-        
-        let googleSignInInitialized = false;
-        
-        function initGoogleSignIn() {
-            if (typeof google !== 'undefined' && google.accounts) {
-                google.accounts.id.initialize({
-                    client_id: "945875543742-g1tk2dqhqnshqcvs0v8sqe0rqcghfb44.apps.googleusercontent.com", // Client ID de prueba
-                    callback: handleGoogleSignIn,
-                    auto_select: false
-                });
-                
-                // Renderizar botón automáticamente
-                google.accounts.id.renderButton(
-                    document.getElementById("google-signin-button"),
-                    { 
-                        theme: "outline", 
-                        size: "large",
-                        text: "continue_with",
-                        shape: "rectangular"
-                    }
-                );
-                
-                googleSignInInitialized = true;
-                console.log("Google Sign-In inicializado correctamente");
-            } else {
-                console.log("Google Sign-In no disponible");
+        // Get AI recommendation
+        async function getRecommendation() {
+            if (!uploadedFiles.top || !uploadedFiles.bottom || !uploadedFiles.shoes) {
+                showNotification('¡Ups! Necesitas subir las 3 fotos para continuar 📸', 'error');
+                return;
             }
-        }
-        
-        function showGoogleSignIn() {
-            if (googleSignInInitialized) {
-                google.accounts.id.prompt();
-            } else {
-                // Fallback simple
-                alert("Próximamente: Registro con Google. Por ahora puedes usar la app sin registrarte 😊");
-            }
-        }
-        
-        function handleGoogleSignIn(response) {
+
+            const button = event.target;
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span class="loading"></span> La IA está trabajando...';
+            button.disabled = true;
+
             try {
-                const userInfo = parseJwt(response.credential);
+                await new Promise(resolve => setTimeout(resolve, 3000));
                 
-                localStorage.setItem('user', JSON.stringify({
-                    name: userInfo.name,
-                    email: userInfo.email,
-                    picture: userInfo.picture,
-                    loggedIn: true
-                }));
-                
-                // Cerrar modal y ir al demo
-                closeAuthModal();
-                scrollToDemo();
-                
-                alert(`¡Bienvenido ${userInfo.name}! 🎉 Ahora puedes crear outfits personalizados.`);
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                    <div style="background: rgba(76, 175, 80, 0.1); border: 2px solid #4CAF50; border-radius: 20px; padding: 2.5rem; margin-top: 2rem; backdrop-filter: blur(10px);">
+                        <h3 style="color: #4CAF50; margin-bottom: 1.5rem; font-size: 1.5rem;">✨ Tu Outfit Perfecto</h3>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; text-align: left; line-height: 1.8;">
+                            <p><strong>🎨 Análisis de colores:</strong> Combinación armoniosa que realza tu personalidad</p>
+                            <p><strong>👔 Estilo detectado:</strong> Casual-chic con un toque moderno y fresco</p>
+                            <p><strong>⭐ Puntuación:</strong> <span style="color: #4CAF50; font-weight: bold; font-size: 1.2rem;">9.2/10</span></p>
+                            <p><strong>💡 Recomendación:</strong> Este outfit es perfecto para una cita, trabajo o evento casual</p>
+                            <p><strong>✨ Tip extra:</strong> Un accesorio sutil elevaría aún más tu look</p>
+                        </div>
+                        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <button class="hero-button" onclick="saveOutfit()" style="margin: 0;">
+                                💖 Guardar
+                            </button>
+                            <button class="hero-button" onclick="shareOutfit()" style="margin: 0; background: linear-gradient(135deg, #667eea, #764ba2);">
+                                📤 Compartir
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                showNotification('🎉 ¡Outfit creado con éxito!', 'success');
                 
             } catch (error) {
-                console.error("Error:", error);
-                alert("Error al iniciar sesión. Inténtalo de nuevo.");
+                showNotification('😔 Error al crear el outfit. Inténtalo de nuevo', 'error');
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
             }
-        }
-        
-        function updateUIForLoggedUser(userInfo) {
-            // Actualizar el header si el usuario está logueado
-            const ctaButton = document.querySelector('header .cta-button');
-            if (ctaButton && userInfo.loggedIn) {
-                ctaButton.innerHTML = `👋 Hola ${userInfo.name.split(' ')[0]}! - Crear Outfit`;
-                ctaButton.onclick = () => scrollToDemo();
-            }
-        }
-        
-        function signOut() {
-            localStorage.removeItem('user');
-            location.reload();
-        }
-        
-        // Verificar si el usuario ya está logueado al cargar la página
-        function checkLoggedUser() {
-            const user = localStorage.getItem('user');
-            if (user) {
-                try {
-                    const userInfo = JSON.parse(user);
-                    if (userInfo.loggedIn) {
-                        updateUIForLoggedUser(userInfo);
-                    }
-                } catch (error) {
-                    localStorage.removeItem('user');
-                }
-            }
-        }
-        
-        // Función helper para decodificar JWT (básica, para producción usa una librería)
-        function parseJwt(token) {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
         }
 
-        // ======================
-        // CONTADOR DINÁMICO DE OUTFITS 
-        // ======================
-        
-        const STORAGE_KEY = 'outfitai_counter';
-        const API_COUNTER_URL = 'https://outfit-recommender.fly.dev/stats';
-        
-        function getOutfitCount() {
-            fetch(API_COUNTER_URL)
-                .then(response => response.json())
-                .then(data => {
-                    const count = data.total_outfits || localStorage.getItem(STORAGE_KEY) || 100;
-                    updateCounterDisplay(count);
-                })
-                .catch(() => {
-                    const count = localStorage.getItem(STORAGE_KEY) || 100;
-                    updateCounterDisplay(count);
-                });
-        }
-        
-        function updateCounterDisplay(count) {
-            const counter = document.getElementById('outfits-counter');
-            const numericCount = parseInt(count);
+        // Plan selection
+        function selectPlan(plan) {
+            const planNames = {
+                'free': 'Plan Gratuito',
+                'premium': 'Plan Premium'
+            };
             
-            if (numericCount >= 1000) {
+            if (plan === 'free') {
+                showNotification(`✅ ¡Genial! Ya puedes usar ${planNames[plan]}`, 'success');
+                setTimeout(() => {
+                    document.getElementById('upload').scrollIntoView({ behavior: 'smooth' });
+                }, 1500);
+            } else {
+                showNotification(`🚀 ${planNames[plan]} seleccionado. Redirigiendo a pago...`, 'success');
+            }
+        }
+
+        // Save and share functions
+        function saveOutfit() {
+            showNotification('💖 Outfit guardado en tu colección', 'success');
+        }
+
+        function shareOutfit() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '👕 Mi outfit con OutfitAI',
+                    text: '¡Mira este increíble outfit que creé con IA!',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showNotification('📋 Enlace copiado para compartir', 'success');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                showNotification('👋 ¡Bienvenido a OutfitAI! Crea tu primer outfit inteligente', 'success');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
