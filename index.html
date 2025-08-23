@@ -3,1985 +3,1033 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👕 OutfitAI - Tu Asistente de Moda Inteligente</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Google OAuth -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <title>I Love Reuse AI - Estilo sostenible e inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFD166;
+            --dark: #1A535C;
+            --light: #F7F7F7;
+            --white: #FFFFFF;
+            --green: #27AE60;
+            --green-dark: #229954;
+            --green-light: #58D68D;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
-
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            color: #ffffff;
-            min-height: 100vh;
         }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
-        /* Floating Elements */
-        .floating-elements {
+        
+        /* Fondo animado con prendas */
+        .floating-items {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.6;
+            z-index: -1;
+            overflow: hidden;
         }
-
+        
         .floating-item {
             position: absolute;
-            font-size: 2.5rem;
-            opacity: 0.2;
-            animation: float 25s infinite linear;
+            opacity: 0.7;
+            font-size: 24px;
+            animation: float 15s infinite linear;
         }
-
-        .floating-item:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .floating-item:nth-child(2) { left: 25%; animation-delay: 5s; }
-        .floating-item:nth-child(3) { left: 65%; animation-delay: 10s; }
-        .floating-item:nth-child(4) { left: 85%; animation-delay: 15s; }
-        .floating-item:nth-child(5) { left: 45%; animation-delay: 20s; }
-
+        
+        .floating-item.shirt {
+            color: #FF6B6B;
+        }
+        
+        .floating-item.pants {
+            color: #4ECDC4;
+        }
+        
+        .floating-item.shoes {
+            color: #FFD166;
+        }
+        
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
         }
-
+        
         /* Header */
         header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             position: fixed;
-            top: 0;
             width: 100%;
-            padding: 1rem 5%;
-            background: rgba(102, 126, 234, 0.1);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
-
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, var(--primary) 20%, 
+                var(--white) 20%, var(--white) 40%, 
+                var(--primary) 40%, var(--primary) 60%, 
+                var(--white) 60%, var(--white) 80%, 
+                var(--primary) 80%, var(--primary) 100%);
+            border-radius: 8px;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 10px;
+            width: 20px;
+            height: 6px;
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, var(--primary) 20%, 
+                var(--white) 20%, var(--white) 40%, 
+                var(--primary) 40%, var(--primary) 60%, 
+                var(--white) 60%, var(--white) 80%, 
+                var(--primary) 80%, var(--primary) 100%);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .logo h1 {
+            font-size: 1.6rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .auth-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .google-login {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .google-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Secciones */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--dark);
+            max-width: 700px;
             margin: 0 auto;
         }
-
-        .nav-center {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-left: auto;
-            margin-right: 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-pills {
-            display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            gap: 0.5rem;
-        }
-
-        .nav-pill {
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .nav-pill:hover, .nav-pill.active {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .auth-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .google-login-btn {
-            background: white;
-            color: #333;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            font-size: 0.9rem;
-        }
-
-        .google-login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .user-info {
-            display: none;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-
-        .cta-btn {
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
-        }
-
-        /* Hero Section */
+        
+        /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.8));
+            color: var(--white);
             text-align: center;
+            padding: 150px 0 100px;
+            margin-top: 70px;
+            border-radius: 0 0 50px 50px;
             position: relative;
-            z-index: 2;
-            padding: 6rem 2rem 4rem;
+            overflow: hidden;
         }
-
+        
         .hero-content {
-            max-width: 700px;
-            animation: fadeInUp 1s ease;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
-
-        .hero-emoji {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
+        
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-            line-height: 1.2;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-
-        .hero-subtitle {
+        
+        .hero p {
             font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 40px;
             opacity: 0.9;
-            font-weight: 600;
         }
-
-        .hero-description {
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        .hero-button {
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 4rem;
-            text-decoration: none;
-        }
-
-        .hero-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 188, 212, 0.4);
-        }
-
-        /* Stats Section */
+        
         .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            gap: 20px;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-item h3 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        /* Sección de Impacto Ambiental */
+        .impact-section {
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .impact-bars {
             max-width: 800px;
             margin: 0 auto;
         }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem 1rem;
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            text-align: center;
+        
+        .impact-item {
+            margin-bottom: 25px;
         }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #00bcd4;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Upload Section */
-        .upload-section {
-            padding: 4rem 5%;
-            position: relative;
-            z-index: 2;
-            display: none;
-        }
-
-        .upload-section.active {
-            display: block;
-        }
-
-        .upload-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .upload-area {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            padding: 4rem 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            border-color: #00bcd4;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .upload-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .upload-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .upload-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .upload-item i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00bcd4;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .file-label {
-            display: block;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            border-radius: 25px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .file-label:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
-        }
-
-        .file-label.multiple {
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-        }
-
-        .preview-area {
-            margin-top: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 0.5rem;
-            border-radius: 10px;
-        }
-
-        .preview-image {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 2px solid #00bcd4;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .preview-image:hover {
-            transform: scale(1.05);
-            border-color: #0097a7;
-            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
-        }
-
-        .remove-image {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff5252;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Results Section */
-        .results-section {
-            margin-top: 3rem;
-            display: none;
-        }
-
-        .results-section.active {
-            display: block;
-        }
-
-        .recommendation-card {
-            background: rgba(0, 188, 212, 0.1);
-            border: 2px solid #00bcd4;
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .recommendation-card.best {
-            background: rgba(255, 193, 7, 0.15);
-            border-color: #ffc107;
-            position: relative;
-        }
-
-        .recommendation-card.best::before {
-            content: '⭐';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: #ffc107;
-            color: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .recommendation-header {
+        
+        .impact-label {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 8px;
         }
-
-        .recommendation-title {
-            color: #00bcd4;
-            font-size: 1.5rem;
-            font-weight: 700;
+        
+        .impact-label span {
+            font-weight: 500;
         }
-
-        .recommendation-score {
-            background: #00bcd4;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .recommendation-content {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
+        
+        .impact-bar {
+            height: 30px;
+            background-color: var(--light);
             border-radius: 15px;
-            text-align: left;
-            line-height: 1.8;
-        }
-
-        .recommendation-buttons {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* Features Section - Ajustes para dos secciones similares */
-        .features {
-            padding: 6rem 5% 4rem;
+            overflow: hidden;
             position: relative;
-            z-index: 2;
         }
-
-        .features:nth-of-type(2) {
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
+        
+        .impact-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
         }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        
+        .impact-value {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Sección Cómo Funciona */
+        .how-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .work-step {
+            text-align: center;
+            padding: 40px 30px;
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .work-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .work-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .work-step i {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+        
+        .work-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .work-step p {
+            color: var(--dark);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* Sección de Equipo */
+        .team-section {
+            background: linear-gradient(to bottom, var(--light), var(--white));
+            position: relative;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .team-member {
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
             text-align: center;
         }
-
-        .features h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
-
-        .features-subtitle {
-            font-size: 1.2rem;
+        
+        .member-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .member-image i {
+            font-size: 6rem;
+            color: white;
             opacity: 0.8;
-            margin-bottom: 4rem;
+        }
+        
+        .member-info {
+            padding: 30px;
+        }
+        
+        .member-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .member-info .role {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+            font-size: 1rem;
+        }
+        
+        .member-info p {
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .footer-column a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        /* Sección CTA Vendedora */
+        .cta-section {
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 15px 30px rgba(39, 174, 96, 0.3);
+        }
+        
+        .cta-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
-
-        .features-grid {
+        
+        .cta-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
         }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
+        
+        .cta-feature {
             background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            transition: transform 0.3s;
         }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #00bcd4;
-            margin-bottom: 1.5rem;
+        
+        .cta-feature:hover {
+            transform: translateY(-5px);
         }
-
-        .feature-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
+        
+        .cta-feature i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
         }
-
-        .feature-card p {
+        
+        .cta-feature h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+        
+        .cta-feature p {
+            font-size: 0.9rem;
+            margin: 0;
             opacity: 0.8;
-            line-height: 1.6;
         }
-
-        /* About Section */
-        .about {
-            padding: 6rem 5% 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .about-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            color: white;
+        
+        .cta-buttons {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
         }
-
-        .founder-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem;
-            border-radius: 30px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .founder-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-        }
-
-        .founder-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #00bcd4;
-            margin: 0 auto 2rem;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .founder-card:hover .founder-avatar {
-            transform: scale(1.1);
-            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
-        }
-
-        .founder-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .founder-title {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-            color: #00bcd4;
-            font-weight: 600;
-        }
-
-        .founder-description {
-            opacity: 0.8;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, #0077b5, #00a0dc);
+        
+        .btn-primary {
+            background-color: var(--white);
+            color: var(--green);
+            padding: 12px 30px;
             border-radius: 25px;
-            color: white;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .social-link:hover {
+        
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background-color: var(--accent);
+            color: var(--dark);
         }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 6rem 5% 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .pricing-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .pricing h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .pricing-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 4rem;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem 2rem;
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 12px 30px;
+            border: 2px solid var(--white);
             border-radius: 25px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border: 2px solid #00bcd4;
-            transform: scale(1.05);
-        }
-
-        .pricing-card.featured::before {
-            content: '🚀';
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: #00bcd4;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            text-decoration: none;
             font-weight: 600;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        .pricing-card.featured:hover {
-            transform: translateY(-10px) scale(1.05);
-        }
-
-        .plan-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .plan-price {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #00bcd4;
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-period {
-            opacity: 0.7;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .plan-features {
-            list-style: none;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-
-        .plan-features li {
-            padding: 0.5rem 0;
-            display: flex;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            font-size: 0.95rem;
+            gap: 8px;
         }
-
-        .plan-features li i {
-            color: #00bcd4;
-            font-size: 1rem;
+        
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--green);
+            transform: translateY(-3px);
         }
-
-        .plan-button {
-            width: 100%;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .plan-button.primary {
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            color: white;
-        }
-
-        .plan-button.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .plan-button:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 3rem 5% 2rem;
+        
+        .footer-bottom {
             text-align: center;
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(20px);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-note {
-            opacity: 0.7;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
         }
-
-        .footer-copyright {
-            opacity: 0.6;
-            font-size: 0.85rem;
-        }
-
+        
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-center {
-                flex-direction: column;
-                gap: 1rem;
-                margin-left: 0;
-                margin-right: 0;
-            }
-            
-            .nav-pills {
+        @media (max-width: 992px) {
+            .nav-menu {
                 display: none;
             }
-
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
-
-            .hero-description {
-                font-size: 1rem;
+            
+            .hero p {
+                font-size: 1.1rem;
             }
-
-            .features h2,
-            .pricing h2,
-            .about h2 {
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 80px;
+                border-radius: 0 0 30px 30px;
+            }
+            
+            .hero h1 {
                 font-size: 2rem;
             }
-
-            .stats {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+            
+            .section-title h2 {
+                font-size: 2rem;
             }
-
-            .features-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr;
+            
+            .stat-item {
+                width: 140px;
+                padding: 15px;
             }
-
-            .upload-grid {
-                grid-template-columns: 1fr;
+            
+            .stat-item h3 {
+                font-size: 1.8rem;
             }
-
-            .pricing-card.featured {
-                transform: none;
+            
+            .work-step, .team-member {
+                max-width: 400px;
+                margin: 0 auto;
             }
-
-            .pricing-card.featured:hover {
-                transform: translateY(-10px);
-            }
-
-            .recommendation-buttons {
+            
+            .cta-buttons {
                 flex-direction: column;
+                align-items: center;
             }
+        }
 
-            .preview-image {
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .hero {
+                padding: 100px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .stat-item {
                 width: 120px;
-                height: 120px;
+                padding: 10px;
+                margin: 10px;
             }
-        }
-
-        /* Scroll animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #ffffff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            color: white;
-            font-weight: 600;
-            z-index: 10000;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: slideInRight 0.3s ease;
-        }
-
-        .notification.success {
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-        }
-
-        .notification.error {
-            background: linear-gradient(135deg, #f44336, #d32f2f);
-        }
-
-        .notification.info {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
-        /* Login required message */
-        .login-required {
-            background: rgba(255, 193, 7, 0.15);
-            border: 2px solid #ffc107;
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .login-required h3 {
-            color: #ffc107;
-            margin-bottom: 1rem;
+            
+            .stat-item h3 {
+                font-size: 1.5rem;
+            }
+            
+            .stat-item p {
+                font-size: 0.9rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section h3 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="floating-elements">
-        <div class="floating-item">👕</div>
-        <div class="floating-item">👗</div>
-        <div class="floating-item">👠</div>
-        <div class="floating-item">🧥</div>
-        <div class="floating-item">👔</div>
-    </div>
+    <!-- Fondo animado con prendas -->
+    <div class="floating-items" id="floatingItems"></div>
 
+    <!-- Header y Navegación -->
     <header>
-        <nav>
-            <div class="logo">
-                👕 OutfitAI
-            </div>
-            <div class="nav-center">
-                <div class="nav-pills">
-                    <a href="#inicio" class="nav-pill active">
-                        🏠 Inicio
-                    </a>
-                    <a href="#que-hacemos" class="nav-pill">
-                        🎯 Qué Hacemos
-                    </a>
-                    <a href="#nosotros" class="nav-pill">
-                        👋 Nosotros
-                    </a>
-                    <a href="#precios" class="nav-pill">
-                        💎 Precios
-                    </a>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <h1>I Love Reuse AI</h1>
                 </div>
-                <div class="auth-container">
-                    <button class="google-login-btn" onclick="loginWithGoogle()" id="loginBtn">
-                        <svg width="18" height="18" viewBox="0 0 18 18">
-                            <path fill="#4285F4" d="M17.64 9.20454546c0-.63818182-.05727273-1.25181818-.16363636-1.84090909H9v3.48090909h4.84378348c-.20892443.95363636-.84317059 1.76772727-1.68345427 2.31181818V15.52H14.88699909C16.67543111 13.84363636 17.64 11.7093333 17.64 9.20454546z"/>
-                            <path fill="#34A853" d="M9 18c2.43 0 4.467-.80727273 5.95636364-2.18545455l-2.90909091-2.25818182c-.80636364.54-1.83727273.85909091-3.04727273.85909091-2.34545455 0-4.32818182-1.58545455-5.03636364-3.71818182L.68181818 12.5218182C2.24909091 15.5981818 5.48090909 18 9 18z"/>
-                            <path fill="#FBBC04" d="M3.96363636 10.7109091c-.18-.54-.28363636-1.11818182-.28363636-1.7109091s.10363636-1.17090909.28363636-1.7109091V5.28181818L.68181818 5.28181818C.24727273 6.1418182 0 7.04727273 0 8s.24727273 1.8581818.68181818 2.7181818l3.28181818-1.27090909z"/>
-                            <path fill="#EA4335" d="M9 3.57272727c1.32272727 0 2.50909091.45454545 3.44363636 1.34727273l2.58181818-2.58181818C13.46363636.89090909 11.42727273 0 9 0 5.48090909 0 2.24909091 2.40181818.68181818 5.28181818l3.28181818 1.27090909C4.67181818 5.15636364 6.65454545 3.57272727 9 3.57272727z"/>
-                        </svg>
-                        Login con Google
+                
+                <ul class="nav-menu">
+                    <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#impacto"><i class="fas fa-globe-americas"></i> Impacto</a></li>
+                    <li><a href="#funcionamiento"><i class="fas fa-cogs"></i> Cómo funciona</a></li>
+                    <li><a href="#equipo"><i class="fas fa-users"></i> Equipo</a></li>
+                </ul>
+                
+                <div class="auth-section">
+                    <button class="google-login">
+                        <i class="fab fa-google"></i> Acceder con Gmail
                     </button>
-                    <div class="user-info" id="userInfo">
-                        <img class="user-avatar" id="userAvatar" alt="Usuario">
-                        <span id="userName"></span>
-                        <button onclick="logout()" style="background: transparent; border: 1px solid white; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">Salir</button>
-                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
 
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <span class="hero-emoji">👕</span>
-            <h1>OutfitAI</h1>
-            <p class="hero-subtitle">¿Tardas mucho eligiendo qué ponerte cada mañana?</p>
-            <p class="hero-description">Deja de perder tiempo. Aprovecha toda la ropa que ya tienes con nuestro algoritmo de IA que encuentra automáticamente las mejores combinaciones basándose en tus fotos. ¡Sin estrés, sin pérdida de tiempo, solo outfits perfectos!</p>
-            
-            <a href="#que-hacemos" class="hero-button">
-                🎯 Ver Cómo Funciona
-            </a>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-number">15 min</span>
-                    <span class="stat-label">Ahorrados cada mañana</span>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Maximiza tu ropa, minimiza tu impacto ambiental</h1>
+                <p>Descubre combinaciones únicas con tu ropa actual gracias a nuestra inteligencia artificial</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>15min</h3>
+                        <p>Ahorra tiempo cada mañana</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>10s</h3>
+                        <p>Obtén sugerencias al instante</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>25kg</h3>
+                        <p>Reduce CO₂ por cada kilo reutilizado</p>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">&lt; 10s</span>
-                    <span class="stat-label">Para generar outfit</span>
+                
+                <a href="#funcionamiento" class="cta-button">Descubre cómo funciona</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Impacto Ambiental -->
+    <section class="impact-section" id="impacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Impacto Ambiental</h2>
+                <p>La industria de la moda es una de las más contaminantes. Reutilizar tu ropa tiene un impacto positivo inmediato</p>
+            </div>
+            
+            <div class="impact-bars">
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Consumo de agua</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="85"></div>
+                        <div class="impact-value">85%</div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">1,247</span>
-                    <span class="stat-label">Personas ya no sufren</span>
+                
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Emisiones de CO₂</span>
+                        <span>72%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="72"></div>
+                        <div class="impact-value">72%</div>
+                    </div>
+                </div>
+                
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Residuos textiles</span>
+                        <span>68%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="68"></div>
+                        <div class="impact-value">68%</div>
+                    </div>
+                </div>
+                
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Uso de químicos</span>
+                        <span>63%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="63"></div>
+                        <div class="impact-value">63%</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="que-hacemos" class="features animate-on-scroll">
-        <div class="features-container">
-            <h2>🎯 Qué Hacemos</h2>
-            <p class="features-subtitle">Resolvemos el problema más común de las mañanas: "No tengo nada que ponerme"</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        📱
-                    </div>
-                    <h3>1. Fotografías Tu Ropa</h3>
-                    <p>Tomas fotos de las prendas que ya tienes en tu closet. Camisas, pantalones, zapatos... todo lo que quieras incluir.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🤖
-                    </div>
-                    <h3>2. IA Analiza y Procesa</h3>
-                    <p>Nuestro algoritmo inteligente analiza colores, patrones, estilos y compatibilidad entre todas tus prendas.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ✨
-                    </div>
-                    <h3>3. Generas Combinaciones</h3>
-                    <p>En segundos obtienes múltiples opciones de outfits perfectamente coordinados, con puntuación de compatibilidad.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🎉
-                    </div>
-                    <h3>4. Sales Perfecto de Casa</h3>
-                    <p>Eliminas el estrés matutino, ahorras tiempo y siempre luces increíble con la ropa que ya tienes.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🔄
-                    </div>
-                    <h3>5. La IA Aprende de Ti</h3>
-                    <p>Mientras más uses OutfitAI, mejor conoce tu estilo y preferencias para sugerencias más personalizadas.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        💡
-                    </div>
-                    <h3>6. Descubres Nuevas Opciones</h3>
-                    <p>Te sorprenderás con combinaciones que nunca habías pensado, maximizando el potencial de tu guardarropa.</p>
-                </div>
+    <!-- Sección Cómo Funciona -->
+    <section id="funcionamiento">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cómo Funciona</h2>
+                <p>Descubre combinaciones únicas con tu ropa actual en solo tres simples pasos</p>
             </div>
             
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="#upload" class="hero-button">
-                    🚀 Empezar Ahora - Es Gratis
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="features animate-on-scroll">
-        <div class="features-container">
-            <h2>💪 Beneficios Que Notarás Inmediatamente</h2>
-            <p class="features-subtitle">Estos son los cambios reales que verás en tu vida desde el primer día</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ⏰
-                    </div>
-                    <h3>Ahorra 15 Minutos Diarios</h3>
-                    <p>Deja de pararte frente al closet sin saber qué ponerte. Nuestra IA te da la respuesta perfecta en segundos.</p>
+            <div class="how-works">
+                <div class="work-step">
+                    <i class="fas fa-upload"></i>
+                    <h3>Sube tus prendas</h3>
+                    <p>Fotografía las prendas que quieres incluir: superiores, inferiores y calzado</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        👕
-                    </div>
-                    <h3>Aprovecha Tu Ropa Actual</h3>
-                    <p>No necesitas comprar nada nuevo. Maximiza todas las prendas que ya tienes con combinaciones que nunca habías pensado.</p>
+                <div class="work-step">
+                    <i class="fas fa-robot"></i>
+                    <h3>IA genera combinaciones</h3>
+                    <p>Nuestro algoritmo analiza colores, estilos y tendencias para crear outfits únicos</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🎯
-                    </div>
-                    <h3>Combinaciones Inteligentes</h3>
-                    <p>Nuestro algoritmo encuentra las mejores combinaciones basándose en colores, patrones y estilos que realmente funcionan.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        😌
-                    </div>
-                    <h3>Sin Estrés Matutino</h3>
-                    <p>Elimina la ansiedad de "no tengo nada que ponerme". Siempre tendrás opciones perfectas listas.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        💡
-                    </div>
-                    <h3>Descubre Tu Estilo</h3>
-                    <p>La IA aprende qué te queda mejor y sugiere combinaciones que realzan tu personalidad única.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        📱
-                    </div>
-                    <h3>Desde Tu Celular</h3>
-                    <p>Toma fotos de tu ropa desde cualquier lugar y obtén recomendaciones al instante.</p>
+                <div class="work-step">
+                    <i class="fas fa-magic"></i>
+                    <h3>Recibe sugerencias</h3>
+                    <p>Obtén recomendaciones personalizadas en menos de 10 segundos</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="upload" class="upload-section animate-on-scroll">
-        <div class="upload-container">
-            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">✨ Termina con el Drama Matutino</h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">Sube fotos de la ropa que ya tienes y descubre combinaciones increíbles que no sabías que existían</p>
-            
-            <div id="loginRequired" class="login-required">
-                <h3>🔐 Un paso más para acabar con el sufrimiento</h3>
-                <p>Inicia sesión con Google para acceder a nuestro algoritmo de IA que revolucionará tus mañanas</p>
-                <button class="google-login-btn" onclick="loginWithGoogle()" style="margin-top: 1rem;">
-                    <svg width="18" height="18" viewBox="0 0 18 18">
-                        <path fill="#4285F4" d="M17.64 9.20454546c0-.63818182-.05727273-1.25181818-.16363636-1.84090909H9v3.48090909h4.84378348c-.20892443.95363636-.84317059 1.76772727-1.68345427 2.31181818V15.52H14.88699909C16.67543111 13.84363636 17.64 11.7093333 17.64 9.20454546z"/>
-                        <path fill="#34A853" d="M9 18c2.43 0 4.467-.80727273 5.95636364-2.18545455l-2.90909091-2.25818182c-.80636364.54-1.83727273.85909091-3.04727273.85909091-2.34545455 0-4.32818182-1.58545455-5.03636364-3.71818182L.68181818 12.5218182C2.24909091 15.5981818 5.48090909 18 9 18z"/>
-                        <path fill="#FBBC04" d="M3.96363636 10.7109091c-.18-.54-.28363636-1.11818182-.28363636-1.7109091s.10363636-1.17090909.28363636-1.7109091V5.28181818L.68181818 5.28181818C.24727273 6.1418182 0 7.04727273 0 8s.24727273 1.8581818.68181818 2.7181818l3.28181818-1.27090909z"/>
-                        <path fill="#EA4335" d="M9 3.57272727c1.32272727 0 2.50909091.45454545 3.44363636 1.34727273l2.58181818-2.58181818C13.46363636.89090909 11.42727273 0 9 0 5.48090909 0 2.24909091 2.40181818.68181818 5.28181818l3.28181818 1.27090909C4.67181818 5.15636364 6.65454545 3.57272727 9 3.57272727z"/>
-                    </svg>
-                    Acceder al Algoritmo de IA
-                </button>
+    <!-- Sección de Equipo -->
+    <section class="team-section" id="equipo">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestro Equipo</h2>
+                <p>Conoce a las personas detrás de I Love Reuse AI</p>
             </div>
-
-            <div class="upload-area" id="uploadArea" style="display: none;">
-                <div class="upload-grid">
-                    <div class="upload-item">
-                        <i class="fas fa-tshirt"></i>
-                        <h4>Parte Superior</h4>
-                        <p>Camisas, blusas, suéteres</p>
-                        <label for="top-upload" class="file-label multiple">
-                            📤 Subir Superiores (máx 3)
-                        </label>
-                        <input type="file" id="top-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('top', this)">
-                        <div id="top-preview" class="preview-area"></div>
-                    </div>
-                    
-                    <div class="upload-item">
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-image">
                         <i class="fas fa-user-tie"></i>
-                        <h4>Parte Inferior</h4>
-                        <p>Pantalones, faldas, shorts</p>
-                        <label for="bottom-upload" class="file-label multiple">
-                            📤 Subir Inferiores (máx 3)
-                        </label>
-                        <input type="file" id="bottom-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('bottom', this)">
-                        <div id="bottom-preview" class="preview-area"></div>
                     </div>
-                    
-                    <div class="upload-item">
-                        <i class="fas fa-shoe-prints"></i>
-                        <h4>Calzado</h4>
-                        <p>Zapatos, sneakers, botas</p>
-                        <label for="shoes-upload" class="file-label multiple">
-                            📤 Subir Zapatos (máx 5)
-                        </label>
-                        <input type="file" id="shoes-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('shoes', this)">
-                        <div id="shoes-preview" class="preview-area"></div>
+                    <div class="member-info">
+                        <h3>José Francisco Corti Badia</h3>
+                        <span class="role">Founder & CEO</span>
+                        <p>Ingeniero Comercial, Diplomado en GenAI U. De Chile 2025 y Diplomado en AI PUC 2022. Experto en Inteligencia Artificial con más de 15 años creando soluciones en distintas industrias.</p>
                     </div>
                 </div>
                 
-                <button class="hero-button" onclick="getRecommendation()" style="margin-top: 2rem; font-size: 1.2rem;" id="generateBtn">
-                    🪄 Generar Combinaciones Inteligentes
-                </button>
-                
-                <div id="result" class="results-section"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="nosotros" class="about animate-on-scroll">
-        <div class="about-container">
-            <h2>👋 Conócenos</h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem;">Detrás de OutfitAI hay un equipo apasionado por la tecnología y la moda</p>
-            
-            <div class="founder-card">
-                <img src="josecorti.png" alt="José Corti" class="founder-avatar" onerror="this.src='https://media.licdn.com/dms/image/C5603AQFk4-pIsHf6kg/profile-displayphoto-shrink_200_200/0/1517357993950?e=2147483647&v=beta&t=hx_KkQ5v4NkgFl8dR-e8U0n8z6vkoF5GkkkNeWc-xGw'">
-                <h3 class="founder-name">José Corti</h3>
-                <p class="founder-title">Founder & CEO</p>
-                <p class="founder-description">
-                    Ingeniero apasionado por la IA y la innovación. Con años de experiencia en tecnología, 
-                    José creó OutfitAI para democratizar el acceso a recomendaciones de moda inteligentes.
-                </p>
-                <a href="https://www.linkedin.com/in/jose-corti-b667b911/" target="_blank" class="social-link">
-                    🔗 Conectar en LinkedIn
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="precios" class="pricing animate-on-scroll">
-        <div class="pricing-container">
-            <h2>💎 Planes y Precios</h2>
-            <p class="pricing-subtitle">Elige el plan perfecto para ti. Comienza gratis y actualiza cuando quieras.</p>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="plan-name">Plan Gratuito</h3>
-                    <div class="plan-price">$0</div>
-                    <div class="plan-period">Para siempre</div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> 10 outfits por día</li>
-                        <li><i class="fas fa-check"></i> Recomendaciones básicas</li>
-                        <li><i class="fas fa-check"></i> Guardado de favoritos</li>
-                        <li><i class="fas fa-check"></i> Acceso web y móvil</li>
-                    </ul>
-                    <button class="plan-button secondary" onclick="selectPlan('free')">Comenzar Gratis</button>
-                </div>
-                
-                <div class="pricing-card featured">
-                    <h3 class="plan-name">Plan Premium</h3>
-                    <div class="plan-price">$5,000</div>
-                    <div class="plan-period">pesos chilenos / mes</div>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> 🚀 Outfits ilimitados</li>
-                        <li><i class="fas fa-check"></i> 🧠 IA que aprende de ti</li>
-                        <li><i class="fas fa-check"></i> 👗 Análisis de ocasiones</li>
-                        <li><i class="fas fa-check"></i> 🎨 Paleta de colores personal</li>
-                        <li><i class="fas fa-check"></i> 📊 Analytics de tu estilo</li>
-                        <li><i class="fas fa-check"></i> ⚡ Soporte prioritario</li>
-                    </ul>
-                    <button class="plan-button primary" onclick="selectPlan('premium')">Elegir Premium</button>
+                <div class="team-member">
+                    <div class="member-image">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Paola Andrea Curti Simpson</h3>
+                        <span class="role">Directora Creativa</span>
+                        <p>Arquitecta, especialista en moda sustentable con amplia experiencia en diseño y sostenibilidad.</p>
+                    </div>
                 </div>
             </div>
-            
-            <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
-                Sin tarjeta de crédito • Cancela cuando quieras • Upgrade en cualquier momento
-            </p>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p class="footer-note">Hecho con ❤️ para revolucionar tu estilo</p>
-            <p class="footer-copyright">&copy; 2025 OutfitAI. Todos los derechos reservados.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>I Love Reuse AI</h3>
+                    <p>Maximiza tu ropa, minimiza tu impacto ambiental con nuestra tecnología de inteligencia artificial.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#impacto">Impacto Ambiental</a>
+                    <a href="#funcionamiento">Cómo Funciona</a>
+                    <a href="#equipo">Nuestro Equipo</a>
+                </div>
+                
+                <!-- Sección CTA Vendedora -->
+                <div class="footer-column">
+                    <div class="cta-section">
+                        <h3>🚀 ¡Comienza Ahora!</h3>
+                        <p>Únete a miles de personas que ya están revolucionando su estilo de manera sostenible</p>
+                        
+                        <div class="cta-features">
+                            <div class="cta-feature">
+                                <i class="fas fa-gift"></i>
+                                <h4>Gratis</h4>
+                                <p>Sin costo inicial</p>
+                            </div>
+                            <div class="cta-feature">
+                                <i class="fas fa-clock"></i>
+                                <h4>Instantáneo</h4>
+                                <p>Resultados en 10 segundos</p>
+                            </div>
+                        </div>
+                        
+                        <div class="cta-buttons">
+                            <a href="#" class="btn-primary">
+                                <i class="fas fa-play"></i>
+                                Empezar Gratis
+                            </a>
+                            <a href="#" class="btn-secondary">
+                                <i class="fab fa-whatsapp"></i>
+                                Pregúntanos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 I Love Reuse AI. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // ========================================
-        // 🔧 CONFIGURACIÓN PARA DESARROLLADOR
-        // ========================================
-        // Esto lo configuras TÚ una sola vez:
-        // 1. Ve a: https://console.developers.google.com/
-        // 2. Crea proyecto → Habilita "Google Identity API" 
-        // 3. Crea OAuth 2.0 Client ID
-        // 4. Agrega tu dominio Netlify a "Authorized origins"
-        // 5. Reemplaza el CLIENT_ID abajo
-        // 
-        // Los USUARIOS solo hacen clic y se autentican automáticamente
-        // ========================================
-
-        // Estado global de la aplicación
-        let isLoggedIn = false;
-        let currentUser = null;
-        let uploadedFiles = {
-            top: [],
-            bottom: [],
-            shoes: []
-        };
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+        // Crear elementos flotantes para el fondo
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingContainer = document.getElementById('floatingItems');
+            const clothingIcons = ['👕', '👚', '👖', '👔', '👗', '🧥', '🥼', '🩳', '👙', '👘', '🥻', '🩱', '🥾', '👟', '👞', '👢'];
+            
+            for (let i = 0; i < 25; i++) {
+                const item = document.createElement('div');
+                item.className = 'floating-item';
+                item.classList.add(Math.random() > 0.5 ? 'shirt' : Math.random() > 0.5 ? 'pants' : 'shoes');
+                item.textContent = clothingIcons[Math.floor(Math.random() * clothingIcons.length)];
+                
+                // Posición y animación aleatoria
+                item.style.left = `${Math.random() * 100}%`;
+                item.style.animationDuration = `${15 + Math.random() * 20}s`;
+                item.style.animationDelay = `-${Math.random() * 20}s`;
+                
+                floatingContainer.appendChild(item);
+            }
+            
+            // Animación para las barras de impacto
+            const impactBars = document.querySelectorAll('.impact-fill');
+            impactBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
             });
-        });
-
-        // Update active nav pill
-        function updateActiveNav() {
-            const sections = ['inicio', 'que-hacemos', 'nosotros', 'precios'];
-            const navPills = document.querySelectorAll('.nav-pill');
-            
-            sections.forEach((section, index) => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
-                        navPills.forEach(pill => pill.classList.remove('active'));
-                        if (navPills[index]) {
-                            navPills[index].classList.add('active');
-                        }
-                    }
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNav);
-
-        // Scroll animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('animated');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(102, 126, 234, 0.3)';
-            } else {
-                header.style.background = 'rgba(102, 126, 234, 0.1)';
-            }
-        });
-
-        // Google OAuth Configuration
-        // ⚠️ CONFIGURAR UNA SOLA VEZ COMO DESARROLLADOR
-        // Este CLIENT_ID lo configuras TÚ, no cada usuario
-        const GOOGLE_CLIENT_ID = '326940877598-ko13n1qcqkkugkoo6gu2n1avs46al09p.apps.googleusercontent.com'; // 📝 CLIENT_ID de ejemplo - reemplazar con el tuyo
-
-        // Initialize Google OAuth when page loads
-        function initializeGoogleAuth() {
-            if (typeof google === 'undefined') {
-                console.warn('⚠️ Google Identity Services no cargado');
-                return;
-            }
-
-            google.accounts.id.initialize({
-                client_id: GOOGLE_CLIENT_ID,
-                callback: handleGoogleSignIn,
-                auto_select: false,
-                cancel_on_tap_outside: true
-            });
-
-            // Preparar el botón de login
-            const loginBtn = document.getElementById('loginBtn');
-            loginBtn.onclick = () => triggerGoogleLogin();
-        }
-
-        // Handle Google Sign-In response
-        function handleGoogleSignIn(response) {
-            try {
-                // Decode JWT token to get user info
-                const token = response.credential;
-                const payload = JSON.parse(atob(token.split('.')[1]));
-                
-                currentUser = {
-                    name: payload.name,
-                    email: payload.email,
-                    picture: payload.picture,
-                    given_name: payload.given_name,
-                    family_name: payload.family_name,
-                    token: token
-                };
-                
-                isLoggedIn = true;
-                updateAuthUI();
-                showUploadSection();
-                
-                showNotification(`¡Hola ${currentUser.given_name || currentUser.name}! 🎉`, 'success');
-                
-            } catch (error) {
-                console.error('Error procesando login:', error);
-                showNotification('❌ Error al procesar el login', 'error');
-                // Fallback a modo demo
-                loginDemo();
-            }
-        }
-
-        // Trigger Google Login (lo que ve el usuario)
-        function triggerGoogleLogin() {
-            if (typeof google === 'undefined') {
-                console.warn('Google Identity Services no disponible, usando modo demo');
-                loginDemo();
-                return;
-            }
-
-            try {
-                // Esto abre el popup de Google automáticamente
-                google.accounts.id.prompt((notification) => {
-                    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                        // Si no se muestra automáticamente, crear botón manual
-                        createGoogleButton();
-                    }
-                });
-            } catch (error) {
-                console.error('Error iniciando Google login:', error);
-                loginDemo();
-            }
-        }
-
-        // Crear botón de Google manual como fallback
-        function createGoogleButton() {
-            const loginBtn = document.getElementById('loginBtn');
-            const originalHTML = loginBtn.innerHTML;
-            
-            // Temporalmente reemplazar con botón de Google
-            const tempDiv = document.createElement('div');
-            loginBtn.parentNode.insertBefore(tempDiv, loginBtn);
-            loginBtn.style.display = 'none';
-            
-            google.accounts.id.renderButton(tempDiv, {
-                theme: 'filled_blue',
-                size: 'large',
-                text: 'signin_with',
-                shape: 'pill',
-                logo_alignment: 'left'
-            });
-            
-            // Restaurar después de 30 segundos si no se usa
-            setTimeout(() => {
-                if (!isLoggedIn) {
-                    tempDiv.remove();
-                    loginBtn.style.display = 'flex';
-                    loginBtn.innerHTML = originalHTML;
-                    loginBtn.onclick = () => loginDemo();
-                }
-            }, 30000);
-        }
-
-        // Demo login (fallback si Google no funciona)
-        function loginDemo() {
-            currentUser = {
-                name: 'Usuario Demo',
-                given_name: 'Usuario',
-                email: 'demo@aitrustyou.com',
-                picture: 'https://lh3.googleusercontent.com/a/default-user=s96-c'
-            };
-            
-            isLoggedIn = true;
-            updateAuthUI();
-            showUploadSection();
-            
-            showNotification('✅ Modo demo activado', 'success');
-        }
-
-        // Main login function (llamada desde el botón)
-        async function loginWithGoogle() {
-            const button = document.getElementById('loginBtn');
-            const originalText = button.innerHTML;
-            
-            button.innerHTML = '<span class="loading"></span> Conectando...';
-            button.disabled = true;
-            
-            // Pequeña pausa para mostrar loading
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            // Activar Google login
-            triggerGoogleLogin();
-            
-            // Restaurar botón después de un momento
-            setTimeout(() => {
-                if (!isLoggedIn) {
-                    button.innerHTML = originalText;
-                    button.disabled = false;
-                }
-            }, 3000);
-        }
-
-        function logout() {
-            isLoggedIn = false;
-            currentUser = null;
-            uploadedFiles = { top: [], bottom: [], shoes: [] };
-            updateAuthUI();
-            hideUploadSection();
-            clearResults();
-            showNotification('👋 Sesión cerrada', 'info');
-        }
-
-        function updateAuthUI() {
-            const loginBtn = document.getElementById('loginBtn');
-            const userInfo = document.getElementById('userInfo');
-            
-            if (isLoggedIn) {
-                loginBtn.style.display = 'none';
-                userInfo.style.display = 'flex';
-                document.getElementById('userName').textContent = currentUser.name;
-                document.getElementById('userAvatar').src = currentUser.picture;
-            } else {
-                loginBtn.style.display = 'flex';
-                userInfo.style.display = 'none';
-            }
-        }
-
-        function showUploadSection() {
-            document.getElementById('loginRequired').style.display = 'none';
-            document.getElementById('uploadArea').style.display = 'block';
-            document.querySelector('.upload-section').classList.add('active');
-        }
-
-        function hideUploadSection() {
-            document.getElementById('loginRequired').style.display = 'block';
-            document.getElementById('uploadArea').style.display = 'none';
-            document.querySelector('.upload-section').classList.remove('active');
-        }
-
-        // Función para detectar si una prenda/zapato necesita rotación inteligente
-        function needsRotationForClothing(img) {
-            const aspectRatio = img.width / img.height;
-            
-            // Si ya es vertical (height > width), no rotar
-            if (aspectRatio <= 1) {
-                return false;
-            }
-            
-            // Si es muy horizontal (panorámica), probablemente no es una prenda individual
-            if (aspectRatio > 3) {
-                return false;
-            }
-            
-            // Si es moderadamente horizontal (1.2 a 3), podría ser una prenda que se ve mejor vertical
-            if (aspectRatio > 1.2 && aspectRatio <= 3) {
-                return true;
-            }
-            
-            // Si es ligeramente horizontal (1 a 1.2), mantener como está
-            return false;
-        }
-
-        // Función para rotación inteligente de prendas
-        function intelligentClothingRotation(file) {
-            return new Promise((resolve) => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                const img = new Image();
-                
-                img.onload = function() {
-                    const shouldRotate = needsRotationForClothing(img);
-                    
-                    if (shouldRotate) {
-                        // Rotar 90 grados para hacer vertical
-                        canvas.width = img.height;
-                        canvas.height = img.width;
-                        ctx.translate(canvas.width / 2, canvas.height / 2);
-                        ctx.rotate(Math.PI / 2);
-                        ctx.drawImage(img, -img.width / 2, -img.height / 2);
-                        console.log(`🔄 Imagen rotada de ${img.width}x${img.height} a ${canvas.width}x${canvas.height}`);
-                    } else {
-                        // Mantener orientación original
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        ctx.drawImage(img, 0, 0);
-                        console.log(`✅ Imagen mantenida en ${img.width}x${img.height}`);
-                    }
-                    
-                    canvas.toBlob(resolve, 'image/jpeg', 0.9);
-                };
-                
-                img.src = URL.createObjectURL(file);
-            });
-        }
-
-        // Configuración de límites por categoría
-        const FILE_LIMITS = {
-            top: 3,
-            bottom: 3,
-            shoes: 5  // Hasta 5 pares de zapatos
-        };
-
-        // File upload handling with intelligent rotation and limits
-        async function handleFileUpload(type, input) {
-            const files = Array.from(input.files);
-            const preview = document.getElementById(`${type}-preview`);
-            const currentCount = uploadedFiles[type].length;
-            const maxFiles = FILE_LIMITS[type];
-            
-            // Verificar límite de archivos
-            const availableSlots = maxFiles - currentCount;
-            if (files.length > availableSlots) {
-                showNotification(`⚠️ Solo puedes subir ${availableSlots} foto${availableSlots > 1 ? 's' : ''} más de ${type}. Máximo: ${maxFiles}`, 'error');
-                return;
-            }
-            
-            console.log(`📤 Procesando ${files.length} archivo(s) para ${type}`);
-            
-            for (let file of files) {
-                try {
-                    // Validar que es una imagen
-                    if (!file.type.startsWith('image/')) {
-                        showNotification('❌ Solo se permiten archivos de imagen', 'error');
-                        continue;
-                    }
-                    
-                    // Validar tamaño (máximo 10MB)
-                    if (file.size > 10 * 1024 * 1024) {
-                        showNotification('❌ La imagen es muy grande. Máximo 10MB', 'error');
-                        continue;
-                    }
-                    
-                    // Aplicar rotación inteligente
-                    const processedFile = await intelligentClothingRotation(file);
-                    
-                    // Crear preview
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const imageContainer = document.createElement('div');
-                        imageContainer.style.position = 'relative';
-                        imageContainer.style.display = 'inline-block';
-                        imageContainer.style.margin = '0.25rem';
-                        
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'preview-image';
-                        img.title = `${type} - ${file.name}`;
-                        
-                        const removeBtn = document.createElement('button');
-                        removeBtn.className = 'remove-image';
-                        removeBtn.innerHTML = '×';
-                        removeBtn.title = 'Eliminar imagen';
-                        removeBtn.onclick = () => {
-                            imageContainer.remove();
-                            const fileIndex = uploadedFiles[type].indexOf(processedFile);
-                            if (fileIndex > -1) {
-                                uploadedFiles[type].splice(fileIndex, 1);
-                            }
-                            updateUploadLabel(type);
-                        };
-                        
-                        imageContainer.appendChild(img);
-                        imageContainer.appendChild(removeBtn);
-                        preview.appendChild(imageContainer);
-                    };
-                    reader.readAsDataURL(processedFile);
-                    
-                    // Agregar archivo procesado al array
-                    uploadedFiles[type].push(processedFile);
-                    
-                } catch (error) {
-                    console.error('Error procesando archivo:', error);
-                    showNotification(`❌ Error procesando ${file.name}`, 'error');
-                }
-            }
-            
-            updateUploadLabel(type);
-            
-            // Animación del contenedor
-            const uploadItem = input.closest('.upload-item');
-            uploadItem.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                uploadItem.style.transform = 'scale(1)';
-            }, 300);
-            
-            // Limpiar el input para permitir resubir las mismas fotos
-            input.value = '';
-        }
-
-        function updateUploadLabel(type) {
-            const label = document.querySelector(`label[for="${type}-upload"]`);
-            const count = uploadedFiles[type].length;
-            const maxFiles = FILE_LIMITS[type];
-            
-            if (count > 0) {
-                const remaining = maxFiles - count;
-                label.innerHTML = `✅ ${count}/${maxFiles} foto${count > 1 ? 's' : ''} cargada${count > 1 ? 's' : ''}`;
-                label.style.background = 'linear-gradient(135deg, #00bcd4, #0097a7)';
-                
-                // Cambiar texto si llegó al límite
-                if (remaining === 0) {
-                    label.innerHTML = `🎯 ${count}/${maxFiles} - ¡Completo!`;
-                    label.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
-                }
-            } else {
-                const typeText = type === 'top' ? 'Superiores' : 
-                                type === 'bottom' ? 'Inferiores' : 'Zapatos';
-                label.innerHTML = `📤 Subir ${typeText} (máx ${maxFiles})`;
-                label.style.background = 'linear-gradient(135deg, #ff9800, #f57c00)';
-            }
-        }
-
-        // Get AI recommendation from your backend with intelligent file selection
-        async function getRecommendation() {
-            if (!isLoggedIn) {
-                showNotification('🔐 Necesitas iniciar sesión primero', 'error');
-                return;
-            }
-
-            // Validar que hay al menos una imagen en cada categoría
-            if (uploadedFiles.top.length === 0 || uploadedFiles.bottom.length === 0 || uploadedFiles.shoes.length === 0) {
-                showNotification('📸 Necesitas subir al menos una foto de cada categoría', 'error');
-                return;
-            }
-
-            const button = document.getElementById('generateBtn');
-            const originalText = button.innerHTML;
-            
-            button.innerHTML = '<span class="loading"></span> La IA está analizando...';
-            button.disabled = true;
-
-            try {
-                // Limpiar resultados anteriores
-                clearResults();
-                
-                // Preparar FormData - enviar la primera imagen de cada categoría
-                const formData = new FormData();
-                
-                // Mostrar al usuario qué imágenes se están enviando
-                console.log('📤 Enviando al backend:');
-                console.log(`- Top: imagen 1 de ${uploadedFiles.top.length}`);
-                console.log(`- Bottom: imagen 1 de ${uploadedFiles.bottom.length}`);
-                console.log(`- Shoes: imagen 1 de ${uploadedFiles.shoes.length}`);
-                
-                formData.append('top', uploadedFiles.top[0], 'top.jpg');
-                formData.append('bottom', uploadedFiles.bottom[0], 'bottom.jpg');
-                formData.append('shoes', uploadedFiles.shoes[0], 'shoes.jpg');
-
-                // Debug información
-                console.log('📊 Estadísticas de archivos:');
-                console.log(`Total archivos cargados: ${uploadedFiles.top.length + uploadedFiles.bottom.length + uploadedFiles.shoes.length}`);
-                
-                // Mostrar notificación sobre qué se está analizando
-                if (uploadedFiles.shoes.length > 1) {
-                    showNotification(`📊 Analizando con la primera imagen de cada categoría (tienes ${uploadedFiles.shoes.length} zapatos cargados)`, 'info');
-                }
-
-                // Llamar a tu backend real con timeout
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 30000);
-
-                const response = await fetch('https://outfit-recommender.fly.dev/recommend', {
-                    method: 'POST',
-                    body: formData,
-                    signal: controller.signal,
-                    headers: {
-                        // No agregar Content-Type, el browser lo maneja automáticamente con FormData
-                    }
-                });
-
-                clearTimeout(timeoutId);
-
-                console.log('📡 Response status:', response.status);
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('❌ Error response:', errorText);
-                    throw new Error(`Error ${response.status}: ${errorText}`);
-                }
-
-                const data = await response.json();
-                console.log('✅ Backend response:', data);
-                
-                // Validar que la respuesta tiene el formato esperado
-                if (!data.results || !Array.isArray(data.results)) {
-                    throw new Error('Formato de respuesta inválido del backend');
-                }
-                
-                // Mostrar resultados ordenados
-                displayRecommendations(data);
-                showNotification('🎉 ¡Recomendaciones generadas!', 'success');
-                
-            } catch (error) {
-                console.error('💥 Error completo:', error);
-                
-                if (error.name === 'AbortError') {
-                    showNotification('⏱️ Timeout: El servidor tardó demasiado en responder', 'error');
-                } else if (error.message.includes('Failed to fetch')) {
-                    showNotification('🌐 Error de conexión: Revisa tu internet o el servidor está caído', 'error');
-                } else {
-                    showNotification(`😔 Error: ${error.message}`, 'error');
-                }
-            } finally {
-                button.innerHTML = originalText;
-                button.disabled = false;
-            }
-        }
-
-        function displayRecommendations(data) {
-            const resultDiv = document.getElementById('result');
-            const bestIndex = data.best_index;
-            
-            // Ordenar resultados por score descendente
-            const sortedResults = [...data.results].sort((a, b) => b.score - a.score);
-            
-            let html = '';
-            
-            sortedResults.forEach((result, index) => {
-                const isBest = result.index === bestIndex;
-                const percentage = (result.score * 100).toFixed(1);
-                
-                html += `
-                    <div class="recommendation-card ${isBest ? 'best' : ''}">
-                        <div class="recommendation-header">
-                            <h3 class="recommendation-title">
-                                ${isBest ? '⭐ ' : ''}Combinación ${result.combination}
-                            </h3>
-                            <div class="recommendation-score">${percentage}%</div>
-                        </div>
-                        <div class="recommendation-content">
-                            <p><strong>🎯 Puntuación:</strong> ${percentage}% de compatibilidad</p>
-                            <p><strong>👔 Estilo:</strong> ${result.formality === 'formal' ? 'Formal' : 'Casual'}</p>
-                            <p><strong>💡 Recomendación:</strong> ${isBest ? 'Esta es tu mejor combinación. Perfecta para destacar con estilo.' : 'Una excelente opción alternativa para diferentes ocasiones.'}</p>
-                            ${isBest ? '<p><strong>✨ Tip especial:</strong> Esta combinación ha sido seleccionada como la óptima por nuestra IA.</p>' : ''}
-                        </div>
-                        <div class="recommendation-buttons">
-                            <button class="hero-button" onclick="saveOutfit(${result.index})" style="margin: 0;">
-                                💖 Guardar
-                            </button>
-                            <button class="hero-button" onclick="shareOutfit(${result.index})" style="margin: 0; background: linear-gradient(135deg, #667eea, #764ba2);">
-                                📤 Compartir
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            resultDiv.innerHTML = html;
-            resultDiv.classList.add('active');
-            
-            // Scroll hacia los resultados
-            setTimeout(() => {
-                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        }
-
-        function clearResults() {
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '';
-            resultDiv.classList.remove('active');
-        }
-
-        // Plan selection
-        function selectPlan(plan) {
-            const planNames = {
-                'free': 'Plan Gratuito',
-                'premium': 'Plan Premium'
-            };
-            
-            if (plan === 'free') {
-                showNotification(`✅ ¡Genial! Ya puedes usar ${planNames[plan]}`, 'success');
-                setTimeout(() => {
-                    document.getElementById('upload').scrollIntoView({ behavior: 'smooth' });
-                }, 1500);
-            } else {
-                showNotification(`🚀 ${planNames[plan]} seleccionado. Redirigiendo a pago...`, 'success');
-            }
-        }
-
-        // Save and share functions
-        function saveOutfit(combinationIndex) {
-            showNotification(`💖 Combinación ${combinationIndex} guardada en tu colección`, 'success');
-        }
-
-        function shareOutfit(combinationIndex) {
-            const shareData = {
-                title: '👕 Mi outfit con OutfitAI',
-                text: `¡Mira esta increíble combinación ${combinationIndex} que creé con IA!`,
-                url: window.location.href
-            };
-            
-            if (navigator.share) {
-                navigator.share(shareData);
-            } else {
-                navigator.clipboard.writeText(shareData.url);
-                showNotification('📋 Enlace copiado para compartir', 'success');
-            }
-        }
-
-        // Show notification
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = message;
-
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
-                    }
-                }, 300);
-            }, 4000);
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            updateAuthUI();
-            
-            // Initialize upload labels with limits
-            Object.keys(FILE_LIMITS).forEach(type => {
-                updateUploadLabel(type);
-            });
-            
-            // Initialize Google OAuth with delay to ensure script loads
-            setTimeout(() => {
-                initializeGoogleAuth();
-            }, 1000);
-            
-            // Check if user clicks on upload section without being logged in
-            document.querySelector('a[href="#upload"]').addEventListener('click', () => {
-                if (!isLoggedIn) {
-                    setTimeout(() => {
-                        showNotification('🔐 Inicia sesión para crear outfits', 'info');
-                    }, 500);
-                }
-            });
-            
-            setTimeout(() => {
-                showNotification('👋 ¡Bienvenido a OutfitAI! Inicia sesión para comenzar', 'success');
-            }, 2000);
         });
     </script>
 </body>
