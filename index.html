@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ðŸ‘• OutfitAI - Tu Asistente de Moda Inteligente</title>
+    <title>I love reuse AI - Maximiza tu Guardarropa, Minimiza tu Impacto Ambiental</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google OAuth -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -18,7 +18,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background: linear-gradient(135deg, #4CAF50 0%, #81C784 50%, #4CAF50 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             color: #ffffff;
@@ -67,7 +67,7 @@
             top: 0;
             width: 100%;
             padding: 1rem 5%;
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(76, 175, 80, 0.1);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
@@ -126,6 +126,32 @@
             transform: translateY(-2px);
         }
 
+        .language-selector {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
         .auth-container {
             display: flex;
             align-items: center;
@@ -164,26 +190,6 @@
             height: 35px;
             border-radius: 50%;
             border: 2px solid white;
-        }
-
-        .cta-btn {
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
         }
 
         /* Hero Section */
@@ -303,224 +309,97 @@
             }
         }
 
-        /* Upload Section */
-        .upload-section {
-            padding: 4rem 5%;
+        /* Environmental Impact Section */
+        .environmental-impact {
+            padding: 6rem 5% 4rem;
             position: relative;
             z-index: 2;
-            display: none;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .upload-section.active {
-            display: block;
-        }
-
-        .upload-container {
-            max-width: 1000px;
+        .impact-container {
+            max-width: 1200px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .upload-area {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            padding: 4rem 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            border-color: #00bcd4;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .upload-grid {
+        .impact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
         }
 
-        .upload-item {
+        .impact-card {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
-            position: relative;
         }
 
-        .upload-item:hover {
-            transform: translateY(-5px);
+        .impact-card:hover {
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
-        .upload-item i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00bcd4;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .file-label {
-            display: block;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            border-radius: 25px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .file-label:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
-        }
-
-        .file-label.multiple {
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-        }
-
-        .preview-area {
-            margin-top: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 0.5rem;
-            border-radius: 10px;
-        }
-
-        .preview-image {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 2px solid #00bcd4;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .preview-image:hover {
-            transform: scale(1.05);
-            border-color: #0097a7;
-            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
-        }
-
-        .remove-image {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff5252;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Results Section */
-        .results-section {
-            margin-top: 3rem;
-            display: none;
-        }
-
-        .results-section.active {
-            display: block;
-        }
-
-        .recommendation-card {
-            background: rgba(0, 188, 212, 0.1);
-            border: 2px solid #00bcd4;
-            border-radius: 20px;
-            padding: 2.5rem;
+        .impact-card h3 {
+            font-size: 1.8rem;
             margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .recommendation-card.best {
-            background: rgba(255, 193, 7, 0.15);
-            border-color: #ffc107;
-            position: relative;
-        }
-
-        .recommendation-card.best::before {
-            content: 'â­';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: #ffc107;
-            color: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .recommendation-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .recommendation-title {
             color: #00bcd4;
-            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .impact-stats {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .impact-stat {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #00bcd4;
+        }
+
+        .impact-stat strong {
+            color: #00bcd4;
             font-weight: 700;
         }
 
-        .recommendation-score {
-            background: #00bcd4;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .recommendation-content {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: left;
-            line-height: 1.8;
-        }
-
-        .recommendation-buttons {
+        .your-impact {
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
             margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
         }
 
-        /* Features Section - Ajustes para dos secciones similares */
+        .your-impact h3 {
+            color: white;
+        }
+
+        .your-impact .impact-stat {
+            border-left-color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .your-impact .impact-stat strong {
+            color: white;
+        }
+
+        /* Features Section */
         .features {
             padding: 6rem 5% 4rem;
             position: relative;
             z-index: 2;
-        }
-
-        .features:nth-of-type(2) {
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
         }
 
         .features-container {
@@ -586,20 +465,22 @@
             line-height: 1.6;
         }
 
-        /* About Section */
-        .about {
+        /* Team Section */
+        .team {
             padding: 6rem 5% 4rem;
             position: relative;
             z-index: 2;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .about-container {
-            max-width: 800px;
+        .team-container {
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .about h2 {
+        .team h2 {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 3rem;
@@ -610,22 +491,29 @@
             gap: 1rem;
         }
 
-        .founder-card {
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .member-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 3rem;
+            padding: 3rem 2rem;
             border-radius: 30px;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
         }
 
-        .founder-card:hover {
+        .member-card:hover {
             transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
         }
 
-        .founder-avatar {
+        .member-avatar {
             width: 120px;
             height: 120px;
             border-radius: 50%;
@@ -634,50 +522,39 @@
             margin: 0 auto 2rem;
             display: block;
             transition: all 0.3s ease;
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
         }
 
-        .founder-card:hover .founder-avatar {
+        .member-card:hover .member-avatar {
             transform: scale(1.1);
             box-shadow: 0 10px 30px rgba(0, 188, 212, 0.3);
         }
 
-        .founder-name {
+        .member-name {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: white;
         }
 
-        .founder-title {
+        .member-title {
             font-size: 1.1rem;
             opacity: 0.8;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             color: #00bcd4;
             font-weight: 600;
         }
 
-        .founder-description {
+        .member-profession {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .member-description {
             opacity: 0.8;
             line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, #0077b5, #00a0dc);
-            border-radius: 25px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
         }
 
         /* Pricing Section */
@@ -733,7 +610,7 @@
         }
 
         .pricing-card.featured::before {
-            content: 'ðŸš€';
+            content: '🚀';
             position: absolute;
             top: -10px;
             right: 20px;
@@ -869,7 +746,7 @@
 
             .features h2,
             .pricing h2,
-            .about h2 {
+            .team h2 {
                 font-size: 2rem;
             }
 
@@ -879,11 +756,9 @@
             }
 
             .features-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .upload-grid {
+            .pricing-grid,
+            .team-grid,
+            .impact-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -893,15 +768,6 @@
 
             .pricing-card.featured:hover {
                 transform: translateY(-10px);
-            }
-
-            .recommendation-buttons {
-                flex-direction: column;
-            }
-
-            .preview-image {
-                width: 120px;
-                height: 120px;
             }
         }
 
@@ -956,7 +822,7 @@
         }
 
         .notification.info {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #4CAF50, #81C784);
         }
 
         @keyframes slideInRight {
@@ -969,50 +835,69 @@
             to { transform: translateX(100%); opacity: 0; }
         }
 
-        /* Login required message */
-        .login-required {
-            background: rgba(255, 193, 7, 0.15);
-            border: 2px solid #ffc107;
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
+        /* Hidden content for language switching */
+        [data-lang]:not([data-lang="es"]) {
+            display: none;
         }
 
-        .login-required h3 {
-            color: #ffc107;
-            margin-bottom: 1rem;
+        html[lang="en"] [data-lang="es"] {
+            display: none;
+        }
+
+        html[lang="en"] [data-lang="en"] {
+            display: initial;
+        }
+
+        html[lang="es"] [data-lang="es"] {
+            display: initial;
+        }
+
+        html[lang="es"] [data-lang="en"] {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="floating-elements">
-        <div class="floating-item">ðŸ‘•</div>
-        <div class="floating-item">ðŸ‘—</div>
-        <div class="floating-item">ðŸ‘ </div>
-        <div class="floating-item">ðŸ§¥</div>
-        <div class="floating-item">ðŸ‘”</div>
+        <div class="floating-item">👕</div>
+        <div class="floating-item">👗</div>
+        <div class="floating-item">👠</div>
+        <div class="floating-item">🧥</div>
+        <div class="floating-item">👖</div>
     </div>
 
     <header>
         <nav>
             <div class="logo">
-                ðŸ‘• OutfitAI
+                <span data-lang="es">💚 I love reuse AI</span>
+                <span data-lang="en">💚 I love reuse AI</span>
             </div>
             <div class="nav-center">
                 <div class="nav-pills">
                     <a href="#inicio" class="nav-pill active">
-                        ðŸ  Inicio
+                        <span data-lang="es">🏠 Inicio</span>
+                        <span data-lang="en">🏠 Home</span>
+                    </a>
+                    <a href="#impacto-ambiental" class="nav-pill">
+                        <span data-lang="es">🌍 Impacto Ambiental</span>
+                        <span data-lang="en">🌍 Environmental Impact</span>
                     </a>
                     <a href="#que-hacemos" class="nav-pill">
-                        ðŸŽ¯ QuÃ© Hacemos
+                        <span data-lang="es">🎯 Qué Hacemos</span>
+                        <span data-lang="en">🎯 What We Do</span>
                     </a>
-                    <a href="#nosotros" class="nav-pill">
-                        ðŸ‘‹ Nosotros
+                    <a href="#equipo" class="nav-pill">
+                        <span data-lang="es">👥 Equipo</span>
+                        <span data-lang="en">👥 Team</span>
                     </a>
                     <a href="#precios" class="nav-pill">
-                        ðŸ’Ž Precios
+                        <span data-lang="es">💎 Precios</span>
+                        <span data-lang="en">💎 Pricing</span>
                     </a>
+                </div>
+                <div class="language-selector">
+                    <button class="lang-btn active" onclick="switchLanguage('es')">🇪🇸 ES</button>
+                    <button class="lang-btn" onclick="switchLanguage('en')">🇺🇸 EN</button>
                 </div>
                 <div class="auth-container">
                     <button class="google-login-btn" onclick="loginWithGoogle()" id="loginBtn">
@@ -1022,12 +907,16 @@
                             <path fill="#FBBC04" d="M3.96363636 10.7109091c-.18-.54-.28363636-1.11818182-.28363636-1.7109091s.10363636-1.17090909.28363636-1.7109091V5.28181818L.68181818 5.28181818C.24727273 6.1418182 0 7.04727273 0 8s.24727273 1.8581818.68181818 2.7181818l3.28181818-1.27090909z"/>
                             <path fill="#EA4335" d="M9 3.57272727c1.32272727 0 2.50909091.45454545 3.44363636 1.34727273l2.58181818-2.58181818C13.46363636.89090909 11.42727273 0 9 0 5.48090909 0 2.24909091 2.40181818.68181818 5.28181818l3.28181818 1.27090909C4.67181818 5.15636364 6.65454545 3.57272727 9 3.57272727z"/>
                         </svg>
-                        Login con Google
+                        <span data-lang="es">Login con Google</span>
+                        <span data-lang="en">Login with Google</span>
                     </button>
                     <div class="user-info" id="userInfo">
                         <img class="user-avatar" id="userAvatar" alt="Usuario">
                         <span id="userName"></span>
-                        <button onclick="logout()" style="background: transparent; border: 1px solid white; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">Salir</button>
+                        <button onclick="logout()" style="background: transparent; border: 1px solid white; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">
+                            <span data-lang="es">Salir</span>
+                            <span data-lang="en">Logout</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1036,306 +925,467 @@
 
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <span class="hero-emoji">ðŸ‘•</span>
-            <h1>OutfitAI</h1>
-            <p class="hero-subtitle">Â¿Tardas mucho eligiendo quÃ© ponerte cada maÃ±ana?</p>
-            <p class="hero-description">Deja de perder tiempo. Aprovecha toda la ropa que ya tienes con nuestro algoritmo de IA que encuentra automÃ¡ticamente las mejores combinaciones basÃ¡ndose en tus fotos. Â¡Sin estrÃ©s, sin pÃ©rdida de tiempo, solo outfits perfectos!</p>
+            <span class="hero-emoji">💚</span>
+            <h1>
+                <span data-lang="es">I love reuse AI</span>
+                <span data-lang="en">I love reuse AI</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span data-lang="es">Maximiza tu Guardarropa, Minimiza tu Impacto Ambiental</span>
+                <span data-lang="en">Maximize Your Wardrobe, Minimize Your Environmental Impact</span>
+            </p>
+            <p class="hero-description">
+                <span data-lang="es">Deja de perder tiempo. Aprovecha toda la ropa que ya tienes con nuestro algoritmo de IA que encuentra automáticamente las mejores combinaciones basándose en tus fotos. ¡Sin estrés, sin pérdida de tiempo, solo outfits perfectos!</span>
+                <span data-lang="en">Stop wasting time. Make the most of all the clothes you already have with our AI algorithm that automatically finds the best combinations based on your photos. No stress, no time wasted, just perfect outfits!</span>
+            </p>
             
-            <a href="#que-hacemos" class="hero-button">
-                ðŸŽ¯ Ver CÃ³mo Funciona
+            <a href="#impacto-ambiental" class="hero-button">
+                <span data-lang="es">🌱 Ver Tu Impacto Positivo</span>
+                <span data-lang="en">🌱 See Your Positive Impact</span>
             </a>
             
             <div class="stats">
                 <div class="stat-item">
                     <span class="stat-number">15 min</span>
-                    <span class="stat-label">Ahorrados cada maÃ±ana</span>
+                    <span class="stat-label" data-lang="es">Ahorrados cada mañana</span>
+                    <span class="stat-label" data-lang="en">Saved every morning</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">&lt; 10s</span>
-                    <span class="stat-label">Para generar outfit</span>
+                    <span class="stat-label" data-lang="es">Para generar outfit</span>
+                    <span class="stat-label" data-lang="en">To generate outfit</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">1,247</span>
-                    <span class="stat-label">Personas ya no sufren</span>
+                    <span class="stat-number">25kg</span>
+                    <span class="stat-label" data-lang="es">CO2 evitados por kg reutilizado</span>
+                    <span class="stat-label" data-lang="en">CO2 avoided per kg reused</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impacto-ambiental" class="environmental-impact animate-on-scroll">
+        <div class="impact-container">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">
+                <span data-lang="es">🌍 Tu Impacto Positivo en el Planeta</span>
+                <span data-lang="en">🌍 Your Positive Impact on the Planet</span>
+            </h2>
+            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">
+                <span data-lang="es">Cada vez que reutilizas tu ropa con nuestra IA, estás ayudando a salvar el medio ambiente</span>
+                <span data-lang="en">Every time you reuse your clothes with our AI, you're helping to save the environment</span>
+            </p>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <h3>
+                        <span data-lang="es">🌎 Problema Mundial</span>
+                        <span data-lang="en">🌎 Global Problem</span>
+                    </h3>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <strong data-lang="es">10%</strong>
+                            <strong data-lang="en">10%</strong>
+                            <span data-lang="es"> de emisiones globales de CO2 produce la industria textil</span>
+                            <span data-lang="en"> of global CO2 emissions produced by textile industry</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong data-lang="es">270 kg</strong>
+                            <strong data-lang="en">270 kg</strong>
+                            <span data-lang="es"> de CO2 per cápita por textiles (Europa - Agencia Europea)</span>
+                            <span data-lang="en"> of CO2 per capita from textiles (Europe - European Agency)</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong data-lang="es">87%</strong>
+                            <strong data-lang="en">87%</strong>
+                            <span data-lang="es"> de textiles terminan incinerados o en vertederos</span>
+                            <span data-lang="en"> of textiles end up incinerated or in landfills</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span data-lang="es"><strong>70 veces menos</strong> impacto tiene reutilizar vs producir nuevo</span>
+                            <span data-lang="en"><strong>70 times less</strong> impact from reusing vs producing new</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="impact-card">
+                    <h3>
+                        <span data-lang="es">🇨🇱 Situación en Chile</span>
+                        <span data-lang="en">🇨🇱 Situation in Chile</span>
+                    </h3>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <strong>32 kg</strong>
+                            <span data-lang="es"> de textiles consumimos per cápita/año (MMA)</span>
+                            <span data-lang="en"> of textiles we consume per capita/year (MMA)</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong>572,118</strong>
+                            <span data-lang="es"> toneladas de residuos textiles anuales</span>
+                            <span data-lang="en"> tons of annual textile waste</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong data-lang="es">4° país mundial</strong>
+                            <strong data-lang="en">4th country globally</strong>
+                            <span data-lang="es"> importador de ropa usada</span>
+                            <span data-lang="en"> importer of used clothing</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong data-lang="es">Solo 1%</strong>
+                            <strong data-lang="en">Only 1%</strong>
+                            <span data-lang="es"> de la ropa se recicla en Chile</span>
+                            <span data-lang="en"> of clothes are recycled in Chile</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong>73%</strong>
+                            <span data-lang="es"> de la ropa post-consumo va a la basura</span>
+                            <span data-lang="en"> of post-consumer clothing goes to trash</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="impact-card your-impact">
+                    <h3>
+                        <span data-lang="es">💚 Tu Impacto Positivo con I love reuse AI</span>
+                        <span data-lang="en">💚 Your Positive Impact with I love reuse AI</span>
+                    </h3>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <strong data-lang="es">25 kg de CO2</strong>
+                            <strong data-lang="en">25 kg of CO2</strong>
+                            <span data-lang="es"> evitas por cada kg de ropa reutilizada (INTEXTER-UPC)</span>
+                            <span data-lang="en"> you avoid for each kg of clothing reused (INTEXTER-UPC)</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong data-lang="es">44% menos</strong>
+                            <strong data-lang="en">44% less</strong>
+                            <span data-lang="es"> gases invernadero si duplicas tiempo de uso</span>
+                            <span data-lang="en"> greenhouse gases if you double usage time</span>
+                        </div>
+                        <div class="impact-stat">
+                            <strong data-lang="es">20-30% menos</strong>
+                            <strong data-lang="en">20-30% less</strong>
+                            <span data-lang="es"> impacto alargando 9 meses el uso de una prenda</span>
+                            <span data-lang="en"> impact by extending garment use by 9 months</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span data-lang="es"><strong>Evitas ser parte</strong> del 73% que va a la basura</span>
+                            <span data-lang="en"><strong>Avoid being part</strong> of the 73% that goes to trash</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span data-lang="es"><strong>Reduces presión</strong> sobre el Desierto de Atacama</span>
+                            <span data-lang="en"><strong>Reduce pressure</strong> on the Atacama Desert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(0, 188, 212, 0.1); border-radius: 20px; border: 1px solid #00bcd4;">
+                <h3 style="color: #00bcd4; margin-bottom: 1rem;">
+                    <span data-lang="es">🎯 Tu Misión: Cambiar el Mundo, Una Prenda a la Vez</span>
+                    <span data-lang="en">🎯 Your Mission: Change the World, One Garment at a Time</span>
+                </h3>
+                <p style="opacity: 0.9; line-height: 1.6;">
+                    <span data-lang="es">Cada outfit que creas con I love reuse AI es un acto de resistencia contra la moda rápida. Eres parte de la solución al problema de los 572,118 toneladas de residuos textiles que Chile genera cada año.</span>
+                    <span data-lang="en">Every outfit you create with I love reuse AI is an act of resistance against fast fashion. You are part of the solution to the problem of the 572,118 tons of textile waste that Chile generates each year.</span>
+                </p>
+                <a href="#que-hacemos" class="hero-button" style="margin-top: 1.5rem;">
+                    <span data-lang="es">🌱 Descubrir Cómo Funciona</span>
+                    <span data-lang="en">🌱 Discover How It Works</span>
+                </a>
             </div>
         </div>
     </section>
 
     <section id="que-hacemos" class="features animate-on-scroll">
         <div class="features-container">
-            <h2>ðŸŽ¯ QuÃ© Hacemos</h2>
-            <p class="features-subtitle">Resolvemos el problema mÃ¡s comÃºn de las maÃ±anas: "No tengo nada que ponerme"</p>
+            <h2>
+                <span data-lang="es">🎯 Qué Hacemos</span>
+                <span data-lang="en">🎯 What We Do</span>
+            </h2>
+            <p class="features-subtitle">
+                <span data-lang="es">Resolvemos el problema más común de las mañanas: "No tengo nada que ponerme"</span>
+                <span data-lang="en">We solve the most common morning problem: "I have nothing to wear"</span>
+            </p>
             
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ“±
-                    </div>
-                    <h3>1. FotografÃ­as Tu Ropa</h3>
-                    <p>Tomas fotos de las prendas que ya tienes en tu closet. Camisas, pantalones, zapatos... todo lo que quieras incluir.</p>
+                    <div class="feature-icon">📱</div>
+                    <h3>
+                        <span data-lang="es">1. Fotografías Tu Ropa</span>
+                        <span data-lang="en">1. Photograph Your Clothes</span>
+                    </h3>
+                    <p>
+                        <span data-lang="es">Tomas fotos de las prendas que ya tienes en tu closet. Camisas, pantalones, zapatos... todo lo que quieras incluir.</span>
+                        <span data-lang="en">Take photos of the clothes you already have in your closet. Shirts, pants, shoes... everything you want to include.</span>
+                    </p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ¤–
-                    </div>
-                    <h3>2. IA Analiza y Procesa</h3>
-                    <p>Nuestro algoritmo inteligente analiza colores, patrones, estilos y compatibilidad entre todas tus prendas.</p>
+                    <div class="feature-icon">🤖</div>
+                    <h3>
+                        <span data-lang="es">2. IA Analiza y Procesa</span>
+                        <span data-lang="en">2. AI Analyzes and Processes</span>
+                    </h3>
+                    <p>
+                        <span data-lang="es">Nuestro algoritmo inteligente analiza colores, patrones, estilos y compatibilidad entre todas tus prendas.</span>
+                        <span data-lang="en">Our intelligent algorithm analyzes colors, patterns, styles and compatibility between all your garments.</span>
+                    </p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        âœ¨
-                    </div>
-                    <h3>3. Generas Combinaciones</h3>
-                    <p>En segundos obtienes mÃºltiples opciones de outfits perfectamente coordinados, con puntuaciÃ³n de compatibilidad.</p>
+                    <div class="feature-icon">✨</div>
+                    <h3>
+                        <span data-lang="es">3. Generas Combinaciones</span>
+                        <span data-lang="en">3. Generate Combinations</span>
+                    </h3>
+                    <p>
+                        <span data-lang="es">En segundos obtienes múltiples opciones de outfits perfectamente coordinados, con puntuación de compatibilidad.</span>
+                        <span data-lang="en">In seconds you get multiple perfectly coordinated outfit options, with compatibility scoring.</span>
+                    </p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸŽ‰
-                    </div>
-                    <h3>4. Sales Perfecto de Casa</h3>
-                    <p>Eliminas el estrÃ©s matutino, ahorras tiempo y siempre luces increÃ­ble con la ropa que ya tienes.</p>
+                    <div class="feature-icon">🎉</div>
+                    <h3>
+                        <span data-lang="es">4. Sales Perfecto de Casa</span>
+                        <span data-lang="en">4. Leave Home Perfect</span>
+                    </h3>
+                    <p>
+                        <span data-lang="es">Eliminas el estrés matutino, ahorras tiempo y siempre luces increíble con la ropa que ya tienes.</span>
+                        <span data-lang="en">Eliminate morning stress, save time and always look amazing with the clothes you already have.</span>
+                    </p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ”„
-                    </div>
-                    <h3>5. La IA Aprende de Ti</h3>
-                    <p>Mientras mÃ¡s uses OutfitAI, mejor conoce tu estilo y preferencias para sugerencias mÃ¡s personalizadas.</p>
+                    <div class="feature-icon">🔄</div>
+                    <h3>
+                        <span data-lang="es">5. La IA Aprende de Ti</span>
+                        <span data-lang="en">5. AI Learns from You</span>
+                    </h3>
+                    <p>
+                        <span data-lang="es">Mientras más uses I love reuse AI, mejor conoce tu estilo y preferencias para sugerencias más personalizadas.</span>
+                        <span data-lang="en">The more you use I love reuse AI, the better it knows your style and preferences for more personalized suggestions.</span>
+                    </p>
                 </div>
                 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ’¡
-                    </div>
-                    <h3>6. Descubres Nuevas Opciones</h3>
-                    <p>Te sorprenderÃ¡s con combinaciones que nunca habÃ­as pensado, maximizando el potencial de tu guardarropa.</p>
+                    <div class="feature-icon">💡</div>
+                    <h3>
+                        <span data-lang="es">6. Descubres Nuevas Opciones</span>
+                        <span data-lang="en">6. Discover New Options</span>
+                    </h3>
+                    <p>
+                        <span data-lang="es">Te sorprenderás con combinaciones que nunca habías pensado, maximizando el potencial de tu guardarropa.</span>
+                        <span data-lang="en">You'll be surprised with combinations you never thought of, maximizing your wardrobe's potential.</span>
+                    </p>
                 </div>
             </div>
             
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="#upload" class="hero-button">
-                    ðŸš€ Empezar Ahora - Es Gratis
+                <a href="#precios" class="hero-button">
+                    <span data-lang="es">🚀 Ver Planes y Precios</span>
+                    <span data-lang="en">🚀 See Plans and Pricing</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="features" class="features animate-on-scroll">
-        <div class="features-container">
-            <h2>ðŸ’ª Beneficios Que NotarÃ¡s Inmediatamente</h2>
-            <p class="features-subtitle">Estos son los cambios reales que verÃ¡s en tu vida desde el primer dÃ­a</p>
+    <section id="equipo" class="team animate-on-scroll">
+        <div class="team-container">
+            <h2>
+                <span data-lang="es">👥 Nuestro Equipo</span>
+                <span data-lang="en">👥 Our Team</span>
+            </h2>
+            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem;">
+                <span data-lang="es">Detrás de I love reuse AI hay un equipo apasionado por la tecnología y la sostenibilidad</span>
+                <span data-lang="en">Behind I love reuse AI is a team passionate about technology and sustainability</span>
+            </p>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        â°
-                    </div>
-                    <h3>Ahorra 15 Minutos Diarios</h3>
-                    <p>Deja de pararte frente al closet sin saber quÃ© ponerte. Nuestra IA te da la respuesta perfecta en segundos.</p>
+            <div class="team-grid">
+                <div class="member-card">
+                    <div class="member-avatar" style="background: linear-gradient(135deg, #4CAF50, #81C784); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">👨‍💼</div>
+                    <h3 class="member-name">José Francisco Corti Badia</h3>
+                    <p class="member-title">
+                        <span data-lang="es">Founder & CEO</span>
+                        <span data-lang="en">Founder & CEO</span>
+                    </p>
+                    <p class="member-profession">
+                        <span data-lang="es">Ingeniero Comercial de Profesión</span>
+                        <span data-lang="en">Commercial Engineer by Profession</span>
+                    </p>
+                    <p class="member-description">
+                        <span data-lang="es">Experto en AI con más de 15 años diseñando soluciones para diferentes industrias. Visionario comprometido con usar la tecnología para crear un impacto positivo en el medio ambiente y cambiar la forma en que las personas interactúan con su guardarropa.</span>
+                        <span data-lang="en">AI expert with over 15 years designing solutions for different industries. Visionary committed to using technology to create positive environmental impact and change how people interact with their wardrobe.</span>
+                    </p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ‘•
-                    </div>
-                    <h3>Aprovecha Tu Ropa Actual</h3>
-                    <p>No necesitas comprar nada nuevo. Maximiza todas las prendas que ya tienes con combinaciones que nunca habÃ­as pensado.</p>
+                <div class="member-card">
+                    <div class="member-avatar" style="background: linear-gradient(135deg, #00bcd4, #0097a7); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">👩‍🎨</div>
+                    <h3 class="member-name">Paola Andrea Curti Simpson</h3>
+                    <p class="member-title">
+                        <span data-lang="es">Directora Creativa</span>
+                        <span data-lang="en">Creative Director</span>
+                    </p>
+                    <p class="member-profession">
+                        <span data-lang="es">Arquitecta de Profesión</span>
+                        <span data-lang="en">Architect by Profession</span>
+                    </p>
+                    <p class="member-description">
+                        <span data-lang="es">Experta en uso de Ropa Sustentable con una visión única que combina diseño, funcionalidad y sostenibilidad. Su experiencia en arquitectura le permite crear estrategias innovadoras para maximizar el potencial de cada guardarropa y reducir el impacto ambiental de la moda.</span>
+                        <span data-lang="en">Expert in Sustainable Fashion with a unique vision that combines design, functionality and sustainability. Her architecture background enables her to create innovative strategies to maximize each wardrobe's potential and reduce fashion's environmental impact.</span>
+                    </p>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸŽ¯
-                    </div>
-                    <h3>Combinaciones Inteligentes</h3>
-                    <p>Nuestro algoritmo encuentra las mejores combinaciones basÃ¡ndose en colores, patrones y estilos que realmente funcionan.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ˜Œ
-                    </div>
-                    <h3>Sin EstrÃ©s Matutino</h3>
-                    <p>Elimina la ansiedad de "no tengo nada que ponerme". Siempre tendrÃ¡s opciones perfectas listas.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ’¡
-                    </div>
-                    <h3>Descubre Tu Estilo</h3>
-                    <p>La IA aprende quÃ© te queda mejor y sugiere combinaciones que realzan tu personalidad Ãºnica.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        ðŸ“±
-                    </div>
-                    <h3>Desde Tu Celular</h3>
-                    <p>Toma fotos de tu ropa desde cualquier lugar y obtÃ©n recomendaciones al instante.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="upload" class="upload-section animate-on-scroll">
-        <div class="upload-container">
-            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">âœ¨ Termina con el Drama Matutino</h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">Sube fotos de la ropa que ya tienes y descubre combinaciones increÃ­bles que no sabÃ­as que existÃ­an</p>
-            
-            <div id="loginRequired" class="login-required">
-                <h3>ðŸ” Un paso mÃ¡s para acabar con el sufrimiento</h3>
-                <p>Inicia sesiÃ³n con Google para acceder a nuestro algoritmo de IA que revolucionarÃ¡ tus maÃ±anas</p>
-                <button class="google-login-btn" onclick="loginWithGoogle()" style="margin-top: 1rem;">
-                    <svg width="18" height="18" viewBox="0 0 18 18">
-                        <path fill="#4285F4" d="M17.64 9.20454546c0-.63818182-.05727273-1.25181818-.16363636-1.84090909H9v3.48090909h4.84378348c-.20892443.95363636-.84317059 1.76772727-1.68345427 2.31181818V15.52H14.88699909C16.67543111 13.84363636 17.64 11.7093333 17.64 9.20454546z"/>
-                        <path fill="#34A853" d="M9 18c2.43 0 4.467-.80727273 5.95636364-2.18545455l-2.90909091-2.25818182c-.80636364.54-1.83727273.85909091-3.04727273.85909091-2.34545455 0-4.32818182-1.58545455-5.03636364-3.71818182L.68181818 12.5218182C2.24909091 15.5981818 5.48090909 18 9 18z"/>
-                        <path fill="#FBBC04" d="M3.96363636 10.7109091c-.18-.54-.28363636-1.11818182-.28363636-1.7109091s.10363636-1.17090909.28363636-1.7109091V5.28181818L.68181818 5.28181818C.24727273 6.1418182 0 7.04727273 0 8s.24727273 1.8581818.68181818 2.7181818l3.28181818-1.27090909z"/>
-                        <path fill="#EA4335" d="M9 3.57272727c1.32272727 0 2.50909091.45454545 3.44363636 1.34727273l2.58181818-2.58181818C13.46363636.89090909 11.42727273 0 9 0 5.48090909 0 2.24909091 2.40181818.68181818 5.28181818l3.28181818 1.27090909C4.67181818 5.15636364 6.65454545 3.57272727 9 3.57272727z"/>
-                    </svg>
-                    Acceder al Algoritmo de IA
-                </button>
-            </div>
-
-            <div class="upload-area" id="uploadArea" style="display: none;">
-                <div class="upload-grid">
-                    <div class="upload-item">
-                        <i class="fas fa-tshirt"></i>
-                        <h4>Parte Superior</h4>
-                        <p>Camisas, blusas, suÃ©teres</p>
-                        <label for="top-upload" class="file-label multiple">
-                            ðŸ“¤ Subir Superiores (mÃ¡x 3)
-                        </label>
-                        <input type="file" id="top-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('top', this)">
-                        <div id="top-preview" class="preview-area"></div>
-                    </div>
-                    
-                    <div class="upload-item">
-                        <i class="fas fa-user-tie"></i>
-                        <h4>Parte Inferior</h4>
-                        <p>Pantalones, faldas, shorts</p>
-                        <label for="bottom-upload" class="file-label multiple">
-                            ðŸ“¤ Subir Inferiores (mÃ¡x 3)
-                        </label>
-                        <input type="file" id="bottom-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('bottom', this)">
-                        <div id="bottom-preview" class="preview-area"></div>
-                    </div>
-                    
-                    <div class="upload-item">
-                        <i class="fas fa-shoe-prints"></i>
-                        <h4>Calzado</h4>
-                        <p>Zapatos, sneakers, botas</p>
-                        <label for="shoes-upload" class="file-label multiple">
-                            ðŸ“¤ Subir Zapatos (mÃ¡x 5)
-                        </label>
-                        <input type="file" id="shoes-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('shoes', this)">
-                        <div id="shoes-preview" class="preview-area"></div>
-                    </div>
-                </div>
-                
-                <button class="hero-button" onclick="getRecommendation()" style="margin-top: 2rem; font-size: 1.2rem;" id="generateBtn">
-                    ðŸª„ Generar Combinaciones Inteligentes
-                </button>
-                
-                <div id="result" class="results-section"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="nosotros" class="about animate-on-scroll">
-        <div class="about-container">
-            <h2>ðŸ‘‹ ConÃ³cenos</h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem;">DetrÃ¡s de OutfitAI hay un equipo apasionado por la tecnologÃ­a y la moda</p>
-            
-            <div class="founder-card">
-                <img src="josecorti.png" alt="JosÃ© Corti" class="founder-avatar" onerror="this.src='https://media.licdn.com/dms/image/C5603AQFk4-pIsHf6kg/profile-displayphoto-shrink_200_200/0/1517357993950?e=2147483647&v=beta&t=hx_KkQ5v4NkgFl8dR-e8U0n8z6vkoF5GkkkNeWc-xGw'">
-                <h3 class="founder-name">JosÃ© Corti</h3>
-                <p class="founder-title">Founder & CEO</p>
-                <p class="founder-description">
-                    Ingeniero apasionado por la IA y la innovaciÃ³n. Con aÃ±os de experiencia en tecnologÃ­a, 
-                    JosÃ© creÃ³ OutfitAI para democratizar el acceso a recomendaciones de moda inteligentes.
-                </p>
-                <a href="https://www.linkedin.com/in/jose-corti-b667b911/" target="_blank" class="social-link">
-                    ðŸ”— Conectar en LinkedIn
-                </a>
             </div>
         </div>
     </section>
 
     <section id="precios" class="pricing animate-on-scroll">
         <div class="pricing-container">
-            <h2>ðŸ’Ž Planes y Precios</h2>
-            <p class="pricing-subtitle">Elige el plan perfecto para ti. Comienza gratis y actualiza cuando quieras.</p>
+            <h2>
+                <span data-lang="es">💎 Planes y Precios</span>
+                <span data-lang="en">💎 Plans and Pricing</span>
+            </h2>
+            <p class="pricing-subtitle">
+                <span data-lang="es">Elige el plan perfecto para ti. Comienza gratis y actualiza cuando quieras.</span>
+                <span data-lang="en">Choose the perfect plan for you. Start free and upgrade whenever you want.</span>
+            </p>
             
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3 class="plan-name">Plan Gratuito</h3>
+                    <h3 class="plan-name">
+                        <span data-lang="es">Plan Gratuito</span>
+                        <span data-lang="en">Free Plan</span>
+                    </h3>
                     <div class="plan-price">$0</div>
-                    <div class="plan-period">Para siempre</div>
+                    <div class="plan-period">
+                        <span data-lang="es">Para siempre</span>
+                        <span data-lang="en">Forever</span>
+                    </div>
                     <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> 10 outfits por dÃ­a</li>
-                        <li><i class="fas fa-check"></i> Recomendaciones bÃ¡sicas</li>
-                        <li><i class="fas fa-check"></i> Guardado de favoritos</li>
-                        <li><i class="fas fa-check"></i> Acceso web y mÃ³vil</li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">10 outfits por día</span>
+                            <span data-lang="en">10 outfits per day</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">Recomendaciones básicas</span>
+                            <span data-lang="en">Basic recommendations</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">Guardado de favoritos</span>
+                            <span data-lang="en">Save favorites</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">Acceso web y móvil</span>
+                            <span data-lang="en">Web and mobile access</span>
+                        </li>
                     </ul>
-                    <button class="plan-button secondary" onclick="selectPlan('free')">Comenzar Gratis</button>
+                    <button class="plan-button secondary" onclick="selectPlan('free')">
+                        <span data-lang="es">Comenzar Gratis</span>
+                        <span data-lang="en">Start Free</span>
+                    </button>
                 </div>
                 
                 <div class="pricing-card featured">
-                    <h3 class="plan-name">Plan Premium</h3>
-                    <div class="plan-price">$5,000</div>
-                    <div class="plan-period">pesos chilenos / mes</div>
+                    <h3 class="plan-name">
+                        <span data-lang="es">Plan Premium</span>
+                        <span data-lang="en">Premium Plan</span>
+                    </h3>
+                    <div class="plan-price">
+                        <span data-lang="es">$5,000</span>
+                        <span data-lang="en">$6</span>
+                    </div>
+                    <div class="plan-period">
+                        <span data-lang="es">pesos chilenos / mes</span>
+                        <span data-lang="en">USD / month</span>
+                    </div>
                     <ul class="plan-features">
-                        <li><i class="fas fa-check"></i> ðŸš€ Outfits ilimitados</li>
-                        <li><i class="fas fa-check"></i> ðŸ§  IA que aprende de ti</li>
-                        <li><i class="fas fa-check"></i> ðŸ‘— AnÃ¡lisis de ocasiones</li>
-                        <li><i class="fas fa-check"></i> ðŸŽ¨ Paleta de colores personal</li>
-                        <li><i class="fas fa-check"></i> ðŸ“Š Analytics de tu estilo</li>
-                        <li><i class="fas fa-check"></i> âš¡ Soporte prioritario</li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">🚀 Outfits ilimitados</span>
+                            <span data-lang="en">🚀 Unlimited outfits</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">🧠 IA que aprende de ti</span>
+                            <span data-lang="en">🧠 AI that learns from you</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">👗 Análisis de ocasiones</span>
+                            <span data-lang="en">👗 Occasion analysis</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">🎨 Paleta de colores personal</span>
+                            <span data-lang="en">🎨 Personal color palette</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">📊 Analytics de tu estilo</span>
+                            <span data-lang="en">📊 Style analytics</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span data-lang="es">⚡ Soporte prioritario</span>
+                            <span data-lang="en">⚡ Priority support</span>
+                        </li>
                     </ul>
-                    <button class="plan-button primary" onclick="selectPlan('premium')">Elegir Premium</button>
+                    <button class="plan-button primary" onclick="selectPlan('premium')">
+                        <span data-lang="es">Elegir Premium</span>
+                        <span data-lang="en">Choose Premium</span>
+                    </button>
                 </div>
             </div>
             
             <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
-                Sin tarjeta de crÃ©dito â€¢ Cancela cuando quieras â€¢ Upgrade en cualquier momento
+                <span data-lang="es">Sin tarjeta de crédito • Cancela cuando quieras • Upgrade en cualquier momento</span>
+                <span data-lang="en">No credit card • Cancel anytime • Upgrade anytime</span>
             </p>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <p class="footer-note">Hecho con â¤ï¸ para revolucionar tu estilo</p>
-            <p class="footer-copyright">&copy; 2025 OutfitAI. Todos los derechos reservados.</p>
+            <p class="footer-note">
+                <span data-lang="es">Hecho con ❤️ para revolucionar tu estilo y salvar el planeta</span>
+                <span data-lang="en">Made with ❤️ to revolutionize your style and save the planet</span>
+            </p>
+            <p class="footer-copyright">
+                <span data-lang="es">&copy; 2025 I love reuse AI. Todos los derechos reservados.</span>
+                <span data-lang="en">&copy; 2025 I love reuse AI. All rights reserved.</span>
+            </p>
         </div>
     </footer>
 
     <script>
-        // ========================================
-        // ðŸ”§ CONFIGURACIÃ“N PARA DESARROLLADOR
-        // ========================================
-        // Esto lo configuras TÃš una sola vez:
-        // 1. Ve a: https://console.developers.google.com/
-        // 2. Crea proyecto â†’ Habilita "Google Identity API" 
-        // 3. Crea OAuth 2.0 Client ID
-        // 4. Agrega tu dominio Netlify a "Authorized origins"
-        // 5. Reemplaza el CLIENT_ID abajo
-        // 
-        // Los USUARIOS solo hacen clic y se autentican automÃ¡ticamente
-        // ========================================
+        // Language switching functionality
+        let currentLang = 'es';
 
-        // Estado global de la aplicaciÃ³n
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+            
+            // Update page title
+            if (lang === 'en') {
+                document.title = "I love reuse AI - Maximize Your Wardrobe, Minimize Your Environmental Impact";
+            } else {
+                document.title = "I love reuse AI - Maximiza tu Guardarropa, Minimiza tu Impacto Ambiental";
+            }
+        }
+
+        // Estado global de la aplicación
         let isLoggedIn = false;
         let currentUser = null;
-        let uploadedFiles = {
-            top: [],
-            bottom: [],
-            shoes: []
-        };
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1352,7 +1402,7 @@
 
         // Update active nav pill
         function updateActiveNav() {
-            const sections = ['inicio', 'que-hacemos', 'nosotros', 'precios'];
+            const sections = ['inicio', 'impacto-ambiental', 'que-hacemos', 'equipo', 'precios'];
             const navPills = document.querySelectorAll('.nav-pill');
             
             sections.forEach((section, index) => {
@@ -1391,21 +1441,19 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(102, 126, 234, 0.3)';
+                header.style.background = 'rgba(76, 175, 80, 0.3)';
             } else {
-                header.style.background = 'rgba(102, 126, 234, 0.1)';
+                header.style.background = 'rgba(76, 175, 80, 0.1)';
             }
         });
 
         // Google OAuth Configuration
-        // âš ï¸ CONFIGURAR UNA SOLA VEZ COMO DESARROLLADOR
-        // Este CLIENT_ID lo configuras TÃš, no cada usuario
-        const GOOGLE_CLIENT_ID = '326940877598-ko13n1qcqkkugkoo6gu2n1avs46al09p.apps.googleusercontent.com'; // ðŸ“ CLIENT_ID de ejemplo - reemplazar con el tuyo
+        const GOOGLE_CLIENT_ID = '326940877598-ko13n1qcqkkugkoo6gu2n1avs46al09p.apps.googleusercontent.com';
 
         // Initialize Google OAuth when page loads
         function initializeGoogleAuth() {
             if (typeof google === 'undefined') {
-                console.warn('âš ï¸ Google Identity Services no cargado');
+                console.warn('⚠️ Google Identity Services no cargado');
                 return;
             }
 
@@ -1416,7 +1464,7 @@
                 cancel_on_tap_outside: true
             });
 
-            // Preparar el botÃ³n de login
+            // Preparar el botón de login
             const loginBtn = document.getElementById('loginBtn');
             loginBtn.onclick = () => triggerGoogleLogin();
         }
@@ -1439,13 +1487,18 @@
                 
                 isLoggedIn = true;
                 updateAuthUI();
-                showUploadSection();
                 
-                showNotification(`Â¡Hola ${currentUser.given_name || currentUser.name}! ðŸŽ‰`, 'success');
+                const welcomeMsg = currentLang === 'es' 
+                    ? `¡Hola ${currentUser.given_name || currentUser.name}! 🎉`
+                    : `Hello ${currentUser.given_name || currentUser.name}! 🎉`;
+                showNotification(welcomeMsg, 'success');
                 
             } catch (error) {
                 console.error('Error procesando login:', error);
-                showNotification('âŒ Error al procesar el login', 'error');
+                const errorMsg = currentLang === 'es' 
+                    ? '⚠️ Error al procesar el login'
+                    : '⚠️ Error processing login';
+                showNotification(errorMsg, 'error');
                 // Fallback a modo demo
                 loginDemo();
             }
@@ -1460,10 +1513,10 @@
             }
 
             try {
-                // Esto abre el popup de Google automÃ¡ticamente
+                // Esto abre el popup de Google automáticamente
                 google.accounts.id.prompt((notification) => {
                     if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                        // Si no se muestra automÃ¡ticamente, crear botÃ³n manual
+                        // Si no se muestra automáticamente, crear botón manual
                         createGoogleButton();
                     }
                 });
@@ -1473,12 +1526,12 @@
             }
         }
 
-        // Crear botÃ³n de Google manual como fallback
+        // Crear botón de Google manual como fallback
         function createGoogleButton() {
             const loginBtn = document.getElementById('loginBtn');
             const originalHTML = loginBtn.innerHTML;
             
-            // Temporalmente reemplazar con botÃ³n de Google
+            // Temporalmente reemplazar con botón de Google
             const tempDiv = document.createElement('div');
             loginBtn.parentNode.insertBefore(tempDiv, loginBtn);
             loginBtn.style.display = 'none';
@@ -1491,7 +1544,7 @@
                 logo_alignment: 'left'
             });
             
-            // Restaurar despuÃ©s de 30 segundos si no se usa
+            // Restaurar después de 30 segundos si no se usa
             setTimeout(() => {
                 if (!isLoggedIn) {
                     tempDiv.remove();
@@ -1507,32 +1560,38 @@
             currentUser = {
                 name: 'Usuario Demo',
                 given_name: 'Usuario',
-                email: 'demo@aitrustyou.com',
+                email: 'demo@ilovereuse.ai',
                 picture: 'https://lh3.googleusercontent.com/a/default-user=s96-c'
             };
             
             isLoggedIn = true;
             updateAuthUI();
-            showUploadSection();
             
-            showNotification('âœ… Modo demo activado', 'success');
+            const demoMsg = currentLang === 'es' 
+                ? '✅ Modo demo activado'
+                : '✅ Demo mode activated';
+            showNotification(demoMsg, 'success');
         }
 
-        // Main login function (llamada desde el botÃ³n)
+        // Main login function (llamada desde el botón)
         async function loginWithGoogle() {
             const button = document.getElementById('loginBtn');
             const originalText = button.innerHTML;
             
-            button.innerHTML = '<span class="loading"></span> Conectando...';
+            const loadingText = currentLang === 'es' 
+                ? '<span class="loading"></span> Conectando...'
+                : '<span class="loading"></span> Connecting...';
+            
+            button.innerHTML = loadingText;
             button.disabled = true;
             
-            // PequeÃ±a pausa para mostrar loading
+            // Pequeña pausa para mostrar loading
             await new Promise(resolve => setTimeout(resolve, 500));
             
             // Activar Google login
             triggerGoogleLogin();
             
-            // Restaurar botÃ³n despuÃ©s de un momento
+            // Restaurar botón después de un momento
             setTimeout(() => {
                 if (!isLoggedIn) {
                     button.innerHTML = originalText;
@@ -1544,11 +1603,12 @@
         function logout() {
             isLoggedIn = false;
             currentUser = null;
-            uploadedFiles = { top: [], bottom: [], shoes: [] };
             updateAuthUI();
-            hideUploadSection();
-            clearResults();
-            showNotification('ðŸ‘‹ SesiÃ³n cerrada', 'info');
+            
+            const logoutMsg = currentLang === 'es' 
+                ? '👋 Sesión cerrada'
+                : '👋 Session closed';
+            showNotification(logoutMsg, 'info');
         }
 
         function updateAuthUI() {
@@ -1566,375 +1626,26 @@
             }
         }
 
-        function showUploadSection() {
-            document.getElementById('loginRequired').style.display = 'none';
-            document.getElementById('uploadArea').style.display = 'block';
-            document.querySelector('.upload-section').classList.add('active');
-        }
-
-        function hideUploadSection() {
-            document.getElementById('loginRequired').style.display = 'block';
-            document.getElementById('uploadArea').style.display = 'none';
-            document.querySelector('.upload-section').classList.remove('active');
-        }
-
-        // FunciÃ³n para detectar si una prenda/zapato necesita rotaciÃ³n inteligente
-        function needsRotationForClothing(img) {
-            const aspectRatio = img.width / img.height;
-            
-            // Si ya es vertical (height > width), no rotar
-            if (aspectRatio <= 1) {
-                return false;
-            }
-            
-            // Si es muy horizontal (panorÃ¡mica), probablemente no es una prenda individual
-            if (aspectRatio > 3) {
-                return false;
-            }
-            
-            // Si es moderadamente horizontal (1.2 a 3), podrÃ­a ser una prenda que se ve mejor vertical
-            if (aspectRatio > 1.2 && aspectRatio <= 3) {
-                return true;
-            }
-            
-            // Si es ligeramente horizontal (1 a 1.2), mantener como estÃ¡
-            return false;
-        }
-
-        // FunciÃ³n para rotaciÃ³n inteligente de prendas
-        function intelligentClothingRotation(file) {
-            return new Promise((resolve) => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                const img = new Image();
-                
-                img.onload = function() {
-                    const shouldRotate = needsRotationForClothing(img);
-                    
-                    if (shouldRotate) {
-                        // Rotar 90 grados para hacer vertical
-                        canvas.width = img.height;
-                        canvas.height = img.width;
-                        ctx.translate(canvas.width / 2, canvas.height / 2);
-                        ctx.rotate(Math.PI / 2);
-                        ctx.drawImage(img, -img.width / 2, -img.height / 2);
-                        console.log(`ðŸ”„ Imagen rotada de ${img.width}x${img.height} a ${canvas.width}x${canvas.height}`);
-                    } else {
-                        // Mantener orientaciÃ³n original
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        ctx.drawImage(img, 0, 0);
-                        console.log(`âœ… Imagen mantenida en ${img.width}x${img.height}`);
-                    }
-                    
-                    canvas.toBlob(resolve, 'image/jpeg', 0.9);
-                };
-                
-                img.src = URL.createObjectURL(file);
-            });
-        }
-
-        // ConfiguraciÃ³n de lÃ­mites por categorÃ­a
-        const FILE_LIMITS = {
-            top: 3,
-            bottom: 3,
-            shoes: 5  // Hasta 5 pares de zapatos
-        };
-
-        // File upload handling with intelligent rotation and limits
-        async function handleFileUpload(type, input) {
-            const files = Array.from(input.files);
-            const preview = document.getElementById(`${type}-preview`);
-            const currentCount = uploadedFiles[type].length;
-            const maxFiles = FILE_LIMITS[type];
-            
-            // Verificar lÃ­mite de archivos
-            const availableSlots = maxFiles - currentCount;
-            if (files.length > availableSlots) {
-                showNotification(`âš ï¸ Solo puedes subir ${availableSlots} foto${availableSlots > 1 ? 's' : ''} mÃ¡s de ${type}. MÃ¡ximo: ${maxFiles}`, 'error');
-                return;
-            }
-            
-            console.log(`ðŸ“¤ Procesando ${files.length} archivo(s) para ${type}`);
-            
-            for (let file of files) {
-                try {
-                    // Validar que es una imagen
-                    if (!file.type.startsWith('image/')) {
-                        showNotification('âŒ Solo se permiten archivos de imagen', 'error');
-                        continue;
-                    }
-                    
-                    // Validar tamaÃ±o (mÃ¡ximo 10MB)
-                    if (file.size > 10 * 1024 * 1024) {
-                        showNotification('âŒ La imagen es muy grande. MÃ¡ximo 10MB', 'error');
-                        continue;
-                    }
-                    
-                    // Aplicar rotaciÃ³n inteligente
-                    const processedFile = await intelligentClothingRotation(file);
-                    
-                    // Crear preview
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const imageContainer = document.createElement('div');
-                        imageContainer.style.position = 'relative';
-                        imageContainer.style.display = 'inline-block';
-                        imageContainer.style.margin = '0.25rem';
-                        
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'preview-image';
-                        img.title = `${type} - ${file.name}`;
-                        
-                        const removeBtn = document.createElement('button');
-                        removeBtn.className = 'remove-image';
-                        removeBtn.innerHTML = 'Ã—';
-                        removeBtn.title = 'Eliminar imagen';
-                        removeBtn.onclick = () => {
-                            imageContainer.remove();
-                            const fileIndex = uploadedFiles[type].indexOf(processedFile);
-                            if (fileIndex > -1) {
-                                uploadedFiles[type].splice(fileIndex, 1);
-                            }
-                            updateUploadLabel(type);
-                        };
-                        
-                        imageContainer.appendChild(img);
-                        imageContainer.appendChild(removeBtn);
-                        preview.appendChild(imageContainer);
-                    };
-                    reader.readAsDataURL(processedFile);
-                    
-                    // Agregar archivo procesado al array
-                    uploadedFiles[type].push(processedFile);
-                    
-                } catch (error) {
-                    console.error('Error procesando archivo:', error);
-                    showNotification(`âŒ Error procesando ${file.name}`, 'error');
-                }
-            }
-            
-            updateUploadLabel(type);
-            
-            // AnimaciÃ³n del contenedor
-            const uploadItem = input.closest('.upload-item');
-            uploadItem.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                uploadItem.style.transform = 'scale(1)';
-            }, 300);
-            
-            // Limpiar el input para permitir resubir las mismas fotos
-            input.value = '';
-        }
-
-        function updateUploadLabel(type) {
-            const label = document.querySelector(`label[for="${type}-upload"]`);
-            const count = uploadedFiles[type].length;
-            const maxFiles = FILE_LIMITS[type];
-            
-            if (count > 0) {
-                const remaining = maxFiles - count;
-                label.innerHTML = `âœ… ${count}/${maxFiles} foto${count > 1 ? 's' : ''} cargada${count > 1 ? 's' : ''}`;
-                label.style.background = 'linear-gradient(135deg, #00bcd4, #0097a7)';
-                
-                // Cambiar texto si llegÃ³ al lÃ­mite
-                if (remaining === 0) {
-                    label.innerHTML = `ðŸŽ¯ ${count}/${maxFiles} - Â¡Completo!`;
-                    label.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
-                }
-            } else {
-                const typeText = type === 'top' ? 'Superiores' : 
-                                type === 'bottom' ? 'Inferiores' : 'Zapatos';
-                label.innerHTML = `ðŸ“¤ Subir ${typeText} (mÃ¡x ${maxFiles})`;
-                label.style.background = 'linear-gradient(135deg, #ff9800, #f57c00)';
-            }
-        }
-
-        // Get AI recommendation from your backend with intelligent file selection
-        async function getRecommendation() {
-            if (!isLoggedIn) {
-                showNotification('ðŸ” Necesitas iniciar sesiÃ³n primero', 'error');
-                return;
-            }
-
-            // Validar que hay al menos una imagen en cada categorÃ­a
-            if (uploadedFiles.top.length === 0 || uploadedFiles.bottom.length === 0 || uploadedFiles.shoes.length === 0) {
-                showNotification('ðŸ“¸ Necesitas subir al menos una foto de cada categorÃ­a', 'error');
-                return;
-            }
-
-            const button = document.getElementById('generateBtn');
-            const originalText = button.innerHTML;
-            
-            button.innerHTML = '<span class="loading"></span> La IA estÃ¡ analizando...';
-            button.disabled = true;
-
-            try {
-                // Limpiar resultados anteriores
-                clearResults();
-                
-                // Preparar FormData - enviar la primera imagen de cada categorÃ­a
-                const formData = new FormData();
-                
-                // Mostrar al usuario quÃ© imÃ¡genes se estÃ¡n enviando
-                console.log('ðŸ“¤ Enviando al backend:');
-                console.log(`- Top: imagen 1 de ${uploadedFiles.top.length}`);
-                console.log(`- Bottom: imagen 1 de ${uploadedFiles.bottom.length}`);
-                console.log(`- Shoes: imagen 1 de ${uploadedFiles.shoes.length}`);
-                
-                formData.append('top', uploadedFiles.top[0], 'top.jpg');
-                formData.append('bottom', uploadedFiles.bottom[0], 'bottom.jpg');
-                formData.append('shoes', uploadedFiles.shoes[0], 'shoes.jpg');
-
-                // Debug informaciÃ³n
-                console.log('ðŸ“Š EstadÃ­sticas de archivos:');
-                console.log(`Total archivos cargados: ${uploadedFiles.top.length + uploadedFiles.bottom.length + uploadedFiles.shoes.length}`);
-                
-                // Mostrar notificaciÃ³n sobre quÃ© se estÃ¡ analizando
-                if (uploadedFiles.shoes.length > 1) {
-                    showNotification(`ðŸ“Š Analizando con la primera imagen de cada categorÃ­a (tienes ${uploadedFiles.shoes.length} zapatos cargados)`, 'info');
-                }
-
-                // Llamar a tu backend real con timeout
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 30000);
-
-                const response = await fetch('https://outfit-recommender.fly.dev/recommend', {
-                    method: 'POST',
-                    body: formData,
-                    signal: controller.signal,
-                    headers: {
-                        // No agregar Content-Type, el browser lo maneja automÃ¡ticamente con FormData
-                    }
-                });
-
-                clearTimeout(timeoutId);
-
-                console.log('ðŸ“¡ Response status:', response.status);
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('âŒ Error response:', errorText);
-                    throw new Error(`Error ${response.status}: ${errorText}`);
-                }
-
-                const data = await response.json();
-                console.log('âœ… Backend response:', data);
-                
-                // Validar que la respuesta tiene el formato esperado
-                if (!data.results || !Array.isArray(data.results)) {
-                    throw new Error('Formato de respuesta invÃ¡lido del backend');
-                }
-                
-                // Mostrar resultados ordenados
-                displayRecommendations(data);
-                showNotification('ðŸŽ‰ Â¡Recomendaciones generadas!', 'success');
-                
-            } catch (error) {
-                console.error('ðŸ’¥ Error completo:', error);
-                
-                if (error.name === 'AbortError') {
-                    showNotification('â±ï¸ Timeout: El servidor tardÃ³ demasiado en responder', 'error');
-                } else if (error.message.includes('Failed to fetch')) {
-                    showNotification('ðŸŒ Error de conexiÃ³n: Revisa tu internet o el servidor estÃ¡ caÃ­do', 'error');
-                } else {
-                    showNotification(`ðŸ˜” Error: ${error.message}`, 'error');
-                }
-            } finally {
-                button.innerHTML = originalText;
-                button.disabled = false;
-            }
-        }
-
-        function displayRecommendations(data) {
-            const resultDiv = document.getElementById('result');
-            const bestIndex = data.best_index;
-            
-            // Ordenar resultados por score descendente
-            const sortedResults = [...data.results].sort((a, b) => b.score - a.score);
-            
-            let html = '';
-            
-            sortedResults.forEach((result, index) => {
-                const isBest = result.index === bestIndex;
-                const percentage = (result.score * 100).toFixed(1);
-                
-                html += `
-                    <div class="recommendation-card ${isBest ? 'best' : ''}">
-                        <div class="recommendation-header">
-                            <h3 class="recommendation-title">
-                                ${isBest ? 'â­ ' : ''}CombinaciÃ³n ${result.combination}
-                            </h3>
-                            <div class="recommendation-score">${percentage}%</div>
-                        </div>
-                        <div class="recommendation-content">
-                            <p><strong>ðŸŽ¯ PuntuaciÃ³n:</strong> ${percentage}% de compatibilidad</p>
-                            <p><strong>ðŸ‘” Estilo:</strong> ${result.formality === 'formal' ? 'Formal' : 'Casual'}</p>
-                            <p><strong>ðŸ’¡ RecomendaciÃ³n:</strong> ${isBest ? 'Esta es tu mejor combinaciÃ³n. Perfecta para destacar con estilo.' : 'Una excelente opciÃ³n alternativa para diferentes ocasiones.'}</p>
-                            ${isBest ? '<p><strong>âœ¨ Tip especial:</strong> Esta combinaciÃ³n ha sido seleccionada como la Ã³ptima por nuestra IA.</p>' : ''}
-                        </div>
-                        <div class="recommendation-buttons">
-                            <button class="hero-button" onclick="saveOutfit(${result.index})" style="margin: 0;">
-                                ðŸ’– Guardar
-                            </button>
-                            <button class="hero-button" onclick="shareOutfit(${result.index})" style="margin: 0; background: linear-gradient(135deg, #667eea, #764ba2);">
-                                ðŸ“¤ Compartir
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            resultDiv.innerHTML = html;
-            resultDiv.classList.add('active');
-            
-            // Scroll hacia los resultados
-            setTimeout(() => {
-                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        }
-
-        function clearResults() {
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '';
-            resultDiv.classList.remove('active');
-        }
-
         // Plan selection
         function selectPlan(plan) {
             const planNames = {
-                'free': 'Plan Gratuito',
-                'premium': 'Plan Premium'
+                'free': currentLang === 'es' ? 'Plan Gratuito' : 'Free Plan',
+                'premium': currentLang === 'es' ? 'Plan Premium' : 'Premium Plan'
             };
             
             if (plan === 'free') {
-                showNotification(`âœ… Â¡Genial! Ya puedes usar ${planNames[plan]}`, 'success');
+                const msg = currentLang === 'es' 
+                    ? `✅ ¡Genial! Ya puedes usar ${planNames[plan]}`
+                    : `✅ Great! You can now use ${planNames[plan]}`;
+                showNotification(msg, 'success');
                 setTimeout(() => {
-                    document.getElementById('upload').scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('impacto-ambiental').scrollIntoView({ behavior: 'smooth' });
                 }, 1500);
             } else {
-                showNotification(`ðŸš€ ${planNames[plan]} seleccionado. Redirigiendo a pago...`, 'success');
-            }
-        }
-
-        // Save and share functions
-        function saveOutfit(combinationIndex) {
-            showNotification(`ðŸ’– CombinaciÃ³n ${combinationIndex} guardada en tu colecciÃ³n`, 'success');
-        }
-
-        function shareOutfit(combinationIndex) {
-            const shareData = {
-                title: 'ðŸ‘• Mi outfit con OutfitAI',
-                text: `Â¡Mira esta increÃ­ble combinaciÃ³n ${combinationIndex} que creÃ© con IA!`,
-                url: window.location.href
-            };
-            
-            if (navigator.share) {
-                navigator.share(shareData);
-            } else {
-                navigator.clipboard.writeText(shareData.url);
-                showNotification('ðŸ“‹ Enlace copiado para compartir', 'success');
+                const msg = currentLang === 'es' 
+                    ? `🚀 ${planNames[plan]} seleccionado. Redirigiendo a pago...`
+                    : `🚀 ${planNames[plan]} selected. Redirecting to payment...`;
+                showNotification(msg, 'success');
             }
         }
 
@@ -1960,27 +1671,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateAuthUI();
             
-            // Initialize upload labels with limits
-            Object.keys(FILE_LIMITS).forEach(type => {
-                updateUploadLabel(type);
-            });
-            
             // Initialize Google OAuth with delay to ensure script loads
             setTimeout(() => {
                 initializeGoogleAuth();
             }, 1000);
             
-            // Check if user clicks on upload section without being logged in
-            document.querySelector('a[href="#upload"]').addEventListener('click', () => {
-                if (!isLoggedIn) {
-                    setTimeout(() => {
-                        showNotification('ðŸ” Inicia sesiÃ³n para crear outfits', 'info');
-                    }, 500);
-                }
-            });
-            
             setTimeout(() => {
-                showNotification('ðŸ‘‹ Â¡Bienvenido a OutfitAI! Inicia sesiÃ³n para comenzar', 'success');
+                const msg = currentLang === 'es' 
+                    ? '🌱 ¡Bienvenido a I love reuse AI! Una app para tu guardarropa y el planeta'
+                    : '🌱 Welcome to I love reuse AI! An app for your wardrobe and the planet';
+                showNotification(msg, 'success');
             }, 2000);
         });
     </script>
