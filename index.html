@@ -3,1946 +3,963 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I love reuse AI - Maximiza tu Guardarropa, Minimiza tu Impacto Ambiental</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>I Love Reuse AI - Maximiza tu ropa, minimiza tu impacto ambiental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #4CAF50;
+            --dark-green: #1B5E20;
+            --accent-blue: #2196F3;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --medium-gray: #E0E0E0;
+            --dark-gray: #424242;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
-
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--white);
+            color: var(--dark-gray);
             line-height: 1.6;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 50%, #2E7D32 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            color: #ffffff;
-            min-height: 100vh;
         }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
+        
+        .container {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
-        .floating-item {
-            position: absolute;
-            font-size: 2.5rem;
-            opacity: 0.2;
-            animation: float 25s infinite linear;
-        }
-
-        .floating-item:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .floating-item:nth-child(2) { left: 25%; animation-delay: 5s; }
-        .floating-item:nth-child(3) { left: 65%; animation-delay: 10s; }
-        .floating-item:nth-child(4) { left: 85%; animation-delay: 15s; }
-        .floating-item:nth-child(5) { left: 45%; animation-delay: 20s; }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
-        }
-
+        
+        /* Header y Navegación */
         header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
-            top: 0;
             width: 100%;
-            padding: 1rem 5%;
-            background: rgba(46, 125, 50, 0.1);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
         }
-
+        
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 15px 0;
         }
-
-        .nav-center {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-left: auto;
-            margin-right: 2rem;
-        }
-
+        
         .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-pills {
-            display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            gap: 0.5rem;
-        }
-
-        .nav-pill {
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .nav-pill:hover, .nav-pill.active {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .language-selector {
-            display: flex;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            overflow: hidden;
-        }
-
-        .lang-btn {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: none;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .auth-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .login-btn {
-            background: white;
-            color: #333;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
+            color: var(--primary-green);
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            font-size: 0.9rem;
         }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        
+        .nav-menu a i {
+            margin-right: 8px;
+            font-size: 1.1rem;
         }
-
-        .user-info {
-            display: none;
+        
+        .nav-menu a:hover {
+            color: var(--primary-green);
+        }
+        
+        .auth-section {
+            display: flex;
             align-items: center;
-            gap: 1rem;
         }
-
-        .user-avatar {
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .user-profile img {
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            border: 2px solid white;
+            margin-right: 10px;
         }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            padding: 6rem 2rem 4rem;
-        }
-
-        .hero-content {
-            max-width: 700px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-emoji {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-            line-height: 1.2;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-            font-weight: 600;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        .hero-button {
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
+        
+        .google-login {
+            background-color: var(--white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 4rem;
-            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .google-login i {
+            color: #DB4437;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .google-login:hover {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .hero-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 188, 212, 0.4);
+        /* Google Sign In Button */
+        #g_id_onload {
+            display: none;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+        .g_id_signin {
+            margin-left: 15px;
+        }
+        
+        /* Secciones generales */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.9), rgba(33, 150, 243, 0.8)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 150px 0 100px;
+            margin-top: 70px;
+        }
+        
+        .hero-content {
             max-width: 800px;
             margin: 0 auto;
         }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem 1rem;
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            text-align: center;
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #00bcd4;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 1rem;
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             opacity: 0.9;
-            font-weight: 500;
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
         }
-
-        .upload-section {
-            padding: 4rem 5%;
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.05);
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
-        }
-
-        .upload-container {
-            max-width: 1000px;
-            margin: 0 auto;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
             text-align: center;
         }
-
-        .upload-area {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            padding: 4rem 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
+        
+        .stat-item h3 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
         }
-
-        .upload-area:hover {
-            border-color: #00bcd4;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .upload-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .upload-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .upload-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .upload-item i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #00bcd4;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .file-label {
-            display: block;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            border-radius: 25px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .file-label:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
-        }
-
-        .file-label.multiple {
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-        }
-
-        .preview-area {
-            margin-top: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 0.5rem;
-            border-radius: 10px;
-        }
-
-        .preview-image {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 2px solid #00bcd4;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .preview-image:hover {
-            transform: scale(1.05);
-            border-color: #0097a7;
-            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
-        }
-
-        .remove-image {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff5252;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .results-section {
-            margin-top: 3rem;
-            display: none;
-        }
-
-        .results-section.active {
-            display: block;
-        }
-
-        .recommendation-card {
-            background: rgba(0, 188, 212, 0.1);
-            border: 2px solid #00bcd4;
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .recommendation-card.best {
-            background: rgba(255, 193, 7, 0.15);
-            border-color: #ffc107;
-            position: relative;
-        }
-
-        .recommendation-card.best::before {
-            content: '⭐';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: #ffc107;
-            color: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        
+        .stat-item p {
             font-size: 1rem;
-            font-weight: bold;
+            margin: 0;
         }
-
-        .recommendation-header {
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Sección de Impacto Ambiental */
+        .impact-section {
+            background-color: var(--light-gray);
+        }
+        
+        .impact-bars {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .impact-item {
+            margin-bottom: 25px;
+        }
+        
+        .impact-label {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 8px;
         }
-
-        .recommendation-title {
-            color: #00bcd4;
-            font-size: 1.5rem;
-            font-weight: 700;
+        
+        .impact-label span {
+            font-weight: 500;
         }
-
-        .recommendation-score {
-            background: #00bcd4;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .recommendation-content {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
+        
+        .impact-bar {
+            height: 30px;
+            background-color: var(--medium-gray);
             border-radius: 15px;
-            text-align: left;
-            line-height: 1.8;
+            overflow: hidden;
+            position: relative;
         }
-
-        .recommendation-buttons {
-            margin-top: 2rem;
+        
+        .impact-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--light-green), var(--primary-green));
+            border-radius: 15px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .impact-value {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Sección Cómo Funciona */
+        .how-works {
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .work-step {
+            flex: 0 0 calc(33.333% - 30px);
+            margin: 15px;
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .work-step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .work-step i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        
+        .work-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+        
+        .work-step p {
+            color: var(--dark-gray);
+        }
+        
+        /* Sección de Equipo */
+        .team-section {
+            background-color: var(--light-gray);
+        }
+        
+        .team-members {
+            display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            gap: 30px;
         }
-
-        .environmental-impact {
-            padding: 6rem 5% 4rem;
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .impact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .impact-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem 2rem;
-            border-radius: 25px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .impact-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        .impact-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            color: #00bcd4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .impact-stats {
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-
-        .impact-stat {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
+        
+        .team-member {
+            background-color: var(--white);
             border-radius: 10px;
-            border-left: 4px solid #00bcd4;
-        }
-
-        .impact-stat strong {
-            color: #00bcd4;
-            font-weight: 700;
-        }
-
-        .your-impact {
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            margin-top: 2rem;
-        }
-
-        .your-impact h3 {
-            color: white;
-        }
-
-        .your-impact .impact-stat {
-            border-left-color: white;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .your-impact .impact-stat strong {
-            color: white;
-        }
-
-        .features {
-            padding: 6rem 5% 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 350px;
             text-align: center;
         }
-
-        .features h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
+        
+        .member-info {
+            padding: 20px;
         }
-
-        .features-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        
+        .member-info h3 {
+            font-size: 1.3rem;
+            color: var(--dark-green);
+            margin-bottom: 5px;
         }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        
+        .member-info .role {
+            color: var(--accent-blue);
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
         }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            text-align: center;
+        
+        .member-info p {
+            color: var(--dark-gray);
         }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: #00bcd4;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .feature-card p {
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        .team {
-            padding: 6rem 5% 4rem;
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .team-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .team h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            color: white;
+        
+        /* Sección de Precios */
+        .pricing-plans {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 1rem;
+            flex-wrap: wrap;
+            gap: 30px;
         }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .member-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem 2rem;
-            border-radius: 30px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
+        
+        .pricing-plan {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 300px;
             text-align: center;
+            transition: transform 0.3s;
         }
-
-        .member-card:hover {
+        
+        .pricing-plan:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
         }
-
-        .member-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
+        
+        .plan-header {
+            padding: 30px 20px;
+            background-color: var(--primary-green);
+            color: var(--white);
         }
-
-        .member-title {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-            color: #00bcd4;
-            font-weight: 600;
+        
+        .plan-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
-
-        .member-profession {
-            font-size: 0.95rem;
-            opacity: 0.7;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .member-description {
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        .pricing {
-            padding: 6rem 5% 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .pricing-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .pricing h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .pricing-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 4rem;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem 2rem;
-            border-radius: 25px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border: 2px solid #00bcd4;
-            transform: scale(1.05);
-        }
-
-        .pricing-card.featured::before {
-            content: '🚀';
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: #00bcd4;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-
-        .pricing-card.featured:hover {
-            transform: translateY(-10px) scale(1.05);
-        }
-
-        .plan-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
+        
         .plan-price {
             font-size: 2.5rem;
-            font-weight: 900;
-            color: #00bcd4;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
         }
-
-        .plan-period {
-            opacity: 0.7;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
+        
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
         }
-
+        
         .plan-features {
+            padding: 30px 20px;
             list-style: none;
-            margin-bottom: 2rem;
-            text-align: left;
         }
-
+        
         .plan-features li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 0.95rem;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--medium-gray);
         }
-
-        .plan-features li i {
-            color: #00bcd4;
-            font-size: 1rem;
+        
+        .plan-features li:last-child {
+            border-bottom: none;
         }
-
+        
         .plan-button {
-            width: 100%;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
+            display: block;
+            margin: 0 20px 20px;
+            padding: 12px;
+            background-color: var(--accent-blue);
+            color: var(--white);
+            border-radius: 5px;
+            text-decoration: none;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
+            transition: background-color 0.3s;
         }
-
-        .plan-button.primary {
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-            color: white;
-        }
-
-        .plan-button.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
+        
         .plan-button:hover {
-            transform: translateY(-2px);
+            background-color: var(--primary-green);
         }
-
-        footer {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 3rem 5% 2rem;
-            text-align: center;
+        
+        /* Sección de Resultados de IA */
+        .results-section {
+            background-color: var(--light-gray);
+        }
+        
+        .ai-results {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .result-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 280px;
             position: relative;
-            z-index: 2;
-            backdrop-filter: blur(20px);
         }
-
+        
+        .result-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: gold;
+            color: var(--dark-gray);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        .result-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .result-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .result-percentage {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .result-description {
+            color: var(--dark-gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+        
         .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
-
-        .footer-note {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
         }
-
-        .footer-copyright {
-            opacity: 0.6;
-            font-size: 0.85rem;
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
         }
-
-        @media (max-width: 768px) {
-            .nav-center {
-                flex-direction: column;
-                gap: 1rem;
-                margin-left: 0;
-                margin-right: 0;
-            }
-            
-            .nav-pills {
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-blue);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: var(--light-gray);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent-blue);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-menu {
                 display: none;
             }
-
+            
+            .work-step {
+                flex: 0 0 calc(50% - 30px);
+            }
+        }
+        
+        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
-
-            .hero-description {
-                font-size: 1rem;
+            
+            .work-step {
+                flex: 0 0 100%;
             }
-
-            .features h2,
-            .pricing h2,
-            .team h2 {
-                font-size: 2rem;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .features-grid,
-            .pricing-grid,
-            .team-grid,
-            .impact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-card.featured {
-                transform: none;
-            }
-
-            .pricing-card.featured:hover {
-                transform: translateY(-10px);
+            
+            .footer-column {
+                flex: 0 0 100%;
             }
         }
 
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #ffffff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            color: white;
-            font-weight: 600;
-            z-index: 10000;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: slideInRight 0.3s ease;
-        }
-
-        .notification.success {
-            background: linear-gradient(135deg, #00bcd4, #0097a7);
-        }
-
-        .notification.error {
-            background: linear-gradient(135deg, #f44336, #d32f2f);
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
-        [data-lang]:not([data-lang="es"]) {
-            display: none;
-        }
-
-        html[lang="en"] [data-lang="es"] {
-            display: none;
-        }
-
-        html[lang="en"] [data-lang="en"] {
-            display: initial;
-        }
-
-        html[lang="es"] [data-lang="es"] {
-            display: initial;
-        }
-
-        html[lang="es"] [data-lang="en"] {
-            display: none;
+        /* Google Sign In Button */
+        .g_id_signin {
+            margin-left: 15px;
+            border-radius: 4px;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
-    <div class="floating-elements">
-        <div class="floating-item">👕</div>
-        <div class="floating-item">👗</div>
-        <div class="floating-item">👠</div>
-        <div class="floating-item">🧥</div>
-        <div class="floating-item">👖</div>
+    <!-- Google Identity Services -->
+    <div id="g_id_onload"
+         data-client_id="326940877598-ko13n1qcqkkugkoo6gu2n1avs46al09p.apps.googleusercontent.com"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-callback="handleGoogleSignIn"
+         data-auto_prompt="false">
     </div>
 
+    <!-- Header y Navegación -->
     <header>
-        <nav>
-            <div class="logo">
-                <span data-lang="es">💚 I love reuse AI</span>
-                <span data-lang="en">💚 I love reuse AI</span>
-            </div>
-            <div class="nav-center">
-                <div class="nav-pills">
-                    <a href="#inicio" class="nav-pill active">
-                        <span data-lang="es">🏠 Inicio</span>
-                        <span data-lang="en">🏠 Home</span>
-                    </a>
-                    <a href="#impacto-ambiental" class="nav-pill">
-                        <span data-lang="es">🌍 Impacto Ambiental</span>
-                        <span data-lang="en">🌍 Environmental Impact</span>
-                    </a>
-                    <a href="#que-hacemos" class="nav-pill">
-                        <span data-lang="es">🎯 Qué Hacemos</span>
-                        <span data-lang="en">🎯 What We Do</span>
-                    </a>
-                    <a href="#equipo" class="nav-pill">
-                        <span data-lang="es">👥 Equipo</span>
-                        <span data-lang="en">👥 Team</span>
-                    </a>
-                    <a href="#precios" class="nav-pill">
-                        <span data-lang="es">💎 Precios</span>
-                        <span data-lang="en">💎 Pricing</span>
-                    </a>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjMkU4QjU3Ii8+PHBhdGggZD0iTTcwIDEzMEgxMzBWNzBINzBWMTMwWiIgZmlsbD0iI0UwRTBFMCIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjcwIiByPSIyMCIgZmlsbD0iIzIxOTZGMiIvPjxjaXJjbGUgY3g9IjcwIiBjeT0iMTAwIiByPSIyMCIgZmlsbD0iIzIxOTZGMiIvPjxjaXJjbGUgY3g9IjEzMCIgY3k9IjEwMCIgcj0iMjAiIGZpbGw9IiMyMTk2RjIiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMzAiIHI9IjIwIiBmaWxsPSIjMjE5NkYyIi8+PC9zdmc+" alt="I Love Reuse AI Logo">
+                    <h1>I Love Reuse AI</h1>
                 </div>
-                <div class="language-selector">
-                    <button class="lang-btn active" onclick="switchLanguage('es')">🇪🇸 ES</button>
-                    <button class="lang-btn" onclick="switchLanguage('en')">🇺🇸 EN</button>
-                </div>
-                <div class="auth-container">
-                    <button class="login-btn" onclick="handleLogin()" id="loginBtn">
-                        <span data-lang="es">🔐 Acceder</span>
-                        <span data-lang="en">🔐 Sign In</span>
-                    </button>
-                    <div class="user-info" id="userInfo">
-                        <img class="user-avatar" id="userAvatar" alt="Usuario">
+                
+                <ul class="nav-menu">
+                    <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#impacto"><i class="fas fa-globe-americas"></i> Impacto ambiental</a></li>
+                    <li><a href="#funcionamiento"><i class="fas fa-cogs"></i> Cómo funciona</a></li>
+                    <li><a href="#equipo"><i class="fas fa-users"></i> Equipo</a></li>
+                    <li><a href="#precios"><i class="fas fa-tag"></i> Precios</a></li>
+                </ul>
+                
+                <div class="auth-section">
+                    <div class="user-profile" id="userProfile" style="display: none;">
+                        <img id="userImage" src="" alt="User">
                         <span id="userName"></span>
-                        <button onclick="logout()" style="background: transparent; border: 1px solid white; color: white; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">
-                            <span data-lang="es">Salir</span>
-                            <span data-lang="en">Logout</span>
-                        </button>
                     </div>
+                    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="medium" data-logo_alignment="left"></div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
 
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <span class="hero-emoji">💚</span>
-            <h1>
-                <span data-lang="es">I love reuse AI</span>
-                <span data-lang="en">I love reuse AI</span>
-            </h1>
-            <p class="hero-subtitle">
-                <span data-lang="es">Maximiza tu Guardarropa, Minimiza tu Impacto Ambiental</span>
-                <span data-lang="en">Maximize Your Wardrobe, Minimize Your Environmental Impact</span>
-            </p>
-            <p class="hero-description">
-                <span data-lang="es">Deja de perder tiempo. Aprovecha toda la ropa que ya tienes con nuestro algoritmo de IA que encuentra automáticamente las mejores combinaciones basándose en tus fotos. ¡Sin estrés, sin pérdida de tiempo, solo outfits perfectos!</span>
-                <span data-lang="en">Stop wasting time. Make the most of all the clothes you already have with our AI algorithm that automatically finds the best combinations based on your photos. No stress, no time wasted, just perfect outfits!</span>
-            </p>
-            
-            <a href="#upload" class="hero-button">
-                <span data-lang="es">🌱 Probar Ahora Gratis</span>
-                <span data-lang="en">🌱 Try Now Free</span>
-            </a>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-number">15 min</span>
-                    <span class="stat-label" data-lang="es">Ahorrados cada mañana</span>
-                    <span class="stat-label" data-lang="en">Saved every morning</span>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Maximiza tu ropa, minimiza tu impacto ambiental</h1>
+                <p>Descubre combinaciones únicas con tu ropa actual gracias a nuestra inteligencia artificial</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>15min</h3>
+                        <p>Ahorra tiempo cada mañana</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>10s</h3>
+                        <p>Obtén sugerencias al instante</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>25kg</h3>
+                        <p>Reduce CO₂ por cada kilo reutilizado</p>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">&lt; 10s</span>
-                    <span class="stat-label" data-lang="es">Para generar outfit</span>
-                    <span class="stat-label" data-lang="en">To generate outfit</span>
+                
+                <a href="#funcionamiento" class="cta-button">Descubre cómo funciona</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Impacto Ambiental -->
+    <section class="impact-section" id="impacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Impacto Ambiental</h2>
+                <p>La industria de la moda es una de las más contaminantes. Reutilizar tu ropa tiene un impacto positivo inmediato</p>
+            </div>
+            
+            <div class="impact-bars">
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Consumo de agua</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="85"></div>
+                        <div class="impact-value">85%</div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">25kg</span>
-                    <span class="stat-label" data-lang="es">CO2 evitados por kg reutilizado</span>
-                    <span class="stat-label" data-lang="en">CO2 avoided per kg reused</span>
+                
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Emisiones de CO₂</span>
+                        <span>72%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="72"></div>
+                        <div class="impact-value">72%</div>
+                    </div>
+                </div>
+                
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Residuos textiles</span>
+                        <span>68%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="68"></div>
+                        <div class="impact-value">68%</div>
+                    </div>
+                </div>
+                
+                <div class="impact-item">
+                    <div class="impact-label">
+                        <span>Uso de químicos</span>
+                        <span>63%</span>
+                    </div>
+                    <div class="impact-bar">
+                        <div class="impact-fill" data-width="63"></div>
+                        <div class="impact-value">63%</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="upload" class="upload-section animate-on-scroll">
-        <div class="upload-container">
-            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">
-                <span data-lang="es">✨ Termina con el Drama Matutino</span>
-                <span data-lang="en">✨ End the Morning Drama</span>
-            </h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">
-                <span data-lang="es">Sube fotos de la ropa que ya tienes y descubre combinaciones increíbles que no sabías que existían</span>
-                <span data-lang="en">Upload photos of the clothes you already have and discover amazing combinations you didn't know existed</span>
-            </p>
-            
-            <div class="upload-area">
-                <div class="upload-grid">
-                    <div class="upload-item">
-                        <i class="fas fa-tshirt"></i>
-                        <h4 data-lang="es">Parte Superior</h4>
-                        <h4 data-lang="en">Upper Body</h4>
-                        <p data-lang="es">Camisas, blusas, suéteres</p>
-                        <p data-lang="en">Shirts, blouses, sweaters</p>
-                        <label for="top-upload" class="file-label multiple">
-                            <span data-lang="es">📤 Subir Superiores (máx 3)</span>
-                            <span data-lang="en">📤 Upload Tops (max 3)</span>
-                        </label>
-                        <input type="file" id="top-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('top', this)">
-                        <div id="top-preview" class="preview-area"></div>
-                    </div>
-                    
-                    <div class="upload-item">
-                        <i class="fas fa-user-tie"></i>
-                        <h4 data-lang="es">Parte Inferior</h4>
-                        <h4 data-lang="en">Lower Body</h4>
-                        <p data-lang="es">Pantalones, faldas, shorts</p>
-                        <p data-lang="en">Pants, skirts, shorts</p>
-                        <label for="bottom-upload" class="file-label multiple">
-                            <span data-lang="es">📤 Subir Inferiores (máx 3)</span>
-                            <span data-lang="en">📤 Upload Bottoms (max 3)</span>
-                        </label>
-                        <input type="file" id="bottom-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('bottom', this)">
-                        <div id="bottom-preview" class="preview-area"></div>
-                    </div>
-                    
-                    <div class="upload-item">
-                        <i class="fas fa-shoe-prints"></i>
-                        <h4 data-lang="es">Calzado</h4>
-                        <h4 data-lang="en">Footwear</h4>
-                        <p data-lang="es">Zapatos, sneakers, botas</p>
-                        <p data-lang="en">Shoes, sneakers, boots</p>
-                        <label for="shoes-upload" class="file-label multiple">
-                            <span data-lang="es">📤 Subir Zapatos (máx 5)</span>
-                            <span data-lang="en">📤 Upload Shoes (max 5)</span>
-                        </label>
-                        <input type="file" id="shoes-upload" class="file-input" accept="image/*" multiple onchange="handleFileUpload('shoes', this)">
-                        <div id="shoes-preview" class="preview-area"></div>
-                    </div>
-                </div>
-                
-                <button class="hero-button" onclick="generateRecommendations()" style="margin-top: 2rem; font-size: 1.2rem;" id="generateBtn">
-                    <span data-lang="es">🪄 Generar Combinaciones Inteligentes</span>
-                    <span data-lang="en">🪄 Generate Smart Combinations</span>
-                </button>
-                
-                <div id="result" class="results-section"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="impacto-ambiental" class="environmental-impact animate-on-scroll">
-        <div class="impact-container">
-            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: white;">
-                <span data-lang="es">🌍 Tu Impacto Positivo en el Planeta</span>
-                <span data-lang="en">🌍 Your Positive Impact on the Planet</span>
-            </h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">
-                <span data-lang="es">Cada vez que reutilizas tu ropa con nuestra IA, estás ayudando a salvar el medio ambiente</span>
-                <span data-lang="en">Every time you reuse your clothes with our AI, you're helping to save the environment</span>
-            </p>
-            
-            <div class="impact-grid">
-                <div class="impact-card">
-                    <h3>
-                        <span data-lang="es">🌎 Problema Mundial</span>
-                        <span data-lang="en">🌎 Global Problem</span>
-                    </h3>
-                    <div class="impact-stats">
-                        <div class="impact-stat">
-                            <strong data-lang="es">10%</strong>
-                            <strong data-lang="en">10%</strong>
-                            <span data-lang="es"> de emisiones globales de CO2 produce la industria textil</span>
-                            <span data-lang="en"> of global CO2 emissions produced by textile industry</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong data-lang="es">270 kg</strong>
-                            <strong data-lang="en">270 kg</strong>
-                            <span data-lang="es"> de CO2 per cápita por textiles (Europa - Agencia Europea)</span>
-                            <span data-lang="en"> of CO2 per capita from textiles (Europe - European Agency)</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong data-lang="es">87%</strong>
-                            <strong data-lang="en">87%</strong>
-                            <span data-lang="es"> de textiles terminan incinerados o en vertederos</span>
-                            <span data-lang="en"> of textiles end up incinerated or in landfills</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span data-lang="es"><strong>70 veces menos</strong> impacto tiene reutilizar vs producir nuevo</span>
-                            <span data-lang="en"><strong>70 times less</strong> impact from reusing vs producing new</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="impact-card">
-                    <h3>
-                        <span data-lang="es">🇨🇱 Situación en Chile</span>
-                        <span data-lang="en">🇨🇱 Situation in Chile</span>
-                    </h3>
-                    <div class="impact-stats">
-                        <div class="impact-stat">
-                            <strong>32 kg</strong>
-                            <span data-lang="es"> de textiles consumimos per cápita/año (MMA)</span>
-                            <span data-lang="en"> of textiles we consume per capita/year (MMA)</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong>572,118</strong>
-                            <span data-lang="es"> toneladas de residuos textiles anuales</span>
-                            <span data-lang="en"> tons of annual textile waste</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong data-lang="es">4° país mundial</strong>
-                            <strong data-lang="en">4th country globally</strong>
-                            <span data-lang="es"> importador de ropa usada</span>
-                            <span data-lang="en"> importer of used clothing</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong data-lang="es">Solo 1%</strong>
-                            <strong data-lang="en">Only 1%</strong>
-                            <span data-lang="es"> de la ropa se recicla en Chile</span>
-                            <span data-lang="en"> of clothes are recycled in Chile</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong>73%</strong>
-                            <span data-lang="es"> de la ropa post-consumo va a la basura</span>
-                            <span data-lang="en"> of post-consumer clothing goes to trash</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="impact-card your-impact">
-                    <h3>
-                        <span data-lang="es">💚 Tu Impacto Positivo con I love reuse AI</span>
-                        <span data-lang="en">💚 Your Positive Impact with I love reuse AI</span>
-                    </h3>
-                    <div class="impact-stats">
-                        <div class="impact-stat">
-                            <strong data-lang="es">25 kg de CO2</strong>
-                            <strong data-lang="en">25 kg of CO2</strong>
-                            <span data-lang="es"> evitas por cada kg de ropa reutilizada (INTEXTER-UPC)</span>
-                            <span data-lang="en"> you avoid for each kg of clothing reused (INTEXTER-UPC)</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong data-lang="es">44% menos</strong>
-                            <strong data-lang="en">44% less</strong>
-                            <span data-lang="es"> gases invernadero si duplicas tiempo de uso</span>
-                            <span data-lang="en"> greenhouse gases if you double usage time</span>
-                        </div>
-                        <div class="impact-stat">
-                            <strong data-lang="es">20-30% menos</strong>
-                            <strong data-lang="en">20-30% less</strong>
-                            <span data-lang="es"> impacto alargando 9 meses el uso de una prenda</span>
-                            <span data-lang="en"> impact by extending garment use by 9 months</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span data-lang="es"><strong>Evitas ser parte</strong> del 73% que va a la basura</span>
-                            <span data-lang="en"><strong>Avoid being part</strong> of the 73% that goes to trash</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span data-lang="es"><strong>Reduces presión</strong> sobre el Desierto de Atacama</span>
-                            <span data-lang="en"><strong>Reduce pressure</strong> on the Atacama Desert</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Sección Cómo Funciona -->
+    <section id="funcionamiento">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cómo Funciona</h2>
+                <p>Descubre combinaciones únicas con tu ropa actual en solo tres simples pasos</p>
             </div>
             
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(0, 188, 212, 0.1); border-radius: 20px; border: 1px solid #00bcd4;">
-                <h3 style="color: #00bcd4; margin-bottom: 1rem;">
-                    <span data-lang="es">🎯 Tu Misión: Cambiar el Mundo, Una Prenda a la Vez</span>
-                    <span data-lang="en">🎯 Your Mission: Change the World, One Garment at a Time</span>
-                </h3>
-                <p style="opacity: 0.9; line-height: 1.6;">
-                    <span data-lang="es">Cada outfit que creas con I love reuse AI es un acto de resistencia contra la moda rápida. Eres parte de la solución al problema de los 572,118 toneladas de residuos textiles que Chile genera cada año.</span>
-                    <span data-lang="en">Every outfit you create with I love reuse AI is an act of resistance against fast fashion. You are part of the solution to the problem of the 572,118 tons of textile waste that Chile generates each year.</span>
-                </p>
-                <a href="#que-hacemos" class="hero-button" style="margin-top: 1.5rem;">
-                    <span data-lang="es">🌱 Descubrir Cómo Funciona</span>
-                    <span data-lang="en">🌱 Discover How It Works</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="que-hacemos" class="features animate-on-scroll">
-        <div class="features-container">
-            <h2>
-                <span data-lang="es">🎯 Qué Hacemos</span>
-                <span data-lang="en">🎯 What We Do</span>
-            </h2>
-            <p class="features-subtitle">
-                <span data-lang="es">Resolvemos el problema más común de las mañanas: "No tengo nada que ponerme"</span>
-                <span data-lang="en">We solve the most common morning problem: "I have nothing to wear"</span>
-            </p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>
-                        <span data-lang="es">1. Fotografías Tu Ropa</span>
-                        <span data-lang="en">1. Photograph Your Clothes</span>
-                    </h3>
-                    <p>
-                        <span data-lang="es">Tomas fotos de las prendas que ya tienes en tu closet. Camisas, pantalones, zapatos... todo lo que quieras incluir.</span>
-                        <span data-lang="en">Take photos of the clothes you already have in your closet. Shirts, pants, shoes... everything you want to include.</span>
-                    </p>
+            <div class="how-works">
+                <div class="work-step">
+                    <i class="fas fa-upload"></i>
+                    <h3>Sube tus prendas</h3>
+                    <p>Fotografía las prendas que quieres incluir: superiores, inferiores y calzado</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>
-                        <span data-lang="es">2. IA Analiza y Procesa</span>
-                        <span data-lang="en">2. AI Analyzes and Processes</span>
-                    </h3>
-                    <p>
-                        <span data-lang="es">Nuestro algoritmo inteligente analiza colores, patrones, estilos y compatibilidad entre todas tus prendas.</span>
-                        <span data-lang="en">Our intelligent algorithm analyzes colors, patterns, styles and compatibility between all your garments.</span>
-                    </p>
+                <div class="work-step">
+                    <i class="fas fa-robot"></i>
+                    <h3>IA genera combinaciones</h3>
+                    <p>Nuestro algoritmo analiza colores, estilos y tendencias para crear outfits únicos</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">✨</div>
-                    <h3>
-                        <span data-lang="es">3. Generas Combinaciones</span>
-                        <span data-lang="en">3. Generate Combinations</span>
-                    </h3>
-                    <p>
-                        <span data-lang="es">En segundos obtienes múltiples opciones de outfits perfectamente coordinados, con puntuación de compatibilidad.</span>
-                        <span data-lang="en">In seconds you get multiple perfectly coordinated outfit options, with compatibility scoring.</span>
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🎉</div>
-                    <h3>
-                        <span data-lang="es">4. Sales Perfecto de Casa</span>
-                        <span data-lang="en">4. Leave Home Perfect</span>
-                    </h3>
-                    <p>
-                        <span data-lang="es">Eliminas el estrés matutino, ahorras tiempo y siempre luces increíble con la ropa que ya tienes.</span>
-                        <span data-lang="en">Eliminate morning stress, save time and always look amazing with the clothes you already have.</span>
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>
-                        <span data-lang="es">5. La IA Aprende de Ti</span>
-                        <span data-lang="en">5. AI Learns from You</span>
-                    </h3>
-                    <p>
-                        <span data-lang="es">Mientras más uses I love reuse AI, mejor conoce tu estilo y preferencias para sugerencias más personalizadas.</span>
-                        <span data-lang="en">The more you use I love reuse AI, the better it knows your style and preferences for more personalized suggestions.</span>
-                    </p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">💡</div>
-                    <h3>
-                        <span data-lang="es">6. Descubres Nuevas Opciones</span>
-                        <span data-lang="en">6. Discover New Options</span>
-                    </h3>
-                    <p>
-                        <span data-lang="es">Te sorprenderás con combinaciones que nunca habías pensado, maximizando el potencial de tu guardarropa.</span>
-                        <span data-lang="en">You'll be surprised with combinations you never thought of, maximizing your wardrobe's potential.</span>
-                    </p>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="#upload" class="hero-button">
-                    <span data-lang="es">🚀 Empezar Ahora - Es Gratis</span>
-                    <span data-lang="en">🚀 Start Now - It's Free</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="equipo" class="team animate-on-scroll">
-        <div class="team-container">
-            <h2>
-                <span data-lang="es">👥 Nuestro Equipo</span>
-                <span data-lang="en">👥 Our Team</span>
-            </h2>
-            <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem;">
-                <span data-lang="es">Detrás de I love reuse AI hay un equipo apasionado por la tecnología y la sostenibilidad</span>
-                <span data-lang="en">Behind I love reuse AI is a team passionate about technology and sustainability</span>
-            </p>
-            
-            <div class="team-grid">
-                <div class="member-card">
-                    <h3 class="member-name">José Francisco Corti Badia</h3>
-                    <p class="member-title">
-                        <span data-lang="es">Founder & CEO</span>
-                        <span data-lang="en">Founder & CEO</span>
-                    </p>
-                    <p class="member-profession">
-                        <span data-lang="es">Ingeniero Comercial de Profesión</span>
-                        <span data-lang="en">Commercial Engineer by Profession</span>
-                    </p>
-                    <p class="member-description">
-                        <span data-lang="es">Experto en AI con más de 15 años diseñando soluciones para diferentes industrias. Visionario comprometido con usar la tecnología para crear un impacto positivo en el medio ambiente y cambiar la forma en que las personas interactúan con su guardarropa.</span>
-                        <span data-lang="en">AI expert with over 15 years designing solutions for different industries. Visionary committed to using technology to create positive environmental impact and change how people interact with their wardrobe.</span>
-                    </p>
-                </div>
-                
-                <div class="member-card">
-                    <h3 class="member-name">Paola Andrea Curti Simpson</h3>
-                    <p class="member-title">
-                        <span data-lang="es">Directora Creativa</span>
-                        <span data-lang="en">Creative Director</span>
-                    </p>
-                    <p class="member-profession">
-                        <span data-lang="es">Arquitecta de Profesión</span>
-                        <span data-lang="en">Architect by Profession</span>
-                    </p>
-                    <p class="member-description">
-                        <span data-lang="es">Experta en uso de Ropa Sustentable con una visión única que combina diseño, funcionalidad y sostenibilidad. Su experiencia en arquitectura le permite crear estrategias innovadoras para maximizar el potencial de cada guardarropa y reducir el impacto ambiental de la moda.</span>
-                        <span data-lang="en">Expert in Sustainable Fashion with a unique vision that combines design, functionality and sustainability. Her architecture background enables her to create innovative strategies to maximize each wardrobe's potential and reduce fashion's environmental impact.</span>
-                    </p>
+                <div class="work-step">
+                    <i class="fas fa-magic"></i>
+                    <h3>Recibe sugerencias</h3>
+                    <p>Obtén recomendaciones personalizadas en menos de 10 segundos</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="precios" class="pricing animate-on-scroll">
-        <div class="pricing-container">
-            <h2>
-                <span data-lang="es">💎 Planes y Precios</span>
-                <span data-lang="en">💎 Plans and Pricing</span>
-            </h2>
-            <p class="pricing-subtitle">
-                <span data-lang="es">Elige el plan perfecto para ti. Comienza gratis y actualiza cuando quieras.</span>
-                <span data-lang="en">Choose the perfect plan for you. Start free and upgrade whenever you want.</span>
-            </p>
+    <!-- Sección de Equipo -->
+    <section class="team-section" id="equipo">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestro Equipo</h2>
+                <p>Conoce a las personas detrás de I Love Reuse AI</p>
+            </div>
             
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="plan-name">
-                        <span data-lang="es">Plan Gratuito</span>
-                        <span data-lang="en">Free Plan</span>
-                    </h3>
-                    <div class="plan-price">$0</div>
-                    <div class="plan-period">
-                        <span data-lang="es">Para siempre</span>
-                        <span data-lang="en">Forever</span>
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-info">
+                        <h3>José Francisco Corti Badía</h3>
+                        <span class="role">Founder & CEO</span>
+                        <p>Ingeniero Comercial, Diplmado en GenAI U. De Chile 2025 y Diplmado en AI. PUC 2022 y experto en Inteligencia Artificial con más de 15 años creando soluciones en distintas industrias.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-info">
+                        <h3>Paola Andrea Curti Simpson</h3>
+                        <span class="role">Directora Creativa</span>
+                        <p>Arquitecta, especialista en moda sustentable con amplia experiencia en diseño y sostenibilidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Precios -->
+    <section id="precios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Planes y Precios</h2>
+                <p>Elige el plan que mejor se adapte a tus necesidades</p>
+            </div>
+            
+            <div class="pricing-plans">
+                <div class="pricing-plan">
+                    <div class="plan-header">
+                        <h3>Básico</h3>
+                        <div class="plan-price">$0 <span>/mes</span></div>
                     </div>
                     <ul class="plan-features">
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">10 outfits por día</span>
-                            <span data-lang="en">10 outfits per day</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">Recomendaciones básicas</span>
-                            <span data-lang="en">Basic recommendations</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">Guardado de favoritos</span>
-                            <span data-lang="en">Save favorites</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">Acceso web y móvil</span>
-                            <span data-lang="en">Web and mobile access</span>
-                        </li>
+                        <li>5 combinaciones diarias</li>
+                        <li>Hasta 3 prendas por outfit</li>
+                        <li>Estadísticas básicas de uso</li>
+                        <li>Soporte por email</li>
                     </ul>
-                    <button class="plan-button secondary" onclick="selectPlan('free')">
-                        <span data-lang="es">Comenzar Gratis</span>
-                        <span data-lang="en">Start Free</span>
-                    </button>
+                    <a href="#" class="plan-button">Empezar gratis</a>
                 </div>
                 
-                <div class="pricing-card featured">
-                    <h3 class="plan-name">
-                        <span data-lang="es">Plan Premium</span>
-                        <span data-lang="en">Premium Plan</span>
-                    </h3>
-                    <div class="plan-price">
-                        <span data-lang="es">$5,000</span>
-                        <span data-lang="en">$6</span>
-                    </div>
-                    <div class="plan-period">
-                        <span data-lang="es">pesos chilenos / mes</span>
-                        <span data-lang="en">USD / month</span>
+                <div class="pricing-plan">
+                    <div class="plan-header" style="background-color: var(--accent-blue);">
+                        <h3>Premium</h3>
+                        <div class="plan-price">$9.99 <span>/mes</span></div>
                     </div>
                     <ul class="plan-features">
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">🚀 Outfits ilimitados</span>
-                            <span data-lang="en">🚀 Unlimited outfits</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">🧠 IA que aprende de ti</span>
-                            <span data-lang="en">🧠 AI that learns from you</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">👗 Análisis de ocasiones</span>
-                            <span data-lang="en">👗 Occasion analysis</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">🎨 Paleta de colores personal</span>
-                            <span data-lang="en">🎨 Personal color palette</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">📊 Analytics de tu estilo</span>
-                            <span data-lang="en">📊 Style analytics</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <span data-lang="es">⚡ Soporte prioritario</span>
-                            <span data-lang="en">⚡ Priority support</span>
-                        </li>
+                        <li>Combinaciones ilimitadas</li>
+                        <li>Hasta 5 prendas por outfit</li>
+                        <li>Estadísticas avanzadas</li>
+                        <li>Soporte prioritario 24/7</li>
+                        <li>Recomendaciones exclusivas</li>
                     </ul>
-                    <button class="plan-button primary" onclick="selectPlan('premium')">
-                        <span data-lang="es">Elegir Premium</span>
-                        <span data-lang="en">Choose Premium</span>
-                    </button>
+                    <a href="#" class="plan-button">Obtener Premium</a>
                 </div>
             </div>
-            
-            <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
-                <span data-lang="es">Sin tarjeta de crédito • Cancela cuando quieras • Upgrade en cualquier momento</span>
-                <span data-lang="en">No credit card • Cancel anytime • Upgrade anytime</span>
-            </p>
         </div>
     </section>
 
+    <!-- Sección de Resultados de IA -->
+    <section class="results-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resultados de Nuestra IA</h2>
+                <p>Así es como nuestra inteligencia artificial te ayuda a crear los mejores outfits</p>
+            </div>
+            
+            <div class="ai-results">
+                <div class="result-card">
+                    <div class="result-badge">
+                        ⭐ Mejor opción
+                    </div>
+                    <div class="result-image">
+                        <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Outfit 1">
+                    </div>
+                    <div class="result-info">
+                        <div class="result-percentage">92%</div>
+                        <p class="result-description">Combinación perfecta para ocasiones informales</p>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-badge">
+                        🥈 Segunda opción
+                    </div>
+                    <div class="result-image">
+                        <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Outfit 2">
+                    </div>
+                    <div class="result-info">
+                        <div class="result-percentage">87%</div>
+                        <p class="result-description">Ideal para eventos semi-formales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p class="footer-note">
-                <span data-lang="es">Hecho con ❤️ para revolucionar tu estilo y salvar el planeta</span>
-                <span data-lang="en">Made with ❤️ to revolutionize your style and save the planet</span>
-            </p>
-            <p class="footer-copyright">
-                <span data-lang="es">&copy; 2025 I love reuse AI. Todos los derechos reservados.</span>
-                <span data-lang="en">&copy; 2025 I love reuse AI. All rights reserved.</span>
-            </p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>I Love Reuse AI</h3>
+                    <p>Maximiza tu ropa, minimiza tu impacto ambiental con nuestra tecnología de inteligencia artificial.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces rápidos</h3>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#impacto">Impacto Ambiental</a>
+                    <a href="#funcionamiento">Cómo Funciona</a>
+                    <a href="#equipo">Nuestro Equipo</a>
+                    <a href="#precios">Precios</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-envelope"></i> info@aitrustyou.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Siempre Viva 742, Springfield</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 I Love Reuse AI. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        let currentLang = 'es';
-        let isLoggedIn = false;
-        let currentUser = null;
-        let uploadedFiles = {
-            top: [],
-            bottom: [],
-            shoes: []
-        };
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
+        // Función para manejar la respuesta de inicio de sesión de Google
+        function handleGoogleSignIn(response) {
+            // Decodificar el token JWT para obtener información del usuario
+            const token = response.credential;
+            const payload = JSON.parse(atob(token.split('.')[1]));
             
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+            // Mostrar información del usuario
+            document.getElementById('userName').textContent = payload.name;
+            document.getElementById('userImage').src = payload.picture;
+            document.getElementById('userProfile').style.display = 'flex';
             
-            if (lang === 'en') {
-                document.title = "I love reuse AI - Maximize Your Wardrobe, Minimize Your Environmental Impact";
-            } else {
-                document.title = "I love reuse AI - Maximiza tu Guardarropa, Minimiza tu Impacto Ambiental";
-            }
+            // Ocultar el botón de inicio de sesión
+            document.querySelector('.g_id_signin').style.display = 'none';
+            
+            // Mostrar mensaje de bienvenida
+            alert(`¡Bienvenido/a ${payload.name}! Has iniciado sesión correctamente.`);
         }
 
+        // Animación de barras de impacto
+        document.addEventListener('DOMContentLoaded', function() {
+            const impactBars = document.querySelectorAll('.impact-fill');
+            
+            impactBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        });
+        
+        // Navegación suave al hacer clic en los enlaces
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
                 }
             });
-        });
-
-        function updateActiveNav() {
-            const sections = ['inicio', 'impacto-ambiental', 'que-hacemos', 'equipo', 'precios'];
-            const navPills = document.querySelectorAll('.nav-pill');
-            
-            sections.forEach((section, index) => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
-                        navPills.forEach(pill => pill.classList.remove('active'));
-                        if (navPills[index]) {
-                            navPills[index].classList.add('active');
-                        }
-                    }
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNav);
-
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('animated');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(46, 125, 50, 0.3)';
-            } else {
-                header.style.background = 'rgba(76, 175, 80, 0.1)';
-            }
-        });
-
-        function handleLogin() {
-            const button = document.getElementById('loginBtn');
-            const originalText = button.innerHTML;
-            
-            const loadingText = currentLang === 'es' 
-                ? '<span class="loading"></span> Conectando...'
-                : '<span class="loading"></span> Connecting...';
-            
-            button.innerHTML = loadingText;
-            button.disabled = true;
-
-            setTimeout(() => {
-                currentUser = {
-                    name: 'Usuario Demo',
-                    given_name: 'Usuario',
-                    email: 'demo@ilovereuse.ai',
-                    picture: 'https://lh3.googleusercontent.com/a/default-user=s96-c'
-                };
-                
-                isLoggedIn = true;
-                updateAuthUI();
-                
-                const welcomeMsg = currentLang === 'es' 
-                    ? `¡Hola ${currentUser.given_name}! 🎉`
-                    : `Hello ${currentUser.given_name}! 🎉`;
-                showNotification(welcomeMsg, 'success');
-                
-                button.innerHTML = originalText;
-                button.disabled = false;
-            }, 2000);
-        }
-
-        function logout() {
-            isLoggedIn = false;
-            currentUser = null;
-            uploadedFiles = { top: [], bottom: [], shoes: [] };
-            
-            document.querySelectorAll('.preview-area').forEach(area => {
-                area.innerHTML = '';
-            });
-            
-            document.getElementById('result').innerHTML = '';
-            document.getElementById('result').classList.remove('active');
-            
-            updateAuthUI();
-            
-            const logoutMsg = currentLang === 'es' 
-                ? '👋 Sesión cerrada'
-                : '👋 Session closed';
-            showNotification(logoutMsg);
-        }
-
-        function updateAuthUI() {
-            const loginBtn = document.getElementById('loginBtn');
-            const userInfo = document.getElementById('userInfo');
-            
-            if (isLoggedIn) {
-                loginBtn.style.display = 'none';
-                userInfo.style.display = 'flex';
-                document.getElementById('userName').textContent = currentUser.name;
-                document.getElementById('userAvatar').src = currentUser.picture;
-            } else {
-                loginBtn.style.display = 'flex';
-                userInfo.style.display = 'none';
-            }
-        }
-
-        function handleFileUpload(type, input) {
-            const files = Array.from(input.files);
-            const maxFiles = type === 'shoes' ? 5 : 3;
-            
-            if (files.length > maxFiles) {
-                const msg = currentLang === 'es' 
-                    ? `Máximo ${maxFiles} archivos para ${type}`
-                    : `Maximum ${maxFiles} files for ${type}`;
-                showNotification(msg, 'error');
-                return;
-            }
-            
-            const previewArea = document.getElementById(`${type}-preview`);
-            previewArea.innerHTML = '';
-            
-            uploadedFiles[type] = files;
-            
-            files.forEach((file, index) => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'preview-image';
-                    img.style.position = 'relative';
-                    
-                    const removeBtn = document.createElement('button');
-                    removeBtn.className = 'remove-image';
-                    removeBtn.innerHTML = '×';
-                    removeBtn.onclick = () => removeImage(type, index);
-                    
-                    const container = document.createElement('div');
-                    container.style.position = 'relative';
-                    container.appendChild(img);
-                    container.appendChild(removeBtn);
-                    
-                    previewArea.appendChild(container);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function removeImage(type, index) {
-            uploadedFiles[type].splice(index, 1);
-            
-            const input = document.getElementById(`${type}-upload`);
-            const dt = new DataTransfer();
-            uploadedFiles[type].forEach(file => dt.items.add(file));
-            input.files = dt.files;
-            
-            handleFileUpload(type, input);
-        }
-
-        function generateRecommendations() {
-            if (!isLoggedIn) {
-                const msg = currentLang === 'es' 
-                    ? '🔐 Debes iniciar sesión para usar la IA'
-                    : '🔐 You must sign in to use the AI';
-                showNotification(msg, 'error');
-                return;
-            }
-
-            const totalFiles = uploadedFiles.top.length + uploadedFiles.bottom.length + uploadedFiles.shoes.length;
-            
-            if (totalFiles === 0) {
-                const msg = currentLang === 'es' 
-                    ? '📷 Sube al menos una foto para generar combinaciones'
-                    : '📷 Upload at least one photo to generate combinations';
-                showNotification(msg, 'error');
-                return;
-            }
-
-            const button = document.getElementById('generateBtn');
-            const originalText = button.innerHTML;
-            const loadingText = currentLang === 'es' 
-                ? '<span class="loading"></span> Generando magia...'
-                : '<span class="loading"></span> Generating magic...';
-            
-            button.innerHTML = loadingText;
-            button.disabled = true;
-
-            setTimeout(() => {
-                const resultArea = document.getElementById('result');
-                
-                const recommendations = [
-                    {
-                        title: currentLang === 'es' ? 'Combinación Perfecta para Oficina' : 'Perfect Office Combination',
-                        score: 95,
-                        content: currentLang === 'es' 
-                            ? 'Camisa blanca + pantalón negro + zapatos de cuero. Esta combinación clásica te dará un look profesional y elegante. Los colores neutros permiten versatilidad y la combinación es atemporal.'
-                            : 'White shirt + black pants + leather shoes. This classic combination will give you a professional and elegant look. Neutral colors allow versatility and the combination is timeless.',
-                        isBest: true
-                    },
-                    {
-                        title: currentLang === 'es' ? 'Look Casual Chic' : 'Casual Chic Look',
-                        score: 88,
-                        content: currentLang === 'es' 
-                            ? 'Blusa estampada + jeans oscuros + sneakers blancos. Perfecto para el día a día, combina comodidad con estilo. El contraste entre lo formal y casual crea un equilibrio interesante.'
-                            : 'Patterned blouse + dark jeans + white sneakers. Perfect for everyday wear, combining comfort with style. The contrast between formal and casual creates an interesting balance.',
-                        isBest: false
-                    },
-                    {
-                        title: currentLang === 'es' ? 'Combinación Weekend' : 'Weekend Combination',
-                        score: 82,
-                        content: currentLang === 'es' 
-                            ? 'Suéter casual + falda midi + botines. Ideal para salidas de fin de semana, ofrece comodidad sin sacrificar el estilo. Las texturas complementarias añaden profundidad visual.'
-                            : 'Casual sweater + midi skirt + ankle boots. Ideal for weekend outings, offering comfort without sacrificing style. Complementary textures add visual depth.',
-                        isBest: false
-                    }
-                ];
-
-                let html = '';
-                recommendations.forEach(rec => {
-                    html += `
-                        <div class="recommendation-card ${rec.isBest ? 'best' : ''}">
-                            <div class="recommendation-header">
-                                <h3 class="recommendation-title">${rec.title}</h3>
-                                <div class="recommendation-score">${rec.score}%</div>
-                            </div>
-                            <div class="recommendation-content">
-                                <p>${rec.content}</p>
-                            </div>
-                            <div class="recommendation-buttons">
-                                <button class="hero-button" onclick="saveOutfit('${rec.title}')">
-                                    <span data-lang="es">💾 Guardar</span>
-                                    <span data-lang="en">💾 Save</span>
-                                </button>
-                                <button class="hero-button" onclick="shareOutfit('${rec.title}')" style="background: linear-gradient(135deg, #ff9800, #f57c00);">
-                                    <span data-lang="es">📤 Compartir</span>
-                                    <span data-lang="en">📤 Share</span>
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                resultArea.innerHTML = html;
-                resultArea.classList.add('active');
-                
-                button.innerHTML = originalText;
-                button.disabled = false;
-
-                const successMsg = currentLang === 'es' 
-                    ? '✨ ¡Combinaciones generadas! Revisa los resultados'
-                    : '✨ Combinations generated! Check the results';
-                showNotification(successMsg, 'success');
-                
-                resultArea.scrollIntoView({ behavior: 'smooth' });
-            }, 3000);
-        }
-
-        function saveOutfit(title) {
-            const msg = currentLang === 'es' 
-                ? `💾 "${title}" guardado en favoritos`
-                : `💾 "${title}" saved to favorites`;
-            showNotification(msg, 'success');
-        }
-
-        function shareOutfit(title) {
-            const msg = currentLang === 'es' 
-                ? `📤 "${title}" compartido exitosamente`
-                : `📤 "${title}" shared successfully`;
-            showNotification(msg, 'success');
-        }
-
-        function selectPlan(plan) {
-            const planNames = {
-                'free': currentLang === 'es' ? 'Plan Gratuito' : 'Free Plan',
-                'premium': currentLang === 'es' ? 'Plan Premium' : 'Premium Plan'
-            };
-            
-            if (plan === 'free') {
-                const msg = currentLang === 'es' 
-                    ? `✅ ¡Genial! Ya puedes usar ${planNames[plan]}`
-                    : `✅ Great! You can now use ${planNames[plan]}`;
-                showNotification(msg, 'success');
-            } else {
-                const msg = currentLang === 'es' 
-                    ? `🚀 ${planNames[plan]} seleccionado. Redirigiendo a pago...`
-                    : `🚀 ${planNames[plan]} selected. Redirecting to payment...`;
-                showNotification(msg, 'success');
-            }
-        }
-
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = message;
-
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
-                    }
-                }, 300);
-            }, 4000);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            updateAuthUI();
-            
-            setTimeout(() => {
-                const msg = currentLang === 'es' 
-                    ? '🌱 ¡Bienvenido a I love reuse AI! Una app para tu guardarropa y el planeta'
-                    : '🌱 Welcome to I love reuse AI! An app for your wardrobe and the planet';
-                showNotification(msg, 'success');
-            }, 2000);
         });
     </script>
 </body>
